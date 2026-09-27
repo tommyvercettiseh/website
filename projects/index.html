@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090c10">
+  <meta name="description" content="Projects by Hessel de Vries. Explore the Pallet Optimizer, a browser-based carton layout and pallet height calculator.">
+  <link rel="canonical" href="https://hesseldevries.com/projects/">
+  <title>Projects | Hessel de Vries</title>
+  <style>
+    @font-face{font-family:Manrope;src:url(../assets/manrope.woff2) format('woff2');font-style:normal;font-weight:400 800;font-display:swap}
+    @font-face{font-family:'DM Mono';src:url(../assets/dmmono.woff2) format('woff2');font-style:normal;font-weight:400;font-display:swap}
+    :root{color-scheme:dark;--bg:#090c10;--paper:#e8e6df;--accent:#e0a363;--muted:#a3a7a8}
+    *{box-sizing:border-box}html{background:var(--bg)}body{min-height:100svh;margin:0;color:var(--paper);background:radial-gradient(ellipse at 76% 54%,#8d562a1f,transparent 48%),var(--bg);font-family:Manrope,Arial,sans-serif}a{color:inherit;text-decoration:none}::selection{background:var(--accent);color:#101010}
+    .shell{max-width:1600px;margin:auto;min-height:100svh;padding:clamp(22px,3.7vw,58px);display:flex;flex-direction:column;gap:clamp(42px,7vh,90px)}
+    .top,.foot{display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-size:clamp(19px,1.7vw,26px);font-weight:800;letter-spacing:-.065em;line-height:1}.brand span{color:var(--accent)}.back,.eyebrow,.index,.status,.kicker,.meta,.foot{font:11px 'DM Mono',monospace;letter-spacing:.11em;text-transform:uppercase}.back{padding:11px 17px;border:1px solid #b1886d;color:var(--paper);clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));transition:background .2s,color .2s}.back:hover{background:var(--accent);color:#151210}
+    main{flex:1}.eyebrow{color:var(--accent);margin:0 0 16px}.heading{font-size:clamp(70px,10vw,150px);line-height:.98;letter-spacing:-.075em;margin:0 0 16px;font-weight:800}.intro{max-width:540px;color:var(--muted);font-size:clamp(15px,1.5vw,18px);line-height:1.6;margin:0 0 clamp(34px,6vw,80px)}
+    .project{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);min-height:clamp(370px,42vw,590px);border:1px solid #555254;background:#101317;transition:border-color .3s,transform .3s;overflow:hidden}.project:hover{border-color:#e0a363;transform:translateY(-3px)}.project:focus-visible,.back:focus-visible,.brand:focus-visible{outline:2px solid #ffe0b2;outline-offset:5px}
+    .project-content{display:flex;flex-direction:column;align-items:flex-start;padding:clamp(26px,4vw,56px);z-index:1}.index{color:var(--accent);margin-bottom:auto}.kicker{color:#aaa9a5;margin:30px 0 10px}.project h2{font-size:clamp(38px,4.5vw,72px);letter-spacing:-.065em;line-height:1.03;margin:0 0 17px}.project p{max-width:410px;color:#b8bab7;line-height:1.65;font-size:clamp(14px,1.2vw,17px);margin:0 0 30px}.cta{display:inline-flex;align-items:center;gap:38px;background:linear-gradient(125deg,#f1bf86,#dd9657 58%,#be673f);color:#171410;padding:15px 18px;font-size:12px;font-weight:800;letter-spacing:.08em;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}.cta b{font-size:20px;font-weight:500;line-height:.6}
+    .visual{position:relative;min-height:360px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 55% 50%,#4934266e,transparent 48%),linear-gradient(150deg,#181c20,#0b0f12)}.visual::before{content:'';position:absolute;inset:0;opacity:.22;background-image:linear-gradient(#bd997c2a 1px,transparent 1px),linear-gradient(90deg,#bd997c2a 1px,transparent 1px);background-size:45px 45px;transform:perspective(520px) rotateX(52deg) scale(1.65)}.visual svg{width:min(84%,620px);max-height:88%;position:relative;filter:drop-shadow(0 30px 50px #0009);transition:transform .6s}.project:hover svg{transform:translateY(-9px) rotate(-1deg)}.visual-label{position:absolute;left:24px;bottom:21px;color:#beb6a9}.status{position:absolute;top:25px;right:26px;color:#e0a363}
+    .foot{color:#85888a;border-top:1px solid #393c3e;padding-top:19px}.foot span:last-child{color:#c5a478}@media(max-width:800px){.shell{gap:45px}.project{grid-template-columns:1fr}.project-content{min-height:340px}.visual{min-height:330px}.heading{font-size:clamp(64px,16vw,115px)}}@media(max-width:420px){.shell{padding:22px}.heading{font-size:clamp(60px,15vw,75px)}.project-content{padding:24px;min-height:350px}.visual{min-height:275px}.foot{font-size:9px}}
+    @media(prefers-reduced-motion:reduce){.project,.visual svg{transition:none}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="top"><a class="brand" href="/" aria-label="Hessel de Vries home">HESSEL<span>.</span></a><a class="back" href="/">← BACK TO HOME</a></header>
+    <main>
+      <p class="eyebrow">HESSEL / SELECTED WORK</p>
+      <h1 class="heading">PROJECTS.</h1>
+      <p class="intro">Built to solve real problems. Designed to feel good while doing it.</p>
+      <a class="project" href="/pallet-optimizer/" aria-label="Open Pallet Optimizer">
+        <div class="project-content">
+          <span class="index">01 / 01 &nbsp;·&nbsp; LIVE TOOL</span>
+          <span class="kicker">PYTHON THINKING / BROWSER TOOL</span>
+          <h2>PALLET<br>OPTIMIZER.</h2>
+          <p>Cartons. Layers. Height. A clean layout in seconds, with a visual plan and export.</p>
+          <span class="cta">OPEN PROJECT <b aria-hidden="true">↗</b></span>
+        </div>
+        <div class="visual" aria-hidden="true">
+          <span class="status">LAYOUT / OPTIMIZED</span>
+          <svg viewBox="0 0 560 470" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="top" x2="1" y2="1"><stop stop-color="#e8b67f"/><stop offset="1" stop-color="#b77851"/></linearGradient><linearGradient id="left" x2="0" y2="1"><stop stop-color="#a4603d"/><stop offset="1" stop-color="#623923"/></linearGradient><linearGradient id="right" x2="1" y2="1"><stop stop-color="#8e5033"/><stop offset="1" stop-color="#3d2c24"/></linearGradient></defs>
+            <path d="M280 55 500 155 280 258 60 155Z" fill="url(#top)" stroke="#f8d4aa" stroke-width="2"/>
+            <path d="M60 155 280 258 280 410 60 306Z" fill="url(#left)" stroke="#a87958" stroke-width="2"/>
+            <path d="M280 258 500 155 500 306 280 410Z" fill="url(#right)" stroke="#b47d5b" stroke-width="2"/>
+            <path d="M60 193 280 296 500 193M60 231 280 334 500 231M60 269 280 372 500 269M132 189 352 88M206 223 426 122M134 120 353 219M207 87 427 188M135 190V340M208 224V374M354 222V375M427 189V341" fill="none" stroke="#f4c391" stroke-opacity=".32" stroke-width="2"/>
+            <path d="M60 306 280 410 500 306 500 332 280 438 60 332Z" fill="#a8734a" stroke="#daa06a" stroke-width="2"/>
+            <path d="M42 306h-18v-90m0-53v-54h40M516 307h21v-90m0-53v-54h-40" fill="none" stroke="#f4c391" stroke-opacity=".65" stroke-width="2"/>
+          </svg>
+          <span class="visual-label meta">8 BOXES / LAYER &nbsp;·&nbsp; 7 LAYERS</span>
+        </div>
+      </a>
+    </main>
+    <footer class="foot"><span>HESSEL DE VRIES / PROJECTS</span><span>01 — 01</span></footer>
+  </div>
+</body>
+</html>
