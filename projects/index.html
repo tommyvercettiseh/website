@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090c10">
-  <meta name="description" content="Projects by Hessel de Vries. Explore the Pallet Optimizer, a browser-based carton layout and pallet height calculator.">
+  <meta name="description" content="Projects by Hessel de Vries. Pallet Optimizer, Rebirth and an interactive mortgage calculator preview.">
   <link rel="canonical" href="https://hesseldevries.com/projects/">
   <title>Projects | Hessel de Vries</title>
   <style>
@@ -18,7 +18,7 @@
     .project{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);min-height:clamp(370px,42vw,590px);border:1px solid #555254;background:#101317;transition:border-color .3s,transform .3s;overflow:hidden}.project:hover{border-color:#e0a363;transform:translateY(-3px)}.project:focus-visible,.back:focus-visible,.brand:focus-visible{outline:2px solid #ffe0b2;outline-offset:5px}
     .project-content{display:flex;flex-direction:column;align-items:flex-start;padding:clamp(26px,4vw,56px);z-index:1}.index{color:var(--accent);margin-bottom:auto}.kicker{color:#aaa9a5;margin:30px 0 10px}.project h2{font-size:clamp(38px,4.5vw,72px);letter-spacing:-.065em;line-height:1.03;margin:0 0 17px}.project p{max-width:410px;color:#b8bab7;line-height:1.65;font-size:clamp(14px,1.2vw,17px);margin:0 0 30px}.cta{display:inline-flex;align-items:center;gap:38px;background:linear-gradient(125deg,#f1bf86,#dd9657 58%,#be673f);color:#171410;padding:15px 18px;font-size:12px;font-weight:800;letter-spacing:.08em;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}.cta b{font-size:20px;font-weight:500;line-height:.6}
     .visual{position:relative;min-height:360px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 55% 50%,#4934266e,transparent 48%),linear-gradient(150deg,#181c20,#0b0f12)}.visual::before{content:'';position:absolute;inset:0;opacity:.22;background-image:linear-gradient(#bd997c2a 1px,transparent 1px),linear-gradient(90deg,#bd997c2a 1px,transparent 1px);background-size:45px 45px;transform:perspective(520px) rotateX(52deg) scale(1.65)}.visual svg{width:min(84%,620px);max-height:88%;position:relative;filter:drop-shadow(0 30px 50px #0009);transition:transform .6s}.project:hover svg{transform:translateY(-9px) rotate(-1deg)}.visual-label{position:absolute;left:24px;bottom:21px;color:#beb6a9}.status{position:absolute;top:25px;right:26px;color:#e0a363}
-    .foot{color:#85888a;border-top:1px solid #393c3e;padding-top:19px}.foot span:last-child{color:#c5a478}@media(max-width:800px){.shell{gap:45px}.project{grid-template-columns:1fr}.project-content{min-height:340px}.visual{min-height:330px}.heading{font-size:clamp(64px,16vw,115px)}}@media(max-width:420px){.shell{padding:22px}.heading{font-size:clamp(60px,15vw,75px)}.project-content{padding:24px;min-height:350px}.visual{min-height:275px}.foot{font-size:9px}}
+    .more{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.mini{position:relative;min-height:365px;display:flex;flex-direction:column;overflow:hidden;padding:clamp(25px,3vw,43px);border:1px solid #555254;background:#101317;transition:border-color .25s,transform .25s}.mini:hover{border-color:var(--accent);transform:translateY(-3px)}.mini:focus-visible{outline:2px solid #ffe0b2;outline-offset:5px}.mini .index{margin:0}.mini .kicker{margin:auto 0 8px}.mini h2{font-size:clamp(36px,4vw,62px);letter-spacing:-.065em;line-height:1.02;margin:0 0 14px;z-index:1}.mini p{font-size:14px;line-height:1.55;color:#b8bab7;max-width:380px;margin:0 0 22px;z-index:1}.mini .cta{align-self:flex-start;z-index:1}.mini>*{position:relative}.rebirth{background:radial-gradient(ellipse at 78% 30%,#aecb6960,transparent 45%),linear-gradient(132deg,#141c18,#0b1111 70%)}.rebirth:before{content:'';position:absolute;right:-13%;top:-27%;width:75%;aspect-ratio:1;border:1px solid #a3d08190;border-radius:50%;box-shadow:0 0 55px #7eba6560,inset 0 0 80px #7eba6533}.rebirth:after{content:'';position:absolute;right:8%;top:10%;width:35%;aspect-ratio:1;border:1px dashed #ccdfaa80;border-radius:50%;transform:rotate(-25deg)}.rebirth .index{color:#b7d88c}.rebirth .cta{background:linear-gradient(125deg,#c9de9b,#88b583);color:#101910}.finance{background:radial-gradient(circle at 82% 24%,#d4874b53,transparent 39%),linear-gradient(145deg,#1d1b19,#101317 70%)}.finance:before{content:'€';font:800 265px Manrope,Arial,sans-serif;letter-spacing:-.1em;position:absolute;top:-120px;right:8%;color:#dc945725;text-shadow:0 0 85px #de955c70}.foot{color:#85888a;border-top:1px solid #393c3e;padding-top:19px}.foot span:last-child{color:#c5a478}@media(max-width:800px){.shell{gap:45px}.project{grid-template-columns:1fr}.project-content{min-height:340px}.visual{min-height:330px}.heading{font-size:clamp(64px,16vw,115px)}}@media(max-width:650px){.more{grid-template-columns:1fr}.mini{min-height:335px}}@media(max-width:420px){.shell{padding:22px}.heading{font-size:clamp(60px,15vw,75px)}.project-content{padding:24px;min-height:350px}.visual{min-height:275px}.foot{font-size:9px}}
     @media(prefers-reduced-motion:reduce){.project,.visual svg{transition:none}}
   </style>
 </head>
@@ -31,7 +31,7 @@
       <p class="intro">TOOLS / AUTOMATION / EXPERIMENTS.</p>
       <a class="project" href="/pallet-optimizer/" aria-label="Open Pallet Optimizer">
         <div class="project-content">
-          <span class="index">01 / 01 &nbsp;·&nbsp; LIVE TOOL</span>
+          <span class="index">01 / 03 &nbsp;·&nbsp; LIVE TOOL</span>
           <span class="kicker">LAYOUT ENGINE / WEB APP</span>
           <h2>PALLET<br>OPTIMIZER.</h2>
           <p>Optimize carton placement, layer count and pallet height. Visualize the result. Export it.</p>
@@ -51,8 +51,12 @@
           <span class="visual-label meta">8 BOXES / LAYER &nbsp;·&nbsp; 7 LAYERS</span>
         </div>
       </a>
+      <div class="more">
+        <a class="mini rebirth" href="/rebirth/" aria-label="Open Rebirth project"><span class="index">02 / 03 &nbsp;·&nbsp; INTERACTIVE</span><span class="kicker">VISUAL EXPERIMENT / VIEWER</span><h2>REBIRTH.</h2><p>An interactive world. Explore the view.</p><span class="cta">OPEN PROJECT <b aria-hidden="true">↗</b></span></a>
+        <a class="mini finance" href="/projects/hypotheek/" aria-label="Open hypotheek preview"><span class="index">03 / 03 &nbsp;·&nbsp; PREVIEW</span><span class="kicker">FINANCE / INTERACTIVE TOOL</span><h2>WONING<br>RUIMTE.</h2><p>Een helder eerste beeld van je hypotheek en zoekbudget.</p><span class="cta">BEKIJK PREVIEW <b aria-hidden="true">↗</b></span></a>
+      </div>
     </main>
-    <footer class="foot"><span>HESSEL DE VRIES / PROJECTS</span><span>01 — 01</span></footer>
+    <footer class="foot"><span>HESSEL DE VRIES / PROJECTS</span><span>01 — 03</span></footer>
   </div>
 </body>
 </html>
