@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#090c10">
-  <meta name="description" content="Portfolio van Hessel de Vries: fotografie met Sony A7R III, editing, Python automatisering en AI met Claude en OpenAI.">
+  <meta name="description" content="Portfolio van Hessel de Vries: Sony A7R III fotografie, editing, AI agents met Claude en OpenAI en Python tools.">
   <link rel="canonical" href="https://hesseldevries.com/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="nl_NL">
   <meta property="og:title" content="Hessel de Vries | Fotografie, AI en Python">
-  <meta property="og:description" content="Sony A7R III, editing, Python automatisering, Claude en OpenAI.">
+  <meta property="og:description" content="Fotografie met Python, editing, AI agents met Claude en OpenAI en losse Python tools.">
   <meta property="og:url" content="https://hesseldevries.com/">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Hessel de Vries","url":"https://hesseldevries.com/","knowsAbout":["Fotografie","Fotobewerking","Python","Automatisering","AI"]}</script>
   <title>Hessel de Vries | Fotografie, AI en Python</title>
@@ -85,6 +85,21 @@
     .title .line.outline{letter-spacing:-.045em;color:#c4c2bd;-webkit-text-stroke:0;text-shadow:0 0 28px rgba(232,230,223,.1)}
     @media(max-width:720px){.title{line-height:1.05}.title .line{padding:.035em .13em .14em .015em;margin:0}.title .line.outline{-webkit-text-stroke:0}}
     @media(prefers-reduced-motion:no-preference){.stage-img.active{animation:frame-drift 16s ease-in-out 1.4s infinite alternate}@keyframes frame-drift{from{transform:scale(1.005) translate3d(0,0,0)}to{transform:scale(1.07) translate3d(-.7%,.45%,0)}}}
+    .mobile-chapter{display:none}.photo-code,.ai-panel,.python-panel{position:absolute;z-index:4;opacity:0;pointer-events:none;transition:opacity .65s ease,transform .65s ease;transform:translateY(12px)}
+    .photo-code{top:17%;left:6%;width:min(310px,80%);padding:16px 18px;border:1px solid #e3a46c9c;background:#0d1214e8;box-shadow:0 14px 40px #0009}.photo-code .window-top{margin-bottom:10px;color:#e0a363}.photo-code pre,.python-panel pre{margin:0;font:clamp(10px,.95vw,13px)/1.65 'DM Mono',monospace;color:#e4e7e0;white-space:pre-wrap}.stage.scene-photo .photo-code{opacity:1;transform:none}
+    .stage.scene-ai .stage-clip,.stage.scene-python .stage-clip{background:radial-gradient(ellipse at 70% 40%,#55332255,transparent 55%),linear-gradient(135deg,#1a2022,#0c1114 75%)}.stage.scene-ai .stage-clip:before,.stage.scene-python .stage-clip:before{content:"";position:absolute;inset:0;opacity:.35;background-image:linear-gradient(#aa80612b 1px,transparent 1px),linear-gradient(90deg,#aa80612b 1px,transparent 1px);background-size:45px 45px}.stage.scene-ai .stage-gradient,.stage.scene-python .stage-gradient{display:none}
+    .ai-panel{inset:19% 10% 16%;display:flex;flex-direction:column;justify-content:center;gap:15px}.stage.scene-ai .ai-panel,.stage.scene-python .python-panel{opacity:1;transform:none}.ai-head,.python-head{font:10px 'DM Mono',monospace;letter-spacing:.12em;color:#e1a86d}.ai-models{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative}.ai-models:after{content:"";position:absolute;left:50%;top:50%;width:1px;height:65px;background:#d49a68;transform:translateX(-50%);z-index:-1}.ai-model{min-height:105px;padding:22px 17px;border:1px solid #b894746e;background:#1a2023e8;display:flex;flex-direction:column;justify-content:space-between}.ai-model strong{font-size:clamp(20px,2.5vw,34px);letter-spacing:-.05em}.ai-model span,.ai-output,.python-output{font:10px 'DM Mono',monospace;letter-spacing:.05em;color:#c3c5bd}.ai-output{margin:10px auto 0;width:75%;padding:17px;background:#463b3199;border:1px solid #d39a6890;color:#f1d1ae;text-align:center}
+    .python-panel{inset:14% 10% 12%;display:flex;flex-direction:column;justify-content:center;gap:20px;padding:23px;background:#101619ee;border:1px solid #d7a47280}.python-head{border-bottom:1px solid #8075696e;padding-bottom:14px}.python-output{background:#26312c;border:1px solid #88a78a99;color:#d3e3ca;padding:14px}.python-panel .code-key{color:#e8ad7b}.python-panel .code-comment{color:#99b8a8}
+    @media(max-width:720px){
+      .frame{min-height:0;padding:20px 20px calc(20px + env(safe-area-inset-bottom))}.hero{display:flex;flex-direction:column;justify-content:center;align-items:stretch;min-height:0;gap:0;overflow:hidden}.mobile-chapter{display:flex;order:0;align-items:center;gap:10px;flex:0 0 auto;margin:0 0 15px;color:var(--accent);font:10px 'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase}.mobile-chapter:before{content:"";width:17px;height:1px;background:currentColor}.copy .chapter-index{display:none}
+      .stage{order:1;position:relative;inset:auto;width:100%;height:clamp(180px,37dvh,325px);max-width:none;flex:0 0 auto;align-self:stretch;justify-self:auto;transform:none!important;opacity:1;margin:0}.stage::before{inset:8px 8px -7px 8px}.stage-clip{inset:0}.stage-img,.rock-edit,.rock-glow,.rock-code{inset:0;width:100%;height:100%}.stage-img[data-image="1"]{object-position:47% 50%}.stage-img[data-image="2"]{object-position:51% 50%}.stage-img[data-image="3"],.rock-edit,.rock-glow,.rock-code{object-position:52% 52%}.stage-img{filter:saturate(.86) contrast(1.05) brightness(.79)}.stage-gradient{background:linear-gradient(0deg,#090c1070,transparent 24%)}.stage-top{top:12px;left:12px;right:12px}.stage-tag{padding:7px 9px;font-size:9px}.stage-bottom{display:flex;bottom:10px;left:12px;right:12px}.stage-bottom .micro,.stage-count{font-size:9px}.stage.scene-photo .stage-top{display:none}
+      .copy{order:2;position:relative;inset:auto;display:flex;flex-direction:column;align-self:stretch;margin:23px 0 0;padding:0;max-width:none;min-width:0;right:auto;left:auto;bottom:auto}.eyebrow{font-size:10px;margin:0 0 9px}.title,.copy[data-slide="3"] .title,.copy[data-slide="4"] .title,.copy[data-slide="5"] .title{font-size:clamp(40px,12vw,57px);line-height:1.04;letter-spacing:-.055em;margin:0 0 13px}.title .line{padding:.01em .045em .09em .01em;margin:0}.title .line.outline{color:#d1c8bf}.subtitle{font-size:13px;line-height:1.5;max-width:350px;margin:0 0 17px}.cta-row{gap:0}.cta{min-height:44px;font-size:11px;padding:11px 15px;gap:22px}.cta-note{display:none}
+      .nav{left:20px;right:auto;top:auto;bottom:52px;transform:none;display:flex;gap:8px}.nav button{padding:5px 0;width:23px;min-height:24px;justify-content:center}.nav button::after,.nav button[aria-current="step"]::after{width:19px;height:2px}.nav button span{display:none!important}.bottom{font-size:9px}.bottom-left .rule{width:18px}.bottom-right .scroll-line{width:23px}.scroll-hint{font-size:9px}
+      .photo-code{top:12px;left:12px;width:min(235px,77%);padding:10px 11px}.photo-code .window-top{font-size:9px;margin-bottom:7px}.photo-code pre{font-size:9px;line-height:1.55}.edit-code{left:12px;top:12px;width:min(270px,85%);padding:10px 11px}.edit-code pre{font-size:9px}.replay{top:12px;right:12px;left:auto;padding:6px 8px;font-size:9px}.stage.scene-edit .replay{opacity:1}.stage.scene-edit.code-in .replay{opacity:0;pointer-events:none}
+      .ai-panel{inset:10% 5% 11%;gap:8px}.ai-head,.python-head{font-size:9px}.ai-models{gap:9px}.ai-model{min-height:72px;padding:11px}.ai-model strong{font-size:19px}.ai-model span,.ai-output{font-size:8px}.ai-output{padding:10px;width:77%;margin-top:4px}.python-panel{inset:8% 5% 9%;padding:15px;gap:11px}.python-panel pre{font-size:10px;line-height:1.5}.python-head{padding-bottom:8px}.python-output{padding:9px;font-size:9px}.cosmos-coordinate{top:25%;right:35px}
+    }
+    @media(max-width:390px){.frame{padding:17px 18px calc(17px + env(safe-area-inset-bottom))}.mobile-chapter{margin-bottom:10px}.copy{margin-top:16px}.title,.copy[data-slide="3"] .title,.copy[data-slide="4"] .title,.copy[data-slide="5"] .title{font-size:clamp(39px,11.6vw,46px);margin-bottom:8px}.subtitle{font-size:12px;margin-bottom:12px}.nav{left:18px;bottom:43px}.stage{height:clamp(164px,34dvh,290px)}}
+    @media(max-width:720px) and (max-height:700px){.stage{height:clamp(150px,30dvh,225px)}.copy{margin-top:12px}.title,.copy[data-slide="3"] .title,.copy[data-slide="4"] .title,.copy[data-slide="5"] .title{font-size:clamp(37px,10vw,47px);margin-bottom:5px}.title .line{padding-bottom:.055em}.eyebrow{margin-bottom:5px}.subtitle{margin-bottom:9px}.mobile-chapter{margin-bottom:9px}.nav{bottom:40px}.bottom{font-size:8px}}
   </style>
 </head>
 <body>
@@ -97,12 +112,13 @@
       <div class="top-meta"><span class="availability"><i></i> A7R III / PYTHON</span><a class="top-link" href="/projects/">PROJECTS ↗</a></div>
     </header>
     <section class="hero" aria-label="Portfolio van Hessel de Vries">
+      <div class="mobile-chapter" id="mobileChapter" aria-hidden="true">01 / 06 · Intro</div>
       <div class="copy" id="copy" aria-live="polite">
         <div class="chapter-index" id="chapter">01 / 06 &nbsp;·&nbsp; Intro</div>
         <p class="eyebrow" id="eyebrow">A7R III / PYTHON / CLAUDE / OPENAI</p>
-        <h1 class="sr-only">Hessel de Vries: fotografie, editing, AI en Python</h1>
+        <h1 class="sr-only">Hessel de Vries: fotografie, editing, AI agents en Python tools</h1>
         <h2 class="title" id="title"><span class="line"><span>PHOTO.</span></span><span class="line outline"><span>CODE.</span></span></h2>
-        <p class="subtitle" id="subtitle">Photography × AI × automation.</p>
+        <p class="subtitle" id="subtitle">Photography × AI agents × Python tools.</p>
         <div class="cta-row"><button class="cta" type="button" id="next">EXPLORE <span aria-hidden="true">↗</span></button><span class="cta-note">SCROLL TO EXPLORE</span></div>
       </div>
       <div class="stage" id="stage" aria-hidden="true">
@@ -117,35 +133,36 @@
         </div>
         <div class="stage-top"><span class="stage-tag" id="stageTag">HESSEL / SELECTED WORK</span><span class="crosshair"></span></div>
         <div class="stage-bottom"><span class="micro" id="stageCaption">PHOTO / CODE / MOTION</span><span class="stage-count" id="stageCount">01 — 06</span></div>
+        <div class="photo-code"><div class="window-top"><i></i><i></i><i></i><span>select_raw.py</span></div><pre><span class="key">from</span> pathlib <span class="key">import</span> Path
+frames = list(Path(<span class="str">"shoot"</span>).glob(<span class="str">"*.ARW"</span>))
+print(len(frames))</pre></div>
+        <div class="ai-panel"><div class="ai-head">AGENT / WORKFLOW 01</div><div class="ai-models"><div class="ai-model"><strong>CLAUDE</strong><span>RESEARCH</span></div><div class="ai-model"><strong>OPENAI</strong><span>ANALYSIS</span></div></div><div class="ai-output">OUTPUT / ACTION</div></div>
+        <div class="python-panel"><div class="python-head">optimizer.py</div><pre><span class="code-key">def</span> layers(height, box):
+    <span class="code-key">return</span> height // box
+
+print(layers(1200, 180))
+<span class="code-comment"># 6 layers</span></pre><div class="python-output">PALLET OPTIMIZER &nbsp; 06 LAYERS</div></div>
         <div class="edit-code" aria-hidden="true"><div class="window-top"><i></i><i></i><i></i><span>rock_edit.py</span></div><pre><span class="comment"># Masker → licht → eindbeeld</span>
 <span class="key">mask</span> = Image.open(<span class="str">"rock-mask.png"</span>)
 <span class="key">glow</span> = mask.filter(Blur(<span class="fn">32</span>))
 <span class="key">final</span> = composite(grade, glow)</pre></div>
         <button class="replay" type="button" id="replay" aria-label="Speel de bewerking opnieuw af">↺ &nbsp; REPLAY</button>
-        <div class="code-window" id="codeWindow"><div class="window-top"><i></i><i></i><i></i><span>hessel / automate.py</span></div><pre><span class="key">from</span> pathlib <span class="key">import</span> Path
-<span class="key">from</span> PIL <span class="key">import</span> Image, ImageEnhance
-out = Path(<span class="str">"exports"</span>)
-out.mkdir(exist_ok=<span class="key">True</span>)
-<span class="key">for</span> photo <span class="key">in</span> Path(<span class="str">"photos"</span>).glob(<span class="str">"*.jpg"</span>):
-    im = Image.open(photo)
-    im = ImageEnhance.Contrast(im).enhance(<span class="fn">1.15</span>)
-    im.save(out / photo.name)</pre></div>
       </div>
     </section>
     <footer class="bottom"><div class="bottom-left"><span class="rule"></span><span id="footLabel">SONY A7R III · PYTHON · CLAUDE · OPENAI</span></div><div class="bottom-right"><span class="scroll-hint">Scroll / swipe</span><span class="scroll-line" aria-hidden="true"></span></div></footer>
   </div>
-  <nav class="nav" id="nav" aria-label="Onderdelen"><button aria-label="Intro" aria-current="step" data-to="0"><span>Intro</span></button><button aria-label="Fotografie" data-to="1"><span>Fotografie</span></button><button aria-label="Editing" data-to="2"><span>Editing</span></button><button aria-label="AI" data-to="3"><span>AI</span></button><button aria-label="Python" data-to="4"><span>Python</span></button><button aria-label="Cosmos" data-to="5"><span>Cosmos</span></button></nav>
+  <nav class="nav" id="nav" aria-label="Onderdelen"><button aria-label="Intro" aria-current="step" data-to="0"><span>Intro</span></button><button aria-label="Photography en Python" data-to="1"><span>Photography</span></button><button aria-label="Editing" data-to="2"><span>Editing</span></button><button aria-label="AI agents" data-to="3"><span>AI agents</span></button><button aria-label="Python tools" data-to="4"><span>Python tools</span></button><button aria-label="Cosmos" data-to="5"><span>Cosmos</span></button></nav>
   <div class="progress" aria-hidden="true"><div class="progress-fill" id="progress"></div></div>
 </main>
 <script>
   (()=>{
     const slides=[
-      {label:'Intro',eyebrow:'A7R III / PYTHON / CLAUDE / OPENAI',title:['PHOTO.','CODE.'],body:'Photography × AI × automation.',button:'EXPLORE',tag:'HESSEL / PORTFOLIO',caption:'PHOTO / CODE / MOTION',foot:'SONY A7R III · PYTHON · CLAUDE · OPENAI',image:1},
-      {label:'Fotografie',eyebrow:'SONY / A7R III',title:['A7R.','III.'],body:'Selected photography.',button:'EDITING',tag:'SONY / A7R III',caption:'SELECTED FRAMES',foot:'PHOTOGRAPHY / SONY A7R III',image:2},
-      {label:'Editing',eyebrow:'MASKING / COLOR GRADING',title:['MASK.','GRADE.'],body:'From original to final frame.',button:'AI',tag:'EDIT / ORIGINAL',caption:'ORIGINAL → COLOR GRADE',foot:'EDITING / MASKING / COLOR',image:3},
-      {label:'AI',eyebrow:'CLAUDE / OPENAI',title:['CLAUDE.','OPENAI.'],body:'Ideas. Workflows. Tools.',button:'PYTHON',tag:'CLAUDE / OPENAI',caption:'AI / WORKFLOWS',foot:'CLAUDE · OPENAI',image:1},
-      {label:'Python',eyebrow:'PYTHON / AUTOMATION',title:['PYTHON.','AUTOMATE.'],body:'Automation at its finest.',button:'COSMOS',tag:'PYTHON / AUTOMATION',caption:'CODE → OUTPUT',foot:'PYTHON / AUTOMATION',image:3},
-      {label:'Cosmos',eyebrow:'GENERATIVE / MOTION',title:['COSMOS.','IN CODE.'],body:'Generative visuals. Live in your browser.',button:'BACK TO START',tag:'GENERATIVE / COSMOS',caption:'SPACE / MOTION / CODE',foot:'GENERATIVE / LIVE RENDER',image:0}
+      {label:'Intro',eyebrow:'A7R III / PYTHON / CLAUDE / OPENAI',title:['PHOTO.','CODE.'],body:'Photography × AI agents × Python tools.',button:'EXPLORE',tag:'HESSEL / PORTFOLIO',caption:'PHOTO / CODE / MOTION',foot:'SONY A7R III · PYTHON · CLAUDE · OPENAI',image:1},
+      {label:'Photography',eyebrow:'SONY A7R III / RAW + PYTHON',title:['PHOTO.','PYTHON.'],body:'A7R III frames. Selected with Python.',button:'VIEW EDITING',tag:'SONY / A7R III · RAW WORKFLOW',caption:'PHOTO / PYTHON',foot:'PHOTOGRAPHY / PYTHON',image:2},
+      {label:'Editing',eyebrow:'MASKING / COLOR GRADING',title:['MASK.','GRADE.'],body:'Masking, light and color. Before → after.',button:'AI AGENTS',tag:'EDIT / ORIGINAL',caption:'EDIT / BEFORE → AFTER',foot:'EDITING / MASKING / COLOR',image:3},
+      {label:'AI agents',eyebrow:'CLAUDE / OPENAI',title:['AI.','AGENTS.'],body:'Claude + OpenAI for real workflows.',button:'PYTHON TOOLS',tag:'AGENT / WORKFLOW',caption:'AGENTS / TASK → RESULT',foot:'AI AGENTS / WORKFLOWS',image:0},
+      {label:'Python tools',eyebrow:'PYTHON / WEB TOOLS',title:['PYTHON.','TOOLS.'],body:'Scripts, calculators and automation.',button:'COSMOS',tag:'PYTHON / WEB TOOLS',caption:'SCRIPTS / APPS / AUTOMATION',foot:'PYTHON / AUTOMATION',image:0},
+      {label:'Cosmos',eyebrow:'GENERATIVE / MOTION',title:['COSMOS.','IN CODE.'],body:'Live generative visuals. Built in code.',button:'BACK TO START',tag:'GENERATIVE / COSMOS',caption:'SPACE / MOTION / CODE',foot:'GENERATIVE / LIVE RENDER',image:0}
     ];
     const $=s=>document.querySelector(s),copy=$('#copy'),stage=$('#stage'),images=[...document.querySelectorAll('.stage-img')],nav=[...document.querySelectorAll('[data-to]')],reduce=matchMedia('(prefers-reduced-motion: reduce)');let current=0,locked=false,touchStart=0,lastWheel=0,sequenceTimers=[];
     const universe=$('#universe'),universeContext=universe.getContext('2d',{alpha:true});let universeFrame=0,universeDust,universeStars=[],universeWidth=0,universeHeight=0,universePointer=0;
@@ -167,7 +184,7 @@ out.mkdir(exist_ok=<span class="key">True</span>)
     addEventListener('resize',()=>{universeDust=null;if(current===5)setUniverse(true)},{passive:true});document.addEventListener('visibilitychange',()=>{if(current===5)setUniverse(true)});if(matchMedia('(pointer:fine)').matches)addEventListener('pointermove',e=>{universePointer=e.clientX/innerWidth-.5},{passive:true});
     function clearEdit(){sequenceTimers.forEach(clearTimeout);sequenceTimers=[];stage.classList.remove('scene-edit','code-in','code-morph','mask-light','grade-in')}
     function runEdit(){clearEdit();stage.classList.add('scene-edit');$('#stageTag').textContent='EDIT / ORIGINAL';if(reduce.matches){stage.classList.add('grade-in');$('#stageTag').textContent='EDIT / COLOR GRADED';return}for(const [ms,cls] of [[420,'code-in'],[1750,'code-morph'],[2200,'mask-light'],[2850,'grade-in']])sequenceTimers.push(setTimeout(()=>stage.classList.add(cls),ms));sequenceTimers.push(setTimeout(()=>$('#stageTag').textContent='EDIT / COLOR GRADED',3900))}
-    function show(n){n=(n+slides.length)%slides.length;if(n===current&&copy.classList.contains('is-entered'))return;current=n;const s=slides[n];copy.classList.remove('is-entered');const paint=()=>{copy.dataset.slide=String(n);$('#chapter').textContent=`${String(n+1).padStart(2,'0')} / 06  ·  ${s.label}`;$('#eyebrow').textContent=s.eyebrow;$('#title').innerHTML=s.title.map((t,i)=>`<span class="line${i?' outline':''}"><span>${t}</span></span>`).join('');$('#subtitle').textContent=s.body;$('#next').innerHTML=`${s.button} <span aria-hidden="true">↗</span>`;$('#stageTag').textContent=s.tag;$('#stageCaption').textContent=s.caption;$('#stageCount').textContent=`${String(n+1).padStart(2,'0')} — 06`;$('#footLabel').textContent=s.foot;$('#progress').style.width=`${(n+1)*100/slides.length}%`;images.forEach(img=>{if(Number(img.dataset.image)===s.image&&img.dataset.src){img.src=img.dataset.src;delete img.dataset.src}img.classList.toggle('active',Number(img.dataset.image)===s.image)});if(n===2){document.querySelectorAll('.rock-edit,.rock-glow,.rock-code').forEach(img=>{if(img.dataset.src){img.src=img.dataset.src;delete img.dataset.src}});runEdit()}else clearEdit();$('#codeWindow').classList.toggle('visible',n===4);setUniverse(n===5);nav.forEach((b,i)=>i===n?b.setAttribute('aria-current','step'):b.removeAttribute('aria-current'));requestAnimationFrame(()=>requestAnimationFrame(()=>copy.classList.add('is-entered')))};if(reduce.matches)paint();else setTimeout(paint,210);locked=true;setTimeout(()=>locked=false,750)}
+    function show(n){n=(n+slides.length)%slides.length;if(n===current&&copy.classList.contains('is-entered'))return;current=n;const s=slides[n];copy.classList.remove('is-entered');const paint=()=>{copy.dataset.slide=String(n);$('#chapter').textContent=`${String(n+1).padStart(2,'0')} / 06  ·  ${s.label}`;$('#mobileChapter').textContent=`${String(n+1).padStart(2,'0')} / 06 · ${s.label}`;$('#eyebrow').textContent=s.eyebrow;$('#title').innerHTML=s.title.map((t,i)=>`<span class="line${i?' outline':''}"><span>${t}</span></span>`).join('');$('#subtitle').textContent=s.body;$('#next').innerHTML=`${s.button} <span aria-hidden="true">↗</span>`;$('#stageTag').textContent=s.tag;$('#stageCaption').textContent=s.caption;$('#stageCount').textContent=`${String(n+1).padStart(2,'0')} — 06`;$('#footLabel').textContent=s.foot;$('#progress').style.width=`${(n+1)*100/slides.length}%`;images.forEach(img=>{if(Number(img.dataset.image)===s.image&&img.dataset.src){img.src=img.dataset.src;delete img.dataset.src}img.classList.toggle('active',Number(img.dataset.image)===s.image)});stage.classList.toggle('scene-photo',n===1);stage.classList.toggle('scene-ai',n===3);stage.classList.toggle('scene-python',n===4);if(n===2){document.querySelectorAll('.rock-edit,.rock-glow,.rock-code').forEach(img=>{if(img.dataset.src){img.src=img.dataset.src;delete img.dataset.src}});runEdit()}else clearEdit();setUniverse(n===5);nav.forEach((b,i)=>i===n?b.setAttribute('aria-current','step'):b.removeAttribute('aria-current'));requestAnimationFrame(()=>requestAnimationFrame(()=>copy.classList.add('is-entered')))};if(reduce.matches)paint();else setTimeout(paint,210);locked=true;setTimeout(()=>locked=false,750)}
     $('#next').addEventListener('click',()=>show(current+1));$('#replay').addEventListener('click',runEdit);$('#homeLink').addEventListener('click',e=>{e.preventDefault();show(0)});nav.forEach(b=>b.addEventListener('click',()=>show(Number(b.dataset.to))));
     addEventListener('wheel',e=>{if(Math.abs(e.deltaY)<5)return;e.preventDefault();const now=performance.now();if(locked||now-lastWheel<690)return;lastWheel=now;show(current+(e.deltaY>0?1:-1))},{passive:false});
     addEventListener('keydown',e=>{if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
