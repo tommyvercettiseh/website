@@ -77,6 +77,12 @@
     @media(max-width:390px){.title{font-size:clamp(51px,14vw,62px)}.stage{inset:10% 0 29% 9%}.copy{bottom:3%}.subtitle{font-size:13px}.code-window{bottom:31%;width:77%}}
     @media(max-height:680px) and (min-width:721px){.frame{min-height:0}.stage{height:70vh}.title{font-size:clamp(54px,7vw,98px);margin-bottom:14px}.chapter-index{margin-bottom:14px}.subtitle{margin-bottom:14px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.stage{transform:none!important}}
+    /* Give large display type real breathing room, including descenders and the final period. */
+    .title{line-height:1.04;letter-spacing:-.056em}
+    .title .line{padding:.035em .16em .14em .02em;margin:0;overflow:hidden}
+    .title .line.outline{letter-spacing:-.035em;color:rgba(232,230,223,.13);-webkit-text-stroke:1.5px rgba(232,230,223,.9);text-shadow:0 0 18px rgba(232,230,223,.07)}
+    @media(max-width:720px){.title{line-height:1.05}.title .line{padding:.035em .13em .14em .015em;margin:0}.title .line.outline{-webkit-text-stroke:1.25px rgba(232,230,223,.95)}}
+    @media(prefers-reduced-motion:no-preference){.stage-img.active{animation:frame-drift 16s ease-in-out 1.4s infinite alternate}@keyframes frame-drift{from{transform:scale(1.005) translate3d(0,0,0)}to{transform:scale(1.07) translate3d(-.7%,.45%,0)}}}
   </style>
 </head>
 <body>
