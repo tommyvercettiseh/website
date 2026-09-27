@@ -162,10 +162,10 @@ print(layers(1200, 180))
       {label:'Editing',eyebrow:'MASKING / COLOR GRADING',title:['MASK.','GRADE.'],body:'Maskers, licht en kleur. Een consistente edit van origineel naar eindbeeld.',button:'BEKIJK AI AGENTS',tag:'EDIT / ORIGINAL',caption:'EDIT / BEFORE → AFTER',foot:'EDITING / MASKING / COLOR',image:3},
       {label:'AI agents',eyebrow:'CLAUDE / OPENAI',title:['AI.','AGENTS.'],body:'Claude en OpenAI helpen met zoeken, analyseren en voorbereiden van terugkerend werk.',button:'BEKIJK PYTHON',tag:'AGENT / WORKFLOW',caption:'AGENTS / TASK → RESULT',foot:'AI AGENTS / WORKFLOWS',image:0},
       {label:'Python tools',eyebrow:'PYTHON / WEB TOOLS',title:['PYTHON.','TOOLS.'],body:'Python tools voor berekeningen, bestanden en taken die je anders telkens zelf doet.',button:'BEKIJK COSMOS',tag:'PYTHON / WEB TOOLS',caption:'SCRIPTS / APPS / AUTOMATION',foot:'PYTHON / AUTOMATION',image:0},
-      {label:'Cosmos',eyebrow:'GENERATIVE / MOTION',title:['COSMOS.','IN CODE.'],body:'Live generative visuals. Built in code.',button:'BACK TO START',tag:'GENERATIVE / COSMOS',caption:'SPACE / MOTION / CODE',foot:'GENERATIVE / LIVE RENDER',image:0}
+      {label:'Cosmos',eyebrow:'GENERATIVE / MOTION',title:['COSMOS.','IN CODE.'],body:'A living flow field. Drawn in real time.',button:'BACK TO START',tag:'GENERATIVE / COSMOS',caption:'LIGHT / FLOW / CODE',foot:'GENERATIVE / LIVE RENDER',image:0}
     ];
     const $=s=>document.querySelector(s),copy=$('#copy'),stage=$('#stage'),images=[...document.querySelectorAll('.stage-img')],nav=[...document.querySelectorAll('[data-to]')],reduce=matchMedia('(prefers-reduced-motion: reduce)');let current=0,locked=false,touchStart=0,lastWheel=0,sequenceTimers=[];
-    const universe=$('#universe'),universeContext=universe.getContext('2d',{alpha:true});let universeFrame=0,universeDust,universeStars=[],universeWidth=0,universeHeight=0,universePointer=0;
+    const universe=$('#universe'),universeContext=universe.getContext('2d',{alpha:true});let universeFrame=0,universeDust,universeStars=[],universeWidth=0,universeHeight=0,universePointer=0,lastUniversePaint=0;
     function buildUniverse(){
       if(!universeContext)return;const dpr=Math.min(devicePixelRatio||1,innerWidth<721?1.15:1.5),w=innerWidth,h=innerHeight;universeWidth=w;universeHeight=h;universe.width=Math.round(w*dpr);universe.height=Math.round(h*dpr);universeContext.setTransform(dpr,0,0,dpr,0,0);
       universeDust=document.createElement('canvas');universeDust.width=w;universeDust.height=h;const g=universeDust.getContext('2d');const cx=w*(w<721?.59:.72),cy=h*(w<721?.40:.48),size=Math.min(w*.48,h*.71);let seed=192706;
@@ -176,11 +176,38 @@ print(layers(1200, 180))
       for(let i=0;i<3100;i++){const r=Math.sqrt(random())*size,a=Math.floor(random()*3)*Math.PI*2/3+r/size*4.6+(random()-.5)*(.14+r/size*.38),spread=(random()-.5)*size*(.025+r/size*.045),x=cx+Math.cos(a)*r+spread,y=cy+Math.sin(a)*r*.47+spread*.32;g.fillStyle=i%5===0?'#d7b5bdc0':i%3===0?'#fbd3a2b3':'#b9c9dca8';const dot=random()<.08?1.45:.85;g.fillRect(x,y,dot,dot)}
       universeStars=Array.from({length:w<721?115:235},(_,i)=>({x:random()*w,y:random()*h,r:random()<.07?1.8:.4+random()*.75,phase:random()*6.28,depth:.4+random()*1.2,color:i%9===0?'255,209,169':'225,233,242'}));
     }
-    function paintUniverse(t){if(!universeContext||current!==5||document.hidden)return;const c=universeContext,w=universeWidth,h=universeHeight;c.clearRect(0,0,w,h);c.drawImage(universeDust,Math.sin(t*.0002)*6+universePointer*9,Math.cos(t*.00017)*5);for(const star of universeStars){const alpha=.24+(Math.sin(t*.0014*star.depth+star.phase)+1)*.22;c.fillStyle=`rgba(${star.color},${alpha.toFixed(2)})`;c.beginPath();c.arc(star.x+universePointer*star.depth*8,star.y,star.r,0,Math.PI*2);c.fill()}
-      const meteor=(t%8600-4600)/900;if(meteor>0&&meteor<1){const x=w*(.92-.23*meteor),y=h*(.16+.13*meteor),trail=c.createLinearGradient(x+100,y-52,x,y);trail.addColorStop(0,'#e1b99700');trail.addColorStop(.85,'#ebbb9baa');trail.addColorStop(1,'#fff5db');c.strokeStyle=trail;c.lineWidth=1.7;c.beginPath();c.moveTo(x+100,y-52);c.lineTo(x,y);c.stroke()}
-      universeFrame=requestAnimationFrame(paintUniverse)}
-    function setUniverse(active){$('#site').classList.toggle('cosmos-active',active);cancelAnimationFrame(universeFrame);if(active&&universeContext){if(!universeDust||universeWidth!==innerWidth||universeHeight!==innerHeight)buildUniverse();if(reduce.matches){paintUniverseStatic()}else universeFrame=requestAnimationFrame(paintUniverse)}}
-    function paintUniverseStatic(){const c=universeContext;c.clearRect(0,0,universeWidth,universeHeight);c.drawImage(universeDust,0,0);for(const star of universeStars){c.fillStyle=`rgba(${star.color},.65)`;c.fillRect(star.x,star.y,star.r,star.r)}}
+    function flowPoint(u,lane,t){
+      const w=universeWidth,h=universeHeight,mobile=w<721,v=1-u;
+      const x=w*(mobile?.17:.43)*v*v*v+3*w*(mobile?.32:.52)*v*v*u+3*w*(mobile?.97:1.04)*v*u*u+w*(mobile?.91:1.09)*u*u*u;
+      const y=h*(mobile?.68:1.08)*v*v*v+3*h*(mobile?.23:.64)*v*v*u+3*h*(mobile?.58:.20)*v*u*u+h*(mobile?-.10:-.17)*u*u*u;
+      const swell=Math.sin(Math.PI*u),wave=Math.sin(u*8.5-t*.00023+lane*1.7);
+      return {x:x+lane*w*(mobile?.15:.12)*(.5+swell*.65)+wave*w*.012*swell+universePointer*w*.018,y:y+lane*h*(mobile?.045:.083)+Math.cos(u*7.5-t*.00019+lane)*h*.017*swell};
+    }
+    function renderUniverse(t,animated){
+      const c=universeContext,w=universeWidth,h=universeHeight,mobile=w<721,phase=animated?t:0;
+      c.clearRect(0,0,w,h);c.drawImage(universeDust,Math.sin(phase*.00015)*5,Math.cos(phase*.00012)*4);
+      // A quiet ring behind the threads anchors the flow without covering the headline.
+      c.save();c.translate(w*(mobile?.63:.79)+universePointer*8,h*(mobile?.31:.48));c.rotate(-.29+Math.sin(phase*.00009)*.025);
+      for(let i=0;i<3;i++){const halo=c.createLinearGradient(-w*.28,-h*.2,w*.29,h*.23);halo.addColorStop(0,'#8ba7c000');halo.addColorStop(.38,i===1?'#deb28b54':'#b8a1bd35');halo.addColorStop(.7,'#f2c49c80');halo.addColorStop(1,'#b68a9b00');c.strokeStyle=halo;c.lineWidth=i===1?1.5:.7;c.beginPath();c.ellipse(0,0,w*(mobile?.34:.27)*(1+i*.065),h*(mobile?.20:.32)*(1+i*.095),0,-2.3,2.25);c.stroke()}
+      c.restore();
+      const count=mobile?24:44,steps=mobile?38:62;
+      for(let i=0;i<count;i++){
+        const lane=i/(count-1)*2-1,edge=1-Math.abs(lane),first=flowPoint(0,lane,phase),last=flowPoint(1,lane,phase),light=c.createLinearGradient(first.x,first.y,last.x,last.y);
+        light.addColorStop(0,'#b66b4600');light.addColorStop(.22,`rgba(215,127,91,${(.09+edge*.19).toFixed(3)})`);light.addColorStop(.52,`rgba(255,216,167,${(.18+edge*.46).toFixed(3)})`);light.addColorStop(.75,`rgba(170,187,213,${(.13+edge*.22).toFixed(3)})`);light.addColorStop(1,'#a5afce00');
+        c.beginPath();for(let j=0;j<=steps;j++){const p=flowPoint(j/steps,lane,phase);if(j)c.lineTo(p.x,p.y);else c.moveTo(p.x,p.y)}
+        c.strokeStyle=light;c.lineWidth=i%11===0?1.8:.65+edge*.55;
+        if(i%11===0){c.shadowColor='#efa96f';c.shadowBlur=mobile?9:19}c.stroke();c.shadowBlur=0;
+      }
+      // Each fleck travels on a strand. Nothing is loaded while other chapters are visible.
+      const flecks=mobile?24:52;
+      for(let i=0;i<flecks;i++){
+        const lane=Math.sin(i*14.13)*.92,u=(phase*(.000025+(i%5)*.000004)+i*.1618)%1,p=flowPoint(u,lane,phase),fade=Math.sin(Math.PI*u),r=(i%9===0?1.85:.8)*fade;
+        c.fillStyle=i%4===0?`rgba(255,224,183,${(.35+fade*.5).toFixed(2)})`:`rgba(208,198,210,${(.18+fade*.46).toFixed(2)})`;c.beginPath();c.arc(p.x,p.y,r,0,Math.PI*2);c.fill();
+      }
+      for(const star of universeStars){const alpha=.13+(Math.sin(phase*.0012*star.depth+star.phase)+1)*.12;c.fillStyle=`rgba(${star.color},${alpha.toFixed(2)})`;c.fillRect(star.x+universePointer*star.depth*5,star.y,star.r,star.r)}
+    }
+    function paintUniverse(t){if(!universeContext||current!==5||document.hidden)return;if(universeWidth<721&&t-lastUniversePaint<32){universeFrame=requestAnimationFrame(paintUniverse);return}lastUniversePaint=t;renderUniverse(t,true);universeFrame=requestAnimationFrame(paintUniverse)}
+    function setUniverse(active){$('#site').classList.toggle('cosmos-active',active);cancelAnimationFrame(universeFrame);if(active&&universeContext){if(!universeDust||universeWidth!==innerWidth||universeHeight!==innerHeight)buildUniverse();lastUniversePaint=0;if(reduce.matches)renderUniverse(0,false);else universeFrame=requestAnimationFrame(paintUniverse)}}
     addEventListener('resize',()=>{universeDust=null;if(current===5)setUniverse(true)},{passive:true});document.addEventListener('visibilitychange',()=>{if(current===5)setUniverse(true)});if(matchMedia('(pointer:fine)').matches)addEventListener('pointermove',e=>{universePointer=e.clientX/innerWidth-.5},{passive:true});
     function clearEdit(){sequenceTimers.forEach(clearTimeout);sequenceTimers=[];stage.classList.remove('scene-edit','code-in','code-morph','mask-light','grade-in')}
     function runEdit(){clearEdit();stage.classList.add('scene-edit');$('#stageTag').textContent='EDIT / ORIGINAL';if(reduce.matches){stage.classList.add('grade-in');$('#stageTag').textContent='EDIT / COLOR GRADED';return}for(const [ms,cls] of [[420,'code-in'],[1750,'code-morph'],[2200,'mask-light'],[2850,'grade-in']])sequenceTimers.push(setTimeout(()=>stage.classList.add(cls),ms));sequenceTimers.push(setTimeout(()=>$('#stageTag').textContent='EDIT / COLOR GRADED',3900))}
