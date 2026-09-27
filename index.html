@@ -181,7 +181,7 @@ print(layers(1200, 180))
       const x=w*(mobile?.17:.43)*v*v*v+3*w*(mobile?.32:.52)*v*v*u+3*w*(mobile?.97:1.04)*v*u*u+w*(mobile?.91:1.09)*u*u*u;
       const y=h*(mobile?.68:1.08)*v*v*v+3*h*(mobile?.23:.64)*v*v*u+3*h*(mobile?.58:.20)*v*u*u+h*(mobile?-.10:-.17)*u*u*u;
       const swell=Math.sin(Math.PI*u),wave=Math.sin(u*8.5-t*.00023+lane*1.7);
-      return {x:x+lane*w*(mobile?.15:.12)*(.5+swell*.65)+wave*w*.012*swell+universePointer*w*.018,y:y+lane*h*(mobile?.045:.083)+Math.cos(u*7.5-t*.00019+lane)*h*.017*swell};
+      return {x:x+lane*w*(mobile?.15:.12)*(.5+swell*.65)+wave*w*.045*swell+universePointer*w*.018,y:y+lane*h*(mobile?.045:.083)+Math.cos(u*7.5-t*.00019+lane)*h*.033*swell};
     }
     function renderUniverse(t,animated){
       const c=universeContext,w=universeWidth,h=universeHeight,mobile=w<721,phase=animated?t:0;
