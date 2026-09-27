@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090c10">
+  <meta name="description" content="Optimize pallet layouts, carton counts and height with a visual result. A project by Hessel de Vries.">
+  <link rel="canonical" href="https://hesseldevries.com/pallet-optimizer/">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/cards.css">
+  <link rel="stylesheet" href="assets/site-theme.css">
+  <title>Pallet Optimizer | Hessel de Vries</title>
+</head>
+<body>
+<header class="topbar compact-topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="./" aria-label="Pallet Optimizer home">
+      <span class="brand-icon">▦</span>
+      <span><strong>Pallet Optimizer</strong></span>
+    </a>
+    <a class="site-back" href="/projects/">← PROJECTS</a>
+    <button id="downloadResult" class="download-button" type="button" disabled>⇩ Download result</button>
+  </div>
+</header>
+
+<main class="workspace compact-workspace">
+  <section class="panel input-panel compact-input-panel">
+    <header class="panel-heading compact-panel-heading"><span>INPUT</span></header>
+    <form id="calculatorForm" class="compact-form" novalidate>
+
+      <section class="compact-section pallet-section">
+        <div class="section-label">Pallet</div>
+        <div class="pallet-inline">
+          <div class="segmented-control pallet-mode compact-toggle">
+            <button type="button" class="active" data-pallet-mode="preset">Preset</button>
+            <button type="button" data-pallet-mode="custom">Custom</button>
+          </div>
+          <label id="presetPalletField" class="select-wrap grow-field">
+            <select id="pallet_id">
+              <option value="euro">Europallet · 1200 × 800 × 144 mm</option>
+              <option value="block">Block pallet · 1200 × 1000 × 144 mm</option>
+              <option value="half">Half pallet · 800 × 600 × 144 mm</option>
+            </select>
+          </label>
+        </div>
+        <div class="custom-pallet-grid compact-custom-grid" id="customPalletFields" hidden>
+          <label class="ghost-field"><input id="custom_pallet_length_mm" type="number" min="1" value="1200" placeholder="Length"><span>mm</span></label>
+          <label class="ghost-field"><input id="custom_pallet_width_mm" type="number" min="1" value="800" placeholder="Width"><span>mm</span></label>
+          <label class="ghost-field"><input id="custom_pallet_height_mm" type="number" min="1" value="144" placeholder="Height"><span>mm</span></label>
+        </div>
+      </section>
+
+      <section class="compact-section carton-section">
+        <div class="section-label">Carton</div>
+        <div class="carton-grid">
+          <label class="ghost-field"><input id="box_length_mm" type="number" min="1" value="400" required placeholder="Length"><span>mm</span></label>
+          <label class="ghost-field"><input id="box_width_mm" type="number" min="1" value="300" required placeholder="Width"><span>mm</span></label>
+          <label class="ghost-field"><input id="box_height_mm" type="number" min="1" value="250" required placeholder="Height"><span>mm</span></label>
+          <label class="ghost-field case-qty"><input id="case_quantity" type="number" min="1" value="12" required placeholder="Case qty"><span>items</span></label>
+        </div>
+      </section>
+
+      <section class="compact-section height-section">
+        <div class="section-label">Maximum height</div>
+        <div class="height-inline">
+          <div class="segmented-control compact-toggle height-toggle">
+            <button type="button" class="active" data-height-mode="inclusive">Include pallet</button>
+            <button type="button" data-height-mode="exclusive">Exclude pallet</button>
+          </div>
+          <label class="ghost-field max-height-input">
+            <input id="max_total_height_mm" type="number" min="1" value="1900" required placeholder="Maximum height">
+            <span>mm</span>
+          </label>
+        </div>
+        <span id="heightLabel" class="mode-caption">Maximum total pallet height</span>
+      </section>
+
+      <section class="compact-section reference-section">
+        <div class="section-label">Reference</div>
+        <label class="simple-reference">
+          <input id="reference" type="text" maxlength="80" placeholder="Reference, e.g. Action 123456">
+        </label>
+      </section>
+
+      <section class="compact-calculate">
+        <button class="primary-button" type="submit">▦ Calculate pallet</button>
+      </section>
+
+      <div id="formError" class="error-message" hidden></div>
+    </form>
+  </section>
+
+  <section class="panel result-panel compact-result-panel" id="resultCard" tabindex="-1">
+    <header class="panel-heading result-heading compact-result-heading">
+      <span>RESULT</span>
+      <small id="resultSubtitle">Europallet · 1200 × 800 × 144 mm</small>
+    </header>
+
+    <aside id="heightAdvice" class="advice-card compact-advice">
+      <span class="advice-icon">i</span>
+      <p id="heightAdviceText">Calculate the pallet to see height advice.</p>
+      <strong>HEIGHT TIP</strong>
+    </aside>
+
+    <div class="metric-grid compact-metrics">
+      <article><span>Boxes / layer</span><strong id="boxesPerLayer">8</strong></article>
+      <article><span>Layers</span><strong id="layers">6</strong></article>
+      <article><span>Boxes / pallet</span><strong id="boxesPerPallet">48</strong></article>
+      <article><span>Pallet Qty</span><strong id="palletQuantity">576</strong></article>
+      <article><span>Total height</span><strong id="totalHeight">1644 mm</strong></article>
+    </div>
+
+    <section class="visual-card compact-visual-card">
+      <div class="visual-title">Pallet visualization <small id="solverStatus"></small></div>
+      <div class="canvas-wrap"><canvas id="palletCanvas" width="1100" height="620"></canvas></div>
+      <div class="height-summary">
+        <span><small>Pallet height</small><strong id="palletHeight">144 mm</strong></span>
+        <span><small>Load height</small><strong id="loadHeight">1500 mm</strong></span>
+        <span><small>Total height</small><strong id="heightSummaryTotal">1644 mm</strong></span>
+      </div>
+    </section>
+  </section>
+</main>
+<script src="assets/optimizer.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
