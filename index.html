@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#090c10">
+  <meta name="description" content="Portfolio van Hessel de Vries: fotografie met Sony A7R III, editing, Python automatisering en AI met Claude en OpenAI.">
+  <link rel="canonical" href="https://hesseldevries.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:title" content="Hessel de Vries | Fotografie, AI en Python">
+  <meta property="og:description" content="Sony A7R III, editing, Python automatisering, Claude en OpenAI.">
+  <meta property="og:url" content="https://hesseldevries.com/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Hessel de Vries","url":"https://hesseldevries.com/","knowsAbout":["Fotografie","Fotobewerking","Python","Automatisering","AI"]}</script>
+  <title>Hessel de Vries | Fotografie, AI en Python</title>
+<style>
+@font-face{font-family:Manrope;font-style:normal;font-weight:400 800;font-display:swap;src:url(assets/manrope.woff2) format("woff2")}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:swap;src:url(assets/dmmono.woff2) format("woff2")}
+</style>
+  <style>
+    :root{color-scheme:dark;--paper:#e8e6df;--dim:#999ca1;--accent:#e0a363;--bg:#090c10;--ease:cubic-bezier(.2,.7,.15,1)}
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--paper);font-family:Manrope,Arial,sans-serif}body{overflow:hidden}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit}a{color:inherit}::selection{background:var(--accent);color:#121212}
+    .site{position:fixed;inset:0;overflow:hidden;isolation:isolate;background:var(--bg)}
+    .site::after{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;opacity:.075;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+    .ambient{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 87% 58%,rgba(141,86,46,.12),transparent 43%)}
+    .frame{position:relative;width:100%;height:100%;height:100dvh;min-height:560px;padding:clamp(22px,3.7vw,58px);display:grid;grid-template-rows:auto 1fr auto;z-index:1}
+    .top,.bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;z-index:8}.brand{font-weight:800;letter-spacing:-.065em;font-size:clamp(19px,1.7vw,26px);line-height:1;text-decoration:none}.brand span{color:var(--accent)}.top-meta,.bottom,.chapter-index,.eyebrow,.stage-tag,.micro,.nav button,.progress-label,.scroll-hint{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase}.top-meta{color:#a7aaac;display:flex;gap:27px;align-items:center}.availability{display:flex;gap:9px;align-items:center}.availability i{display:block;width:6px;height:6px;border-radius:50%;background:#c5a478;box-shadow:0 0 12px #c5a478}
+    .top-link{border:1px solid #56585b;border-radius:100px;text-decoration:none;padding:11px 17px;background:transparent;color:inherit;cursor:pointer;transition:background .2s,color .2s}.top-link:hover{background:var(--paper);color:#111}.bottom{color:#a4a6a6}.bottom-left{display:flex;align-items:center;gap:15px}.rule{height:1px;width:48px;background:var(--accent)}.bottom-right{display:flex;align-items:center;gap:13px}.scroll-line{height:1px;width:62px;background:#666;position:relative;overflow:hidden}.scroll-line::after{content:"";position:absolute;left:-30px;top:0;height:1px;width:30px;background:var(--accent);animation:sweep 2s ease-in-out infinite}@keyframes sweep{to{left:100%}}
+    .hero{position:relative;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);align-items:center;gap:clamp(15px,2vw,35px)}
+    .copy{position:relative;z-index:4;align-self:center;padding-bottom:2vh;max-width:810px;pointer-events:none}.copy a,.copy button{pointer-events:auto}.chapter-index{color:var(--accent);display:flex;align-items:center;gap:13px;margin-bottom:clamp(22px,3vw,45px)}.chapter-index::before{content:"";width:21px;height:1px;background:currentColor}.eyebrow{color:#bababa;margin:0 0 14px}.title{font-size:clamp(63px,8.15vw,148px);line-height:.9;letter-spacing:-.088em;font-weight:800;margin:0 0 30px;max-width:950px}.title .line{display:block;overflow:hidden;padding-right:.13em;padding-bottom:.11em;margin-bottom:-.11em}.title .line span{display:block;transform:translate3d(0,110%,0);transition:transform 1.05s var(--ease)}.title .outline{font-weight:800;color:transparent;-webkit-text-stroke:1px rgba(232,230,223,.76)}.copy.is-entered .title .line span{transform:translateZ(0)}.copy.is-entered .title .line:nth-child(2) span{transition-delay:.1s}
+    .subtitle{max-width:385px;font-size:clamp(15px,1.2vw,18px);line-height:1.7;color:#c0c2c1;margin:0 0 30px;opacity:0;transform:translateY(15px);transition:opacity .6s .35s,transform .6s .35s}.copy.is-entered .subtitle,.copy.is-entered .cta-row,.copy.is-entered .chapter-index,.copy.is-entered .eyebrow{opacity:1;transform:translateY(0)}.chapter-index,.eyebrow,.cta-row{opacity:0;transform:translateY(12px);transition:opacity .55s .2s,transform .55s .2s}.cta-row{display:flex;align-items:center;gap:22px}.cta{border:0;border-radius:100px;color:#16130e;background:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:32px;padding:15px 19px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .25s,background .25s}.cta:hover{transform:translateY(-3px);background:#f1b879}.cta span{font-size:21px;line-height:.6;font-weight:400}.cta-note{font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;font-size:10px;color:#888d91}
+    .stage{height:min(68vh,740px);width:100%;max-width:850px;justify-self:end;position:relative;z-index:1;align-self:center;transform:translate3d(var(--px,0px),var(--py,0px),0)}.stage::before{content:"";position:absolute;inset:18px -18px -18px 18px;border:1px solid rgba(224,163,99,.3);pointer-events:none;z-index:1}.stage-clip{position:absolute;inset:0;overflow:hidden;background:#171b1d;clip-path:inset(0 round 1px)}.stage-img{position:absolute;inset:-5%;width:110%;height:110%;object-fit:cover;filter:saturate(.7) contrast(1.08) brightness(.66);transform:scale(1.08);opacity:0;transition:transform 1.4s var(--ease),opacity .8s,filter 1s;will-change:transform,opacity}.stage-img.active{opacity:1;transform:scale(1)}.stage-img[data-image="1"]{object-position:58% 50%}.stage-img[data-image="2"]{object-position:50% 50%}.stage-img[data-image="3"]{object-position:52% 55%}.stage-gradient{position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,12,16,.62),transparent 53%),linear-gradient(0deg,rgba(9,12,16,.4),transparent 34%)}.stage-top,.stage-bottom{position:absolute;z-index:2;left:21px;right:21px;display:flex;justify-content:space-between;align-items:center;color:#f4eee5}.stage-top{top:22px}.stage-bottom{bottom:21px}.stage-tag{background:rgba(9,12,16,.52);padding:10px 12px;backdrop-filter:blur(9px)}.crosshair{width:18px;height:18px;position:relative}.crosshair::before,.crosshair::after{content:"";position:absolute;background:var(--paper)}.crosshair::before{width:18px;height:1px;top:8px}.crosshair::after{height:18px;width:1px;left:8px}.micro{font-size:10px}.stage-count{font-family:'DM Mono',monospace;font-size:12px}
+    .code-window{position:absolute;right:5%;bottom:9%;width:min(400px,90%);background:rgba(10,15,18,.88);border:1px solid rgba(241,240,232,.24);backdrop-filter:blur(15px);box-shadow:0 20px 80px #0008;z-index:2;padding:20px 22px;opacity:0;transform:translateY(25px);transition:opacity .7s .2s,transform .7s .2s;pointer-events:none}.code-window.visible{opacity:1;transform:none}.window-top{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;color:#aaabad;font-size:10px;margin-bottom:17px}.window-top i{width:6px;height:6px;border:1px solid #a5a6a4;border-radius:50%}.window-top span{margin-left:auto}.code-window pre{font-family:'DM Mono',monospace;white-space:pre-wrap;margin:0;font-size:clamp(10px,.95vw,13px);line-height:1.8;color:#c8d0c9}.code-window .key{color:#deaa79}.code-window .str{color:#a7bca0}.code-window .comment{color:#6d797c}.code-window .fn{color:#c6bacd}
+    .nav{position:absolute;right:clamp(20px,3vw,52px);top:50%;transform:translateY(-50%);z-index:9;display:grid;gap:15px;justify-items:end}.nav button{padding:8px 0 8px 9px;border:0;background:transparent;color:#ddd;opacity:.65;cursor:pointer;display:flex;align-items:center;gap:12px;transition:opacity .2s}.nav button::after{content:"";width:14px;height:1px;background:#ddd;transition:width .35s,background .35s}.nav button:hover,.nav button[aria-current="step"]{opacity:1}.nav button[aria-current="step"]::after{width:35px;background:var(--accent)}.nav button span{display:none}.nav button:hover span,.nav button[aria-current="step"] span{display:inline}
+    .progress{position:absolute;z-index:8;left:0;bottom:0;width:100%;height:2px;background:rgba(255,255,255,.12)}.progress-fill{width:20%;height:100%;background:var(--accent);transition:width .75s var(--ease)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+
+    /* The edit is an actual rock mask, an animated code texture and a radial color reveal. */
+    .rock-edit,.rock-glow,.rock-code{position:absolute;inset:-5%;width:110%;height:110%;object-fit:cover;object-position:52% 55%;pointer-events:none;will-change:opacity,clip-path}
+    .rock-edit{z-index:1;clip-path:circle(0% at 54% 46%);filter:contrast(1.08) brightness(.91);transition:clip-path 1.6s cubic-bezier(.16,.8,.18,1)}
+    .rock-glow{z-index:2;opacity:0;mix-blend-mode:screen;filter:saturate(1.45) brightness(1.35);transition:opacity .8s}
+    .rock-code{z-index:3;opacity:0;filter:drop-shadow(0 0 9px #ff733b);transition:opacity .7s,filter .7s}
+    .stage.scene-edit.code-morph .rock-code{opacity:1}
+    .stage.scene-edit.mask-light .rock-code{opacity:0;filter:blur(14px) drop-shadow(0 0 18px #ff6633)}
+    .stage.scene-edit.mask-light .rock-glow{opacity:.92;animation:rock-pulse 2.4s ease-in-out 1}
+    .stage.scene-edit.grade-in .rock-edit{clip-path:circle(110% at 54% 46%)}
+    .stage.scene-edit.grade-in .rock-glow{animation:none;opacity:0;transition:opacity 1.3s .2s}
+    @keyframes rock-pulse{50%{opacity:1;filter:saturate(1.65) brightness(2)}}
+    .edit-code{position:absolute;z-index:4;left:7%;top:20%;width:min(395px,86%);padding:18px 20px;background:rgba(8,12,15,.91);border:1px solid rgba(240,176,103,.4);backdrop-filter:blur(12px);box-shadow:0 20px 80px #0008,0 0 40px #e56b3d20;opacity:0;transform:translateY(18px);pointer-events:none;transition:opacity .55s,transform .8s cubic-bezier(.2,.8,.2,1),filter .8s}
+    .edit-code .window-top{color:#d9bca3}.edit-code pre{margin:0;color:#e8e7dc;font:clamp(10px,.95vw,12px)/1.85 'DM Mono',monospace;white-space:pre-wrap}
+    .stage.scene-edit.code-in .edit-code{opacity:1;transform:none}
+    .stage.scene-edit.code-morph .edit-code{opacity:0;transform:translate(39%,29%) scale(.08);filter:blur(16px)}
+    .replay{position:absolute;z-index:6;top:19px;left:205px;border:1px solid #e8e6df9c;background:#090c1070;color:var(--paper);border-radius:100px;padding:9px 13px;font:10px 'DM Mono',monospace;letter-spacing:.06em;opacity:0;cursor:pointer;pointer-events:none;backdrop-filter:blur(10px);transition:opacity .25s,background .25s}
+    .stage.scene-edit .replay{opacity:1;pointer-events:auto}.replay:hover{background:#c16838}
+    @media(max-width:720px){.edit-code{top:23%;left:7%;width:86%;padding:12px 13px}.edit-code pre{font-size:9px;line-height:1.5}.replay{top:47px;left:14px;font-size:9px;padding:8px 10px}}
+    @media(prefers-reduced-motion:reduce){.stage.scene-edit .rock-edit{clip-path:circle(110% at 54% 46%)}.stage.scene-edit .rock-glow{opacity:.4}.stage.scene-edit .edit-code,.stage.scene-edit .rock-code{display:none}}
+
+    /* Brighter controls with a restrained scan effect; focus remains obvious without hover. */
+    .cta{position:relative;overflow:hidden;border:1px solid #f2c08a;background:linear-gradient(125deg,#f1bf86 0%,#dd9657 58%,#be673f 100%);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));border-radius:0;box-shadow:0 0 28px #e7834460;letter-spacing:.08em;isolation:isolate}
+    .cta::before{content:"";position:absolute;inset:-120% auto -120% -70%;width:45%;transform:skewX(-22deg);background:linear-gradient(90deg,transparent,#fff9,transparent);transition:left .55s ease;z-index:-1}
+    .cta:hover::before{left:125%}.cta:hover{background:linear-gradient(125deg,#ffd19b,#ecab70 56%,#cc7546);box-shadow:0 0 36px #f19b52a0}.cta span{transition:transform .25s}.cta:hover span{transform:translate(3px,-3px)}
+    .top-link,.replay{border-radius:0;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));border-color:#b1886d;background:linear-gradient(115deg,#181b1dcc,#251a19bb);box-shadow:inset 0 0 0 1px #e6ab6740}.top-link:hover,.replay:hover{background:#e4a66c;color:#151210}
+    :is(.cta,.top-link,.replay,.nav button,.brand):focus-visible{outline:2px solid #ffe0b2;outline-offset:4px}
+    .copy[data-slide="3"] .title{font-size:clamp(63px,6.8vw,120px)}
+    .copy[data-slide="4"] .title{font-size:clamp(55px,6.3vw,110px)}
+    @media(max-width:720px){
+      .copy{right:5%}.title{line-height:1.01}.title .line{padding-bottom:.16em;margin-bottom:-.045em}
+      .copy[data-slide="3"] .title{font-size:clamp(45px,11.5vw,70px)}
+      .copy[data-slide="4"] .title{font-size:clamp(43px,10.3vw,64px)}
+      .subtitle{max-width:calc(100vw - 74px)}
+      .cta{font-size:12px;gap:18px;min-height:44px}.top-link{min-height:40px}
+    }
+    @media(max-width:390px){.copy{right:6%;bottom:4%}.title{margin-bottom:13px}.subtitle{line-height:1.45;margin-bottom:13px}.chapter-index{margin-bottom:12px}.copy[data-slide="3"] .title{font-size:clamp(42px,10.8vw,52px)}.copy[data-slide="4"] .title{font-size:clamp(39px,9.6vw,47px)}}
+    @media(max-height:650px) and (max-width:720px){.stage{inset:10% 0 33% 14%}.copy{bottom:4%}.subtitle{margin-bottom:10px}.chapter-index{margin-bottom:9px}.title{margin-bottom:8px}}
+    @media(prefers-reduced-motion:reduce){.cta::before{display:none}.stage.scene-edit.grade-in .rock-glow{opacity:0}}
+    @media(max-width:1100px){.title{font-size:clamp(65px,8.5vw,110px)}.nav button span{display:none!important}.nav{right:16px}.hero{gap:0}.stage{height:66vh}.copy{margin-right:-8vw}}
+    @media(max-width:720px){.frame{min-height:0;padding:24px 22px calc(24px + env(safe-area-inset-bottom))}.top-meta .availability{display:none}.top-meta{gap:0}.top-link{padding:9px 11px;font-size:10px}.hero{display:block}.stage{position:absolute;inset:12% 0 24% 14%;width:auto;height:auto;max-width:none;opacity:.83}.stage::before{inset:12px -9px -9px 12px}.stage-gradient{background:linear-gradient(0deg,#090c10 3%,rgba(9,12,16,.75) 24%,rgba(9,12,16,.11) 80%),linear-gradient(90deg,rgba(9,12,16,.22),transparent)}.copy{position:absolute;bottom:5%;left:0;right:12%;margin:0;padding:0}.chapter-index{margin-bottom:17px}.eyebrow{font-size:10px}.title{font-size:clamp(60px,15vw,105px);margin-bottom:17px}.subtitle{font-size:14px;line-height:1.5;max-width:310px;margin-bottom:19px}.cta-note{display:none}.cta{padding:13px 16px}.nav{right:13px;top:44%}.nav button::after{width:8px}.nav button[aria-current="step"]::after{width:20px}.stage-top{left:14px;right:14px;top:14px}.stage-bottom{display:none}.code-window{right:7%;bottom:24%;width:75%;padding:12px 14px}.code-window pre{font-size:10px;line-height:1.55}.window-top{margin-bottom:7px}.bottom{font-size:9px}.bottom-left{gap:8px}.rule{width:17px}.scroll-hint{font-size:9px}.bottom-right{gap:7px}.scroll-line{width:25px}}
+    @media(max-width:390px){.title{font-size:clamp(51px,14vw,62px)}.stage{inset:10% 0 29% 9%}.copy{bottom:3%}.subtitle{font-size:13px}.code-window{bottom:31%;width:77%}}
+    @media(max-height:680px) and (min-width:721px){.frame{min-height:0}.stage{height:70vh}.title{font-size:clamp(54px,7vw,98px);margin-bottom:14px}.chapter-index{margin-bottom:14px}.subtitle{margin-bottom:14px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.stage{transform:none!important}}
+  </style>
+</head>
+<body>
+<main class="site" id="site">
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="frame">
+    <header class="top">
+      <a class="brand" href="#" id="homeLink" aria-label="Hessel de Vries, naar begin">HESSEL<span>.</span></a>
+      <div class="top-meta"><span class="availability"><i></i> A7R III / PYTHON</span><button class="top-link" type="button" id="portfolioLink">PORTFOLIO ↗</button></div>
+    </header>
+    <section class="hero" aria-label="Portfolio van Hessel de Vries">
+      <div class="copy" id="copy" aria-live="polite">
+        <div class="chapter-index" id="chapter">01 / 05 &nbsp;·&nbsp; Intro</div>
+        <p class="eyebrow" id="eyebrow">A7R III / PYTHON / CLAUDE / OPENAI</p>
+        <h1 class="sr-only">Hessel de Vries: fotografie, editing, AI en Python</h1>
+        <h2 class="title" id="title"><span class="line"><span>PHOTO.</span></span><span class="line outline"><span>CODE.</span></span></h2>
+        <p class="subtitle" id="subtitle">Photography × AI × automation.</p>
+        <div class="cta-row"><button class="cta" type="button" id="next">EXPLORE <span aria-hidden="true">↗</span></button><span class="cta-note">SCROLL TO EXPLORE</span></div>
+      </div>
+      <div class="stage" id="stage" aria-hidden="true">
+        <div class="stage-clip">
+          <img class="stage-img active" data-image="1" alt="Avondbeeld op straat in Thailand" src="assets/photo-02.webp" fetchpriority="high" decoding="async">
+          <img class="stage-img" data-image="2" alt="Kat in het gras, gefotografeerd met Sony A7R III" data-src="assets/photo-01.webp" loading="lazy" decoding="async">
+          <img class="stage-img" data-image="3" alt="Rots in zee op Madeira, voor en na kleurcorrectie" data-src="assets/photo-03.jpg" loading="lazy" decoding="async">
+          <img class="rock-edit" data-src="assets/rock-graded.webp" alt="" aria-hidden="true">
+          <img class="rock-glow" data-src="assets/rock-glow.webp" alt="" aria-hidden="true">
+          <img class="rock-code" data-src="assets/rock-code.webp" alt="" aria-hidden="true">
+          <div class="stage-gradient"></div>
+        </div>
+        <div class="stage-top"><span class="stage-tag" id="stageTag">HESSEL / SELECTED WORK</span><span class="crosshair"></span></div>
+        <div class="stage-bottom"><span class="micro" id="stageCaption">PHOTO / CODE / MOTION</span><span class="stage-count" id="stageCount">01 — 05</span></div>
+        <div class="edit-code" aria-hidden="true"><div class="window-top"><i></i><i></i><i></i><span>rock_edit.py</span></div><pre><span class="comment"># Masker → licht → eindbeeld</span>
+<span class="key">mask</span> = Image.open(<span class="str">"rock-mask.png"</span>)
+<span class="key">glow</span> = mask.filter(Blur(<span class="fn">32</span>))
+<span class="key">final</span> = composite(grade, glow)</pre></div>
+        <button class="replay" type="button" id="replay" aria-label="Speel de bewerking opnieuw af">↺ &nbsp; REPLAY</button>
+        <div class="code-window" id="codeWindow"><div class="window-top"><i></i><i></i><i></i><span>hessel / automate.py</span></div><pre><span class="key">from</span> pathlib <span class="key">import</span> Path
+<span class="key">from</span> PIL <span class="key">import</span> Image, ImageEnhance
+out = Path(<span class="str">"exports"</span>)
+out.mkdir(exist_ok=<span class="key">True</span>)
+<span class="key">for</span> photo <span class="key">in</span> Path(<span class="str">"photos"</span>).glob(<span class="str">"*.jpg"</span>):
+    im = Image.open(photo)
+    im = ImageEnhance.Contrast(im).enhance(<span class="fn">1.15</span>)
+    im.save(out / photo.name)</pre></div>
+      </div>
+    </section>
+    <footer class="bottom"><div class="bottom-left"><span class="rule"></span><span id="footLabel">SONY A7R III · PYTHON · CLAUDE · OPENAI</span></div><div class="bottom-right"><span class="scroll-hint">Scroll / swipe</span><span class="scroll-line" aria-hidden="true"></span></div></footer>
+  </div>
+  <nav class="nav" id="nav" aria-label="Onderdelen"><button aria-label="Intro" aria-current="step" data-to="0"><span>Intro</span></button><button aria-label="Fotografie" data-to="1"><span>Fotografie</span></button><button aria-label="Editing" data-to="2"><span>Editing</span></button><button aria-label="AI" data-to="3"><span>AI</span></button><button aria-label="Python" data-to="4"><span>Python</span></button></nav>
+  <div class="progress" aria-hidden="true"><div class="progress-fill" id="progress"></div></div>
+</main>
+<script>
+  (()=>{
+    const slides=[
+      {label:'Intro',eyebrow:'A7R III / PYTHON / CLAUDE / OPENAI',title:['PHOTO.','CODE.'],body:'Photography × AI × automation.',button:'EXPLORE',tag:'HESSEL / PORTFOLIO',caption:'PHOTO / CODE / MOTION',foot:'SONY A7R III · PYTHON · CLAUDE · OPENAI',image:1},
+      {label:'Fotografie',eyebrow:'SONY / A7R III',title:['A7R.','III.'],body:'Selected photography.',button:'EDITING',tag:'SONY / A7R III',caption:'SELECTED FRAMES',foot:'PHOTOGRAPHY / SONY A7R III',image:2},
+      {label:'Editing',eyebrow:'MASKING / COLOR GRADING',title:['MASK.','GRADE.'],body:'From original to final frame.',button:'AI',tag:'EDIT / ORIGINAL',caption:'ORIGINAL → COLOR GRADE',foot:'EDITING / MASKING / COLOR',image:3},
+      {label:'AI',eyebrow:'CLAUDE / OPENAI',title:['CLAUDE.','OPENAI.'],body:'Ideas. Workflows. Tools.',button:'PYTHON',tag:'CLAUDE / OPENAI',caption:'AI / WORKFLOWS',foot:'CLAUDE · OPENAI',image:1},
+      {label:'Python',eyebrow:'PYTHON / AUTOMATION',title:['PYTHON.','AUTOMATE.'],body:'Automation at its finest.',button:'BACK TO START',tag:'PYTHON / AUTOMATION',caption:'CODE → OUTPUT',foot:'PYTHON / AUTOMATION',image:3}
+    ];
+    const $=s=>document.querySelector(s),copy=$('#copy'),stage=$('#stage'),images=[...document.querySelectorAll('.stage-img')],nav=[...document.querySelectorAll('[data-to]')],reduce=matchMedia('(prefers-reduced-motion: reduce)');let current=0,locked=false,touchStart=0,lastWheel=0,sequenceTimers=[];
+    function clearEdit(){sequenceTimers.forEach(clearTimeout);sequenceTimers=[];stage.classList.remove('scene-edit','code-in','code-morph','mask-light','grade-in')}
+    function runEdit(){clearEdit();stage.classList.add('scene-edit');$('#stageTag').textContent='EDIT / ORIGINAL';if(reduce.matches){stage.classList.add('grade-in');$('#stageTag').textContent='EDIT / COLOR GRADED';return}for(const [ms,cls] of [[420,'code-in'],[1750,'code-morph'],[2200,'mask-light'],[2850,'grade-in']])sequenceTimers.push(setTimeout(()=>stage.classList.add(cls),ms));sequenceTimers.push(setTimeout(()=>$('#stageTag').textContent='EDIT / COLOR GRADED',3900))}
+    function show(n){n=(n+slides.length)%slides.length;if(n===current&&copy.classList.contains('is-entered'))return;current=n;const s=slides[n];copy.classList.remove('is-entered');const paint=()=>{ copy.dataset.slide=String(n);$('#chapter').textContent=`${String(n+1).padStart(2,'0')} / 05  ·  ${s.label}`;$('#eyebrow').textContent=s.eyebrow;$('#title').innerHTML=s.title.map((t,i)=>`<span class="line${i?' outline':''}"><span>${t}</span></span>`).join('');$('#subtitle').textContent=s.body;$('#next').innerHTML=`${s.button} <span aria-hidden="true">↗</span>`;$('#stageTag').textContent=s.tag;$('#stageCaption').textContent=s.caption;$('#stageCount').textContent=`${String(n+1).padStart(2,'0')} — 05`;$('#footLabel').textContent=s.foot;$('#progress').style.width=`${(n+1)*20}%`;images.forEach(img=>{if(Number(img.dataset.image)===s.image&&img.dataset.src){img.src=img.dataset.src;delete img.dataset.src}img.classList.toggle('active',Number(img.dataset.image)===s.image)});if(n===2){document.querySelectorAll('.rock-edit,.rock-glow,.rock-code').forEach(img=>{if(img.dataset.src){img.src=img.dataset.src;delete img.dataset.src}});runEdit()}else clearEdit();$('#codeWindow').classList.toggle('visible',n===4);nav.forEach((b,i)=>i===n?b.setAttribute('aria-current','step'):b.removeAttribute('aria-current'));requestAnimationFrame(()=>requestAnimationFrame(()=>copy.classList.add('is-entered')))};if(reduce.matches)paint();else setTimeout(paint,210);locked=true;setTimeout(()=>locked=false,750)}
+    $('#next').addEventListener('click',()=>show(current+1));$('#replay').addEventListener('click',runEdit);$('#portfolioLink').addEventListener('click',()=>show(1));$('#homeLink').addEventListener('click',e=>{e.preventDefault();show(0)});nav.forEach(b=>b.addEventListener('click',()=>show(Number(b.dataset.to))));
+    addEventListener('wheel',e=>{if(Math.abs(e.deltaY)<5)return;e.preventDefault();const now=performance.now();if(locked||now-lastWheel<690)return;lastWheel=now;show(current+(e.deltaY>0?1:-1))},{passive:false});
+    addEventListener('keydown',e=>{if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(4)});
+    addEventListener('touchstart',e=>touchStart=e.touches[0].clientY,{passive:true});addEventListener('touchend',e=>{const d=touchStart-e.changedTouches[0].clientY;if(Math.abs(d)>45&&!locked)show(current+(d>0?1:-1))},{passive:true});
+    let targetX=0,targetY=0,x=0,y=0,raf=0;function tick(){x+=(targetX-x)*.07;y+=(targetY-y)*.07;stage.style.setProperty('--px',`${x.toFixed(2)}px`);stage.style.setProperty('--py',`${y.toFixed(2)}px`);if(Math.abs(targetX-x)+Math.abs(targetY-y)>.08)raf=requestAnimationFrame(tick);else raf=0}if(!reduce.matches&&matchMedia('(pointer:fine)').matches){addEventListener('pointermove',e=>{targetX=(e.clientX/innerWidth-.5)*20;targetY=(e.clientY/innerHeight-.5)*16;if(!raf)raf=requestAnimationFrame(tick)},{passive:true})}
+    requestAnimationFrame(()=>copy.classList.add('is-entered'));
+  })();
+</script>
+</body>
+</html>
