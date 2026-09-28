@@ -7,7 +7,6 @@ from pathlib import Path, PurePosixPath
 import posixpath
 import stat
 import subprocess
-import tempfile
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -68,32 +67,68 @@ def read_existing(sftp, path):
     with sftp.open(path, 'rb') as f:
         return f.read()
 
-def deploy(files):
+# SHA-256 SSHFP records verified through DNSSEC-validating DNS-over-HTTPS
+# for ssh.cyz0ptrz6.service.one on 2026-09-28 (AD=true).
+HOST_KEY_HASHES = {
+    'ssh-ed25519': '88380087fd5d8fd1f25e4de73b3b52ea72bb8c9235232476b94af10c217d908f',
+    'ecdsa-sha2-nistp256': 'f2c041954e10e11a94cd93b527446902e723ebf0e271a248d538cf0dc44edb65',
+}
+
+def connect():
     import paramiko
     host, user = required_env('HOSTNET_HOST'), required_env('HOSTNET_USER')
-    root_setting = required_env('HOSTNET_WEBROOT')
-    private_key, known_hosts = required_env('HOSTNET_SSH_KEY'), required_env('HOSTNET_KNOWN_HOSTS')
+    if host != 'ssh.cyz0ptrz6.service.one':
+        raise ValueError('Unexpected deployment host')
+    private_key = required_env('HOSTNET_SSH_KEY')
     key = paramiko.Ed25519Key.from_private_key(io.StringIO(private_key))
+    class PinnedHostKey(paramiko.MissingHostKeyPolicy):
+        def missing_host_key(self, client, hostname, server_key):
+            expected = HOST_KEY_HASHES.get(server_key.get_name())
+            if not expected or digest(server_key.asbytes()) != expected:
+                raise paramiko.SSHException('Host key differs from verified DNSSEC SSHFP')
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(PinnedHostKey())
+    client.connect(host, port=22, username=user, pkey=key, look_for_keys=False,
+                   allow_agent=False, timeout=20, banner_timeout=20, auth_timeout=20)
+    return client
+
+def verify_root(sftp, root):
+    if PurePosixPath(root).name != 'httpdocs':
+        raise ValueError('Expected the verified httpdocs webroot')
+    for name in ['index.html', '.htaccess', 'projects/index.html']:
+        if read_existing(sftp, posixpath.join(root, name)) is None:
+            raise ValueError('Target is not the existing website')
+
+def probe():
+    with connect() as client, client.open_sftp() as sftp:
+        home = sftp.normalize('.')
+        print('SFTP connection and pinned server identity verified.')
+        print('SFTP home:', home)
+        candidates = [home, posixpath.join(home, 'webroots/sites/httpdocs'),
+                      posixpath.join(posixpath.dirname(home), 'httpdocs'),
+                      '/webroots/sites/httpdocs']
+        for candidate in dict.fromkeys(candidates):
+            try:
+                root = sftp.normalize(candidate)
+                verify_root(sftp, root)
+                print('VERIFIED_WEBROOT=' + root)
+                return
+            except (FileNotFoundError, ValueError):
+                continue
+        print('Directories in SFTP home:', ', '.join(sorted(
+            x.filename for x in sftp.listdir_attr(home) if stat.S_ISDIR(x.st_mode))))
+        raise ValueError('Live webroot needs configuration; no files were changed')
+
+def deploy(files):
+    root_setting = required_env('HOSTNET_WEBROOT')
     run_id = os.environ.get('GITHUB_RUN_ID', '')
     attempt = os.environ.get('GITHUB_RUN_ATTEMPT', '1')
     if not run_id.isdigit() or not attempt.isdigit():
         raise ValueError('Deploy must run from GitHub Actions')
-    with tempfile.TemporaryDirectory() as temp:
-        known_file = Path(temp) / 'known_hosts'
-        known_file.write_text(known_hosts + '\n')
-        with paramiko.SSHClient() as client:
-            client.load_host_keys(str(known_file))
-            client.set_missing_host_key_policy(paramiko.RejectPolicy())
-            client.connect(host, port=22, username=user, pkey=key, look_for_keys=False,
-                           allow_agent=False, timeout=20, banner_timeout=20, auth_timeout=20)
-            with client.open_sftp() as sftp:
+    with connect() as client:
+        with client.open_sftp() as sftp:
                 root = sftp.normalize(root_setting)
-                if PurePosixPath(root).name != 'httpdocs':
-                    raise ValueError('Expected the verified httpdocs webroot')
-                # Verify target before any remote writes.
-                for name in ['index.html', '.htaccess', 'projects/index.html']:
-                    if read_existing(sftp, posixpath.join(root, name)) is None:
-                        raise ValueError('Target is not the existing website')
+                verify_root(sftp, root)
                 backup = posixpath.join(posixpath.dirname(root), 'github-deploy-backups', run_id + '-' + attempt)
                 changes = []
                 for name in files:
@@ -136,9 +171,12 @@ def deploy(files):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--check', action='store_true')
+    parser.add_argument('--probe', action='store_true')
     args = parser.parse_args()
     files = files_to_publish()
-    if args.check:
+    if args.probe:
+        probe()
+    elif args.check:
         print('Validated', len(files), 'tracked static files. No server connection made.')
     else:
         deploy(files)
