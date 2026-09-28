@@ -1,0 +1,10 @@
+# The public site is static. Block leftover WordPress and backup files.
+<FilesMatch "(?i)(\.php$|\.(old|bk|bak|sql|sqlite|zip|tar|gz)$|^index~[0-9]*\.html$|^mobile-check~[0-9]*\.html$|^\.env$)">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
