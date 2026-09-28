@@ -8,13 +8,13 @@ Repository Settings → Secrets and variables → Actions:
 
 Secrets:
 - `HOSTNET_SSH_KEY`: the private Ed25519 key matching the existing Hostnet public key named **GitHub Actions Hostnet Deploy**. Never paste this in chat, commit it, or print it in workflow logs.
-- `HOSTNET_KNOWN_HOSTS`: the SSH server's trusted `known_hosts` entry for `ssh.cyz0ptrz6.service.one`. Confirm its fingerprint through a trusted source before saving it. A fresh network scan alone is not independent verification.
+Server identity is pinned in the script using SHA-256 SSHFP fingerprints independently verified through DNSSEC-validating DNS-over-HTTPS (AD=true) on 2026-09-28. No automatic acceptance of changed keys is allowed. Reverify DNSSEC SSHFP if Hostnet rotates its host keys.
 
 Variables:
 - `HOSTNET_WEBROOT`: the verified SFTP path to the live `httpdocs` directory. The File Manager's `HTTP/` label is not necessarily an SFTP path.
 - `HOSTNET_DEPLOY_ENABLED`: set to `true` only after the settings above are configured.
 
-Then Actions → Publish to Hostnet → Run workflow. Verify the first run completes and all five live page checks pass. Automatic deployment is **not active** until this setup and first live test succeed.
+First run Actions → Publish to Hostnet → Run workflow with `probe` checked to verify the connection and discover the webroot without changing files. Then, after configuring the variables, run it again with `probe` unchecked. Verify the first run completes and all five live page checks pass. Automatic deployment is **not active** until this setup and first live test succeed.
 
 ## Behaviour
 
