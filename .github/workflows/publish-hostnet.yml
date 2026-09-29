@@ -1,0 +1,33 @@
+name: Publish website to Hostnet
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trigger-hostnet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check central deploy token
+        env:
+          CENTRAL_DEPLOY_TOKEN: ${{ secrets.CENTRAL_DEPLOY_TOKEN }}
+        run: |
+          if [ -z "$CENTRAL_DEPLOY_TOKEN" ]; then
+            echo "::error::Add CENTRAL_DEPLOY_TOKEN as a repository Actions secret. The token needs Actions: Read and write on tommyvercettiseh/hostnet."
+            exit 1
+          fi
+
+      - name: Trigger central deployment
+        env:
+          GH_TOKEN: ${{ secrets.CENTRAL_DEPLOY_TOKEN }}
+        run: |
+          gh workflow run deploy-hostnet.yml \
+            --repo tommyvercettiseh/hostnet \
+            --ref main \
+            -f project=website
+          echo "Central Hostnet workflow requested for website."
