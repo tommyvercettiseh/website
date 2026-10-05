@@ -52,20 +52,40 @@
     .off-added .off-remove{border:0;background:transparent;color:#f5ab92;padding:3px 7px;font-size:17px;line-height:1}
     @media(max-width:760px){.off-results{grid-template-columns:1fr}.off-fields{grid-template-columns:1fr 100px}.off-fields button{grid-column:1/-1}}
     @media(max-width:460px){.lookup{padding:17px}.off-result{flex-wrap:wrap}.off-result .btn{margin-left:auto}}
+
+    .builder-dialog{width:min(760px,calc(100vw - 20px));max-height:90dvh}
+    .builder-dialog .modal-body{max-height:67dvh}
+    .builder-dialog .builder-field{display:flex;flex-direction:column;gap:7px;color:#d2ddd5;font-size:12px;font-weight:600}
+    .builder-dialog input,.builder-dialog select{width:100%;min-width:0;border:1px solid #4b5953;background:#0c1517;color:#f4f6f2;border-radius:9px;padding:11px;font:inherit}
+    .builder-dialog input:focus-visible,.builder-dialog select:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+    .builder-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+    .builder-add-row{display:grid;grid-template-columns:1fr 100px auto;gap:9px;align-items:end;margin-top:9px}
+    .builder-items{display:grid;gap:8px;min-height:62px;margin:14px 0}
+    .builder-line{display:flex;gap:10px;justify-content:space-between;align-items:center;background:#0b1416;border:1px solid #35443e;border-radius:10px;padding:10px}
+    .builder-line b{font-size:12px}.builder-line small{font-size:11px;color:var(--muted);display:block;margin-top:4px}
+    .builder-qty{display:flex;gap:7px;align-items:center;flex-shrink:0}.builder-qty input{width:80px;text-align:right}
+    .builder-qty button{border:0;background:#392a28;color:#ffad92;border-radius:8px;font-size:18px;padding:7px 11px;cursor:pointer}
+    .builder-total{color:var(--lime);padding:12px;border:1px solid #8b705073;border-radius:11px;font-size:13px;line-height:1.55}
+    .builder-empty{font-size:12px;color:var(--muted);padding:15px}
+    .custom-actions{display:flex;gap:7px;margin:7px 0 10px;flex-wrap:wrap}.custom-actions .btn{padding:7px 10px;font-size:11px}
+    .builder-dialog .modal-actions{flex-wrap:wrap}#builder-delete{color:#ffa994;border-color:#a46e63;margin-right:auto}#builder-delete[hidden],#builder-manual[hidden]{display:none}
+    .manual-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+    .manual-grid .builder-field{font-size:10px}
+    @media(max-width:640px){.tools .btn{flex:1;min-width:134px}.builder-fields,.builder-add-row{grid-template-columns:1fr}.builder-add-row .btn{grid-column:1/-1}.builder-dialog .modal-body{padding:17px}.builder-qty input{width:65px}.builder-dialog .modal-actions{padding:12px 16px}}
   </style>
 </head>
 <body>
   <header><div class="shell nav"><div class="logo"><div class="logo-mark">F</div> FUEL<span style="color:var(--lime)">.</span></div><div class="nav-right"><div class="pill hide-mobile">HES / PERFORMANCE</div><div class="pill live">LIVE MACRO TRACKING</div></div></div></header>
   <main class="shell">
     <section class="hero"><div><div class="eyebrow">EAT WITH PURPOSE / TRAIN WITH INTENT</div><h1>STICK TO<br><em>THE PLAN.</em></h1><p>Geen giswerk. Kies je dag, wissel gerechten, bepaal je grammen en volg direct je macro's. Grote maaltijden vroeg. Shake vóór 19:00.</p></div><div class="target"><div class="smallcaps">Dagdoel</div><div class="val"><span>3.000</span> kcal</div><div class="smallcaps">± 200 g eiwit</div></div></section>
-    <section class="toolbar" aria-label="Dagen en acties"><div class="seg" id="days"><button type="button" data-day="A" class="active">Dag A</button><button type="button" data-day="B">Dag B</button><button type="button" data-day="C">Dag C</button></div><div class="tools"><button type="button" class="btn" id="reset">↺ Herstel dag</button><button type="button" class="btn" id="print">⎙ Print</button><button type="button" class="btn accent" id="shop">▤ Boodschappenlijst</button></div></section>
+    <section class="toolbar" aria-label="Dagen en acties"><div class="seg" id="days"><button type="button" data-day="A" class="active">Dag A</button><button type="button" data-day="B">Dag B</button><button type="button" data-day="C">Dag C</button></div><div class="tools"><button type="button" class="btn accent" id="jump-search">⌕ Product zoeken</button><button type="button" class="btn accent" id="open-builder">＋ Maaltijd maken</button><button type="button" class="btn" id="reset">↺ Herstel dag</button><button type="button" class="btn" id="print">⎙ Print</button><button type="button" class="btn accent" id="shop">▤ Boodschappenlijst</button></div></section>
 
     <section class="lookup" aria-labelledby="off-heading">
       <div class="lookup-header"><div><div class="eyebrow">PRODUCTDATABASE / BARCODE</div><h2 id="off-heading">Zoek je eigen producten</h2><p>Bijvoorbeeld “Jumbo gevulde koeken” of een barcode. Kies je portie en tel hem mee bij een maaltijd.</p></div><div class="off-by">Data: <a href="https://world.openfoodfacts.org/" target="_blank" rel="noopener noreferrer">Open Food Facts ↗</a></div></div>
       <form class="off-form" id="off-form"><input id="off-query" type="search" name="q" placeholder="Jumbo gevulde koeken of barcode (EAN)" aria-label="Productnaam of barcode" maxlength="100" required autocomplete="off"><button class="btn accent" id="off-search" type="submit">Zoek product</button></form>
       <div class="off-feedback" id="off-feedback" role="status" aria-live="polite">Zoek in de openbare productdatabase. Controleer altijd het etiket.</div>
       <div class="off-results" id="off-results" aria-label="Zoekresultaten"></div>
-      <div class="off-selection" id="off-selection" hidden><h3 id="off-picked-name"></h3><div class="off-fields"><label for="off-slot">Tijdstip<select id="off-slot"></select></label><label for="off-grams">Hoeveelheid (g/ml)<input id="off-grams" type="number" min="1" max="2500" step="1" value="100"></label><button id="off-add" type="button" class="btn accent">+ Voeg toe</button></div><div id="off-preview" class="off-preview"></div></div>
+      <div class="off-selection" id="off-selection" hidden><h3 id="off-picked-name"></h3><div class="off-fields"><label for="off-slot">Tijdstip<select id="off-slot"></select></label><label for="off-grams">Hoeveelheid (g/ml)<input id="off-grams" type="number" min="1" max="2500" step="1" value="100"></label><button id="off-add" type="button" class="btn accent">+ Voeg toe</button></div><div id="off-preview" class="off-preview"></div><button type="button" id="off-to-builder" class="btn" style="margin-top:11px">＋ Gebruik als ingrediënt in eigen maaltijd</button></div>
     </section>
     <div class="section-head"><h2>Je maaltijden <span style="color:var(--lime)" id="day-name">/ Dag A</span></h2><span class="legend">BEWERKBARE GRAMMEN · GEWICHTSCHECK · LIVE TOTALEN</span></div>
     <div class="grid" id="meals" aria-live="polite"></div>
@@ -73,6 +93,32 @@
   </main>
   <div class="bottom" aria-label="Live dagtotalen"><div class="bottom-content"><div class="bottom-title"><div class="smallcaps">JOUW DAGTOTAAL</div><strong id="status">Binnen dagdoel <span>· Dag A</span></strong></div><div class="gauge" id="g-kcal"><div class="g-label">Calorieën</div><div class="g-head"><b id="kcal">0</b><small>/ 3000</small></div><div class="bar"><i></i></div></div><div class="gauge" id="g-p"><div class="g-label">Eiwit</div><div class="g-head"><b id="p">0 g</b><small>/ 200 g</small></div><div class="bar"><i></i></div></div><div class="gauge" id="g-c"><div class="g-label">Koolhydraten</div><div class="g-head"><b id="c">0 g</b></div><div class="bar"><i></i></div></div><div class="gauge" id="g-f"><div class="g-label">Vetten</div><div class="g-head"><b id="f">0 g</b></div><div class="bar"><i></i></div></div></div></div>
   <dialog id="shop-dialog"><div class="modal-head"><h2>Boodschappenlijst <span id="shopday" style="color:var(--lime)">A</span></h2><button type="button" class="btn" id="close" aria-label="Sluiten">✕</button></div><div class="modal-body" id="shop-lines"></div><div class="modal-actions"><button class="btn" type="button" id="copyday">Kopieer voedingsschema</button><button class="btn accent" type="button" id="copyshop">Kopieer lijst</button></div></dialog>
+
+   <dialog id="builder-dialog" class="builder-dialog" aria-labelledby="builder-title">
+    <form id="builder-form">
+     <div class="modal-head"><h2 id="builder-title">Maak je eigen maaltijd</h2><button type="button" id="builder-close" class="btn" aria-label="Sluiten">✕</button></div>
+     <div class="modal-body">
+      <p class="note" style="margin:0 0 15px">Kies ingrediënten en gramgewichten. Het recept is daarna op elke dag opnieuw te gebruiken.</p>
+      <div class="builder-fields"><label class="builder-field" for="builder-name">Naam<input id="builder-name" maxlength="70" minlength="2" placeholder="Bijv. Gehaktwraps met groenten" required></label><label class="builder-field" for="builder-slot">Tijdstip<select id="builder-slot"></select></label></div>
+      <label class="builder-field" for="builder-food">Kies een ingrediënt</label>
+      <div class="builder-add-row"><select id="builder-food"></select><label class="builder-field" for="builder-grams">Hoeveel (g/ml)<input type="number" id="builder-grams" min="1" max="2500" value="100"></label><button type="button" class="btn accent" id="builder-add">＋ Ingrediënt</button></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><button type="button" class="btn" id="builder-search-off">⌕ Zoek merkproduct/barcode</button><button type="button" class="btn" id="builder-manual-toggle">＋ Eigen ingrediënt</button></div>
+      <div id="builder-manual" hidden style="border:1px solid #455451;border-radius:12px;padding:13px;margin-top:12px">
+       <label class="builder-field" for="builder-manual-name">Productnaam<input type="text" id="builder-manual-name" maxlength="80" placeholder="Bijv. eigen gehaktmengsel"></label>
+       <div class="manual-grid" style="margin-top:10px">
+        <label class="builder-field">Gram<input id="builder-manual-g" type="number" min="1" max="2500" value="100"></label>
+        <label class="builder-field">Kcal / 100g<input id="builder-manual-k" type="number" min="0" max="1000" step="0.1" value="0"></label>
+        <label class="builder-field">Eiwit / 100g<input id="builder-manual-p" type="number" min="0" max="100" step="0.1" value="0"></label>
+        <label class="builder-field">KH / 100g<input id="builder-manual-c" type="number" min="0" max="100" step="0.1" value="0"></label>
+        <label class="builder-field">Vet / 100g<input id="builder-manual-f" type="number" min="0" max="100" step="0.1" value="0"></label>
+       </div><button type="button" class="btn accent" id="builder-manual-add" style="margin-top:10px">Voeg eigen product toe</button>
+      </div>
+      <div class="builder-items" id="builder-items"></div>
+      <div class="builder-total" id="builder-totals">0 kcal</div>
+     </div>
+     <div class="modal-actions"><button type="button" id="builder-delete" class="btn" hidden>Verwijder recept</button><button type="button" id="builder-cancel" class="btn">Annuleren</button><button type="submit" class="btn accent">✓ Bewaar en gebruik</button></div>
+    </form>
+   </dialog>
   <div class="toast" id="toast" role="status"></div>
 <script>
 'use strict';
@@ -111,8 +157,12 @@ const defaults={A:['quark-oats','chicken-bread','beef-rice','toast-jam','shake']
 const storageKey='hes-fuel-v1';
 function getSaved(){try{return JSON.parse(localStorage.getItem(storageKey)||'{}')}catch{return {}}}
 const saved=getSaved();let day=['A','B','C'].includes(saved.day)?saved.day:'A';let plan=saved.plan&&typeof saved.plan==='object'?saved.plan:{};let amounts=saved.amounts&&typeof saved.amounts==='object'?saved.amounts:{};let offExtras=saved.offExtras&&typeof saved.offExtras==='object'?saved.offExtras:{};
-function persist(){try{localStorage.setItem(storageKey,JSON.stringify({day,plan,amounts,offExtras}))}catch{}}
-function selected(slot,index){const id=(plan[day]||{})[slot.id]||defaults[day][index];return recipes[slot.id].find(r=>r.id===id)||recipes[slot.id][0]}
+let userRecipes=Array.isArray(saved.userRecipes)?saved.userRecipes.filter(r=>r&&typeof r.id==='string'&&Array.isArray(r.items)).slice(0,50):[];
+let customFoods=saved.customFoods&&typeof saved.customFoods==='object'?saved.customFoods:{};
+for(const [key,f] of Object.entries(customFoods))if(/^(off-|manual-)/.test(key)&&f&&typeof f.name==='string')foods[key]=f;
+function persist(){try{localStorage.setItem(storageKey,JSON.stringify({day,plan,amounts,offExtras,userRecipes,customFoods}))}catch{}}
+function recipeOptions(slotId){return recipes[slotId].concat(userRecipes)}
+function selected(slot,index){const id=(plan[day]||{})[slot.id]||defaults[day][index];return recipeOptions(slot.id).find(r=>r.id===id)||recipes[slot.id][0]}
 function quantity(recipe,idx){const v=amounts[day+'|'+recipe.id+'|'+idx];return Number.isFinite(Number(v))&&v!==undefined?Math.max(0,Number(v)):recipe.items[idx].g}
 function calc(recipe){const val={k:0,p:0,c:0,f:0,w:0};recipe.items.forEach((it,i)=>{const n=foods[it.key],g=quantity(recipe,i);for(const key of ['k','p','c','f']) val[key]+=g*n[key]/100;val.w+=g*n.w});return val}
 
@@ -146,8 +196,8 @@ function offShopping(){
 }
 const format=n=>Math.round(n).toLocaleString('nl-NL');const tidy=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function render(){document.querySelectorAll('[data-day]').forEach(b=>{b.classList.toggle('active',b.dataset.day===day);b.setAttribute('aria-pressed',String(b.dataset.day===day))});document.getElementById('day-name').textContent='/ Dag '+day;
-  document.getElementById('meals').innerHTML=slots.map((slot,index)=>{const r=selected(slot,index),v=calcWithExtra(slot.id,r),opts=recipes[slot.id].map(o=>`<option value="${o.id}" ${o.id===r.id?'selected':''}>${tidy(o.title)}</option>`).join('');
-    return `<article class="meal" data-slot="${slot.id}"><div class="photo"><div class="placeholder">${r.emoji}</div><div class="dish-shot" role="img" aria-label="Afbeelding van ${tidy(r.title)}" style="background-position:${((r.art%4)*100/3).toFixed(3)}% ${(Math.floor(r.art/4)*100/3).toFixed(3)}%"></div><div class="meta-top"><span class="time">${slot.time}</span><span class="location">${slot.place}</span></div></div><div class="meal-body"><div class="meal-index">0${index+1} / ${slot.name}</div><h3>${tidy(r.title)}</h3><p class="desc">${tidy(r.desc)}</p><div class="stats"><div class="stat"><b>${format(v.k)}</b><small>KCAL</small></div><div class="stat"><b>${format(v.p)}g</b><small>EIWIT</small></div><div class="stat"><b>${format(v.c)}g</b><small>KH</small></div><div class="stat"><b>${format(v.f)}g</b><small>VET</small></div></div><div class="ingredients">${r.items.map((it,i)=>{const food=foods[it.key];return `<label class="ing"><span class="ing-name">${tidy(food.name)}</span><span class="ing-qty"><input aria-label="${tidy(food.name)} in ${food.unit||'gram'}" type="number" min="0" max="2500" step="5" data-ing="${i}" value="${quantity(r,i)}"><span class="unit">${food.unit||'g'}</span></span></label>`}).join('')}${renderExtras(slot.id)}</div><div class="${slot.id==='shake'?'fine':v.w>500.5?'warn':'fine'}">${slot.id==='shake'?'✓ Drinkmaaltijd · uitgezonderd van 500 g':v.w>500.5?'⚠ Geschat '+format(v.w)+' g bereid, boven 500 g':'✓ Geschat '+format(v.w)+' g op bord'}</div><div class="swap"><label for="select-${slot.id}">Kies een ander gerecht</label><div class="select-wrap"><select id="select-${slot.id}" data-select="${slot.id}" ${slot.id==='shake'?'disabled':''}>${opts}</select></div></div></div></article>`
+  document.getElementById('meals').innerHTML=slots.map((slot,index)=>{const r=selected(slot,index),v=calcWithExtra(slot.id,r),opts=recipeOptions(slot.id).map(o=>`<option value="${o.id}" ${o.id===r.id?'selected':''}>${tidy(o.title)}</option>`).join('');
+    return `<article class="meal" data-slot="${slot.id}"><div class="photo">${r.custom?'<div class="placeholder" style="background:radial-gradient(circle at 50% 40%,#627950,#18312b 62%,#11191c)">🍽️</div>':'<div class="placeholder">'+r.emoji+'</div><div class="dish-shot" role="img" aria-label="Afbeelding van '+tidy(r.title)+'" style="background-position:'+((r.art%4)*100/3).toFixed(3)+'% '+(Math.floor(r.art/4)*100/3).toFixed(3)+'%"></div>'}<div class="meta-top"><span class="time">${slot.time}</span><span class="location">${slot.place}</span></div></div><div class="meal-body"><div class="meal-index">0${index+1} / ${slot.name}</div><h3>${tidy(r.title)}</h3><p class="desc">${tidy(r.desc)}</p>${r.custom?'<div class="custom-actions"><button type="button" class="btn" data-builder-edit="'+tidy(r.id)+'">✎ Bewerk dit recept</button></div>':''}<div class="stats"><div class="stat"><b>${format(v.k)}</b><small>KCAL</small></div><div class="stat"><b>${format(v.p)}g</b><small>EIWIT</small></div><div class="stat"><b>${format(v.c)}g</b><small>KH</small></div><div class="stat"><b>${format(v.f)}g</b><small>VET</small></div></div><div class="ingredients">${r.items.map((it,i)=>{const food=foods[it.key];return `<label class="ing"><span class="ing-name">${tidy(food.name)}</span><span class="ing-qty"><input aria-label="${tidy(food.name)} in ${food.unit||'gram'}" type="number" min="0" max="2500" step="5" data-ing="${i}" value="${quantity(r,i)}"><span class="unit">${food.unit||'g'}</span></span></label>`}).join('')}${renderExtras(slot.id)}</div><div class="${slot.id==='shake'?'fine':v.w>500.5?'warn':'fine'}">${slot.id==='shake'?'✓ Drinkmaaltijd · uitgezonderd van 500 g':v.w>500.5?'⚠ Geschat '+format(v.w)+' g bereid, boven 500 g':'✓ Geschat '+format(v.w)+' g op bord'}</div><div class="swap"><label for="select-${slot.id}">Kies een ander gerecht</label><div class="select-wrap"><select id="select-${slot.id}" data-select="${slot.id}">${opts}</select></div><button type="button" class="btn" data-builder-new="${slot.id}" style="margin-top:9px;width:100%;border-style:dashed">＋ Zelf maaltijd samenstellen</button></div></div></article>`
   }).join('');drawBottom();persist()}
 function drawBottom(){const sum={k:0,p:0,c:0,f:0},meals=slots.map((s,i)=>calcWithExtra(s.id,selected(s,i)));meals.forEach(v=>['k','p','c','f'].forEach(k=>sum[k]+=v[k]));['k','p','c','f'].forEach(k=>document.getElementById(k==='k'?'kcal':k).textContent=format(sum[k])+(k==='k'?'':' g'));
  const limits={k:3000,p:200,c:350,f:100};Object.keys(limits).forEach(k=>{const wrap=document.getElementById('g-'+(k==='k'?'kcal':k)),percentage=Math.min(100,(sum[k]/limits[k])*100);wrap.querySelector('.bar i').style.width=percentage+'%';wrap.classList.toggle('over',k==='k'&&sum.k>3150)});document.getElementById('status').innerHTML=(sum.k>3150?'Boven calorie-doel':sum.p<185?'Eiwit iets laag':'Dicht bij dagdoel')+' <span>· Dag '+day+'</span>'}
@@ -273,6 +323,7 @@ document.getElementById('meals').addEventListener('change',e=>{
 
 render();
 </script>
+<script src="assets/builder.js?v=1"></script>
 <style media="print">@media print{body{color:#111;background:white;padding:0}header,.hero,.toolbar,.bottom,.swap,.tools,dialog,.toast{display:none!important}.shell{width:100%}.grid{display:block}.meal{break-inside:avoid;margin:0 0 14px;border:1px solid #bbb;box-shadow:none;color:#111;background:#fff;display:grid;grid-template-columns:1fr 3fr}.photo{height:auto;min-height:130px}.meal-body{padding:12px}.ingredients{grid-template-columns:1fr 1fr}.desc,.stat small,.ing-name,.note{color:#333}.stats{display:flex;gap:20px}.footer-notes{color:#444}.fine,.warn{color:#333}.ing input{color:#111;background:white;border:0}}</style>
 </body>
 </html>
