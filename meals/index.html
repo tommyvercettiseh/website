@@ -1,329 +1,268 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b1012">
-  <meta name="description" content="Interactieve eiwitrijke voedingsplanner: kies je dag, wissel maaltijden, pas gramgewichten aan en volg live je calorieën en macro's.">
-  <title>Meals · Stick to the Plan | HES</title>
-  <link rel="preload" as="image" href="assets/recipes.avif" type="image/avif">
-  <style>
-    :root { color-scheme:dark; --bg:#090e11; --bg2:#10171a; --card:#151d20; --line:#2a3435; --txt:#f4f6f2; --muted:#9eaaa7; --lime:#e5b26e; --cyan:#80c9b9; --amber:#f0bc70; --red:#f19885; --shadow:0 18px 55px #0005; }
-    * {box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;color:var(--txt);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(ellipse 900px 500px at 12% -8%,#283b31 0%, transparent 70%),radial-gradient(ellipse 700px 450px at 96% 14%,#1e3338 0%,transparent 72%),var(--bg);padding-bottom:185px}
-    button,input,select{font:inherit} button{cursor:pointer} button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--lime);outline-offset:3px} a{color:inherit} .shell{width:min(1210px,calc(100% - 48px));margin:auto}
-    header{border-bottom:1px solid #ffffff19;background:#080d0db8;backdrop-filter:blur(20px);position:relative;z-index:3} .nav{height:71px;display:flex;align-items:center;justify-content:space-between;gap:20px} .logo{font-size:19px;letter-spacing:.22em;font-weight:900;display:flex;align-items:center;gap:12px}.logo-mark{height:31px;width:31px;display:grid;place-items:center;border-radius:9px;background:var(--lime);color:#0c1612;letter-spacing:0;font-size:19px}.nav-right{display:flex;align-items:center;gap:12px}.pill{border:1px solid #ffffff23;padding:8px 11px;border-radius:100px;color:var(--muted);font-size:11px;letter-spacing:.08em}.live{display:flex;align-items:center;gap:7px}.live:before{content:"";background:var(--lime);width:7px;height:7px;border-radius:50%;box-shadow:0 0 12px var(--lime)}
-    .hero{display:grid;grid-template-columns:1fr auto;gap:25px;align-items:end;padding:45px 0 31px}.eyebrow{display:flex;align-items:center;gap:12px;color:var(--lime);font-size:11px;letter-spacing:.21em;font-weight:800;text-transform:uppercase}.eyebrow:before{content:"";display:block;width:22px;height:1px;background:var(--lime)}h1{font-size:clamp(40px,6.4vw,81px);letter-spacing:-.075em;line-height:1.01;margin:13px 0 18px;font-weight:800}h1 em{font-style:normal;color:var(--lime)}.hero p{color:var(--muted);max-width:590px;line-height:1.7;font-size:14px;margin:0}.hero .target{padding:19px 23px;border:1px solid #ffffff20;background:#121b1ce0;border-radius:17px;text-align:right;min-width:185px}.target .val{font-size:35px;font-weight:760;letter-spacing:-.055em}.target .val span{color:var(--lime)}.smallcaps{color:var(--muted);font-size:10px;letter-spacing:.15em;font-weight:700;text-transform:uppercase}
-    .toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;padding:16px 0 23px}.seg{display:flex;gap:5px;background:#192225;border:1px solid #344043;border-radius:13px;padding:5px}.seg button{border:0;border-radius:9px;background:transparent;color:var(--muted);padding:10px 22px;font-weight:700;font-size:13px}.seg button.active{background:var(--lime);color:#152015;box-shadow:0 2px 18px #e5b26e25}.tools{display:flex;gap:9px;flex-wrap:wrap}.btn{background:#182225;border:1px solid #374244;color:#e0e9e4;border-radius:11px;padding:11px 15px;font-weight:600;font-size:12px;transition:.2s}.btn:hover{border-color:var(--lime);transform:translateY(-1px)}.btn.accent{background:var(--lime);color:#162016;border-color:var(--lime)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:4px 0 17px}.section-head h2{margin:0;font-size:19px;letter-spacing:-.02em}.section-head .legend{font-size:12px;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;align-items:stretch}.meal{display:flex;flex-direction:column;overflow:hidden;border-radius:19px;border:1px solid #ffffff1a;background:linear-gradient(160deg,#1a2425,#111a1d);box-shadow:var(--shadow);min-width:0;transition:transform .2s,border-color .2s}.meal:hover{transform:translateY(-2px);border-color:#b18c5966}.photo{height:183px;background:linear-gradient(130deg,#314538,#131f22);position:relative;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.93) contrast(1.03)}.photo::after{content:"";pointer-events:none;position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,#10191dbb)}.photo .placeholder{position:absolute;inset:0;display:grid;place-items:center;font-size:75px}.meta-top{position:absolute;top:14px;left:14px;right:14px;display:flex;align-items:center;justify-content:space-between;z-index:1}.time{font-size:12px;font-weight:800;letter-spacing:.05em;background:#0b1515d9;border:1px solid #ffffff36;border-radius:8px;padding:8px 11px;backdrop-filter:blur(4px)}.location{color:#e3eee8;font-size:10px;background:#0b1515a8;border-radius:7px;padding:7px 9px;text-transform:uppercase;letter-spacing:.08em}.meal-body{padding:19px;display:flex;flex-direction:column;flex:1}.meal-index{font-size:10px;letter-spacing:.16em;color:var(--lime);text-transform:uppercase;font-weight:800}.meal h3{margin:8px 0 8px;font-size:20px;line-height:1.22;letter-spacing:-.035em;min-height:48px}.desc{font-size:12px;color:var(--muted);min-height:35px;line-height:1.5;margin:0 0 15px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:13px 0;border-top:1px solid #ffffff19;border-bottom:1px solid #ffffff19}.stat b{display:block;font-size:16px;letter-spacing:-.035em;font-variant-numeric:tabular-nums}.stat small{font-size:10px;letter-spacing:.02em;color:var(--muted)}.stat:first-child b{color:var(--lime)}.stat:first-child small{color:#dcba80}
-    .ingredients{margin:15px 0 16px;display:grid;gap:9px}.ing{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px}.ing-name{color:#cbd4cf}.ing-qty{display:flex;align-items:center;gap:4px}.ing input{width:53px;text-align:right;border:1px solid #334042;color:#ecf5eb;border-radius:7px;background:#10181a;padding:6px 5px;appearance:textfield;font-size:12px;font-variant-numeric:tabular-nums}.ing input::-webkit-inner-spin-button,.ing input::-webkit-outer-spin-button{appearance:none;margin:0}.unit{color:var(--muted);font-size:10px;width:15px}.swap{margin-top:auto;padding-top:10px}.swap label{display:block;color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}.select-wrap{position:relative}.select-wrap:after{content:"⌄";position:absolute;right:13px;top:8px;color:var(--lime);font-size:22px;pointer-events:none}.swap select{appearance:none;width:100%;border:1px solid #455451;background:#1b2928;color:#f3f6f3;padding:12px 34px 12px 12px;border-radius:10px;font-size:12px;cursor:pointer}.warn{display:flex;align-items:center;gap:6px;color:var(--amber);font-size:11px;margin-bottom:12px}.fine{display:flex;align-items:center;gap:6px;color:#a7c4ad;font-size:11px;margin-bottom:12px}.note{font-size:10px;line-height:1.5;color:var(--muted)}
-    .footer-notes{margin-top:21px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:#7f8d89;font-size:11px;line-height:1.65}.footer-notes strong{color:#b9c6c0}
-    .bottom{position:fixed;left:0;right:0;bottom:0;z-index:9;background:#111a1beb;border-top:1px solid #5869526b;box-shadow:0 -15px 50px #000a;backdrop-filter:blur(25px);padding:18px max(24px,calc((100vw - 1210px)/2)) calc(18px + env(safe-area-inset-bottom))}.bottom-content{display:grid;grid-template-columns:1.4fr repeat(4,1fr);align-items:center;gap:23px}.bottom-title .smallcaps{color:var(--lime)}.bottom-title strong{display:block;font-size:21px;letter-spacing:-.04em;margin-top:5px}.bottom-title span{color:var(--muted);font-size:12px;font-weight:400}.gauge .g-head{display:flex;justify-content:space-between;align-items:baseline;gap:5px;margin-bottom:9px}.gauge b{font-size:21px;letter-spacing:-.05em;font-variant-numeric:tabular-nums}.gauge .g-head small{font-size:10px;color:var(--muted)}.gauge .g-label{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}.bar{height:5px;background:#31403d;border-radius:50px;overflow:hidden}.bar>i{display:block;height:100%;background:var(--lime);border-radius:50px;transition:width .25s}.gauge:nth-child(3) .bar i{background:var(--cyan)}.gauge:nth-child(4) .bar i{background:#e5b887}.gauge:nth-child(5) .bar i{background:#cfabca}.gauge.over .bar i{background:var(--red)}
-    dialog{background:#172123;color:var(--txt);border:1px solid #62716380;border-radius:20px;width:min(700px,calc(100vw - 28px));max-height:85vh;box-shadow:0 20px 70px #000a;padding:0}dialog::backdrop{background:#020809cf;backdrop-filter:blur(5px)}.modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 25px;border-bottom:1px solid #ffffff19}.modal-head h2{margin:0;font-size:22px}.modal-body{padding:24px;max-height:60vh;overflow:auto}.shop-line{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #ffffff13;padding:9px 0;font-size:13px}.shop-line span:last-child{color:var(--lime);font-weight:700}.modal-actions{display:flex;justify-content:flex-end;gap:9px;padding:17px 24px;border-top:1px solid #ffffff19}.toast{position:fixed;z-index:20;bottom:145px;left:50%;transform:translateX(-50%) translateY(12px);padding:12px 18px;background:var(--lime);color:#112015;font-weight:800;border-radius:12px;box-shadow:0 9px 30px #0008;opacity:0;transition:.25s;pointer-events:none;font-size:12px}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-    @media(max-width:1040px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bottom-content{grid-template-columns:1fr repeat(4,1fr);gap:12px}.bottom-title strong{font-size:17px}.gauge b{font-size:18px}}
-    @media(max-width:660px){body{padding-bottom:185px}.shell{width:calc(100% - 28px)}.nav{height:61px}.pill.hide-mobile{display:none}.hero{grid-template-columns:1fr;padding:27px 0 21px;gap:14px}.hero .target{text-align:left;display:flex;align-items:center;justify-content:space-between;min-width:0;padding:12px 16px}.target .val{font-size:25px}.hero p{font-size:12px}.toolbar{padding:8px 0 21px;gap:11px}.seg{width:100%}.seg button{flex:1}.tools{width:100%}.tools .btn{flex:1;padding:10px 8px}.section-head .legend{display:none}.grid{grid-template-columns:1fr;gap:14px}.photo{height:185px}.meal h3{min-height:0}.desc{min-height:0}.meal-body{padding:16px}.bottom{padding:13px 13px calc(14px + env(safe-area-inset-bottom))}.bottom-content{grid-template-columns:repeat(4,1fr);gap:10px}.bottom-title{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:8px}.bottom-title strong{font-size:14px;margin:0}.bottom-title span{font-size:10px}.gauge b{font-size:17px}.gauge .g-head small{display:none}.gauge .g-label{font-size:9px}.footer-notes{margin-bottom:0}.toast{bottom:145px}}
-    @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-    /* recipe sprite image */.photo .dish-shot{position:absolute;inset:0;background-image:url('assets/recipes.avif');background-repeat:no-repeat;background-size:400% 400%;filter:saturate(.99) contrast(1.06);transition:transform .35s ease}.meal:hover .dish-shot{transform:scale(1.025)}.photo .dish-shot:focus-visible{outline:2px solid var(--lime);outline-offset:-3px}
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1012"><meta name="description" content="Eenvoudige voedingsplanner: maak kaarten per tijdstip, voeg producten uit Open Food Facts toe en zie direct je macro's.">
+<title>FUEL · Stick to the plan</title>
+<style>
+:root{color-scheme:dark;--bg:#090e11;--panel:#151d20;--panel2:#1b2527;--line:#2e3b3c;--ink:#f3f3ed;--mute:#96a6a4;--gold:#e5b26e;--accent:#8cc2ad;--danger:#ffbaa8}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;padding-bottom:150px;font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Arial,sans-serif;background:radial-gradient(ellipse 80% 450px at 78% -20%,#35482b54,transparent),var(--bg);color:var(--ink)}input,button,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}button:disabled{opacity:.45;cursor:not-allowed}.container{width:min(1080px,calc(100% - 36px));margin:auto}.topbar{border-bottom:1px solid #ffffff12;background:#0b1012db;backdrop-filter:blur(15px)}.top-inner{height:68px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:21px;letter-spacing:.17em;font-weight:850}.brand b{color:var(--gold)}.top-note{font:11px ui-monospace,monospace;letter-spacing:.12em;color:var(--mute)}.intro{padding:38px 0 23px}.eyebrow{font:700 11px ui-monospace,monospace;letter-spacing:.22em;color:var(--gold);text-transform:uppercase}.intro h1{font-size:clamp(37px,6vw,65px);line-height:1.04;letter-spacing:-.06em;margin:10px 0 14px}.intro h1 em{font-style:normal;color:var(--gold)}.intro p{margin:0;color:var(--mute);font-size:14px}.section-line{margin:20px 0 15px;display:flex;align-items:center;justify-content:space-between;gap:15px}.section-line h2{font-size:17px;margin:0;letter-spacing:-.03em}.outline-btn,.small-btn{border:1px solid #465654;border-radius:10px;background:#192426;color:var(--ink);padding:10px 13px;font-size:12px;font-weight:650}.outline-btn:hover,.small-btn:hover{border-color:var(--gold)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.meal-card{min-width:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#1a2424,#121a1d);box-shadow:0 20px 45px #0003;display:flex;flex-direction:column}.card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid #ffffff15;padding:16px 18px}.time-group{display:flex;align-items:center;gap:11px}.time-input{font-size:23px;font-weight:800;letter-spacing:-.055em;border:0;background:transparent;color:var(--ink);width:113px;padding:4px 0;color-scheme:dark}.card-type{display:block;color:var(--mute);letter-spacing:.14em;font:700 10px ui-monospace,monospace;text-transform:uppercase}.delete-btn{border:0;background:transparent;color:#9daaa8;border-radius:8px;width:32px;height:34px;font-size:18px}.delete-btn:hover{color:var(--danger);background:#ffffff0a}.card-body{padding:18px;flex:1}.meal-title{font-size:17px;font-weight:760;letter-spacing:-.03em;margin:0 0 8px}.empty{text-align:center;padding:24px 0 9px}.empty .icon-plus{font-size:38px;color:var(--gold);line-height:1}.empty p{margin:7px 0 17px;color:var(--mute);font-size:12px}.add-ingredient{width:100%;min-height:54px;border:1px dashed #987c4e;border-radius:12px;background:#e5b26e13;color:#f1d2a4;font-weight:750;font-size:14px;transition:background .2s}.add-ingredient:hover{background:#e5b26e28}.add-ingredient.has-items{min-height:43px;margin-top:14px;background:transparent}.items{display:grid;gap:4px}.item-row{display:grid;grid-template-columns:minmax(0,1fr) 82px 17px 29px;gap:6px;align-items:center;border-bottom:1px solid #ffffff0c;padding:9px 0}.item-name{font-size:13px;overflow-wrap:anywhere}.qty{width:82px;min-width:0;background:#0b1415;border:1px solid #40504f;color:var(--ink);border-radius:8px;padding:7px 5px;text-align:right;font-variant-numeric:tabular-nums}.unit{font-size:11px;color:var(--mute)}.remove-item{border:0;background:transparent;color:#a4b1ac;font-size:19px;line-height:1;border-radius:7px;min-height:30px}.remove-item:hover{color:var(--danger)}.subtotal{margin-top:auto;border-top:1px solid #ffffff16;padding:15px 18px 16px}.subtotal-head{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px}.subtotal-head strong{font-size:11px;color:#a5b7b3;letter-spacing:.13em}.subtotal-head span{font-size:11px;color:var(--mute)}.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.stat{min-width:0}.stat b{font-size:clamp(16px,2.5vw,21px);letter-spacing:-.045em;font-variant-numeric:tabular-nums;white-space:nowrap}.stat:first-child b{color:var(--gold)}.stat small{display:block;color:var(--mute);font-size:10px}.save-row{display:flex;align-items:center;gap:8px;margin-top:17px}.save{flex:1;border:1px solid #7a7656;background:#d7ac70;color:#18211f;border-radius:10px;padding:11px;font-size:12px;font-weight:800;letter-spacing:.065em}.save:hover{background:#efbf7f}.reuse{display:flex;gap:7px;align-items:center;justify-content:center;border:0;background:transparent;color:#bbcfca;font-size:12px;padding:7px 5px}.reuse:hover{color:var(--gold)}.use-row{text-align:center;padding-top:12px}.day-total{position:fixed;bottom:0;left:0;right:0;z-index:20;border-top:1px solid #6f7c6345;box-shadow:0 -12px 35px #0009;background:#11191ceb;backdrop-filter:blur(24px)}.total-inner{display:flex;align-items:center;gap:24px;min-height:114px;padding:16px 0}.totals-title{min-width:170px}.totals-title small{display:block;color:var(--gold);letter-spacing:.15em;font-size:10px;font-weight:750}.totals-title strong{font-size:20px;letter-spacing:-.035em}.total-blocks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;flex:1}.total-number{display:flex;justify-content:space-between;align-items:baseline;gap:3px}.total-number b{font-size:20px}.total-number small{color:var(--mute);font-size:10px}.track{height:5px;background:#35403e;border-radius:6px;overflow:hidden;margin-top:6px}.track i{display:block;width:0%;height:100%;background:var(--gold);border-radius:6px;transition:width .15s}.total-block:nth-child(2) .track i{background:var(--accent)}.total-block:nth-child(3) .track i{background:#a0b5cd}.total-block:nth-child(4) .track i{background:#c4a6b7}.toast{position:fixed;z-index:100;bottom:135px;left:50%;transform:translateX(-50%);border-radius:10px;background:#33463d;color:#fff;padding:10px 18px;opacity:0;pointer-events:none;transition:opacity .2s;text-align:center}.toast.show{opacity:1}dialog{color:var(--ink);background:#131d1e;border:1px solid #596960;border-radius:18px;box-shadow:0 25px 90px #000c;padding:0;width:min(620px,calc(100vw - 22px));max-height:min(85vh,850px);overflow:hidden}dialog::backdrop{background:#020708d4;backdrop-filter:blur(5px)}.modal-header{padding:18px 20px;border-bottom:1px solid #ffffff18;display:flex;justify-content:space-between;align-items:center;gap:12px}.modal-header strong{font-size:20px}.x-close{background:transparent;border:0;color:#bbc8c2;font-size:23px;width:35px;height:35px}.modal-body{padding:20px;overflow-y:auto;max-height:65vh}.search-area{display:flex;gap:8px}.search-area input,.text-input{width:100%;padding:12px;background:#0d1516;color:var(--ink);border:1px solid #526360;border-radius:10px}.action-btn{background:var(--gold);border:0;border-radius:10px;color:#14201b;font-weight:800;padding:10px 14px}.action-btn:hover{background:#f5c68e}.help{color:var(--mute);font-size:12px;margin:8px 0 14px}.picker-title{font-size:11px;color:var(--gold);letter-spacing:.12em;font-weight:800;text-transform:uppercase;margin:19px 0 8px}.food-list{display:grid;gap:7px}.food-hit{border:1px solid #334543;background:#1a2526;color:var(--ink);text-align:left;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%}.food-hit b{font-size:13px;display:block}.food-hit small{display:block;font-size:11px;color:var(--mute)}.food-hit:hover{border-color:var(--gold)}.badge{color:var(--gold);font-size:10px;white-space:nowrap}.selection{padding:16px;margin-top:18px;background:#24312c;border:1px solid #728066;border-radius:12px}.selection[hidden]{display:none}.selection p{margin:4px 0 12px;color:var(--mute);font-size:12px}.select-controls{display:flex;gap:10px;align-items:end}.select-controls label{flex:1;font-size:11px;color:var(--mute)}.select-controls input{margin-top:4px}.manual-link{border:0;background:none;color:var(--gold);font-size:12px;padding:10px 0}.manual-area{display:none;border-top:1px solid #ffffff1a;padding-top:12px}.manual-area.open{display:block}.manual-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:11px}.manual-grid label{font-size:11px;color:var(--mute)}.manual-grid input{width:100%;padding:9px;color:var(--ink);background:#0d1516;border:1px solid #526360;border-radius:8px;margin-top:3px}.modal-actions{display:flex;justify-content:flex-end;gap:10px;border-top:1px solid #ffffff13;padding:15px 20px}.template-list{display:grid;gap:8px}.template-line{display:flex;gap:8px;align-items:center}.template-line .food-hit{flex:1}.template-line .delete-template{border:0;background:transparent;color:var(--danger);font-size:20px}.muted{color:var(--mute)}@media(max-width:820px){.cards{grid-template-columns:1fr}.container{width:min(620px,calc(100% - 28px))}.total-inner{gap:10px}.totals-title{min-width:120px}.total-blocks{gap:8px}}@media(max-width:550px){body{padding-bottom:170px}.intro{padding-top:26px}.top-note{display:none}.card-head{padding:13px 15px}.card-body{padding:14px 15px}.subtotal{padding:14px 15px}.total-inner{display:block;min-height:0;padding:11px 0}.totals-title{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:9px}.totals-title strong{font-size:14px}.total-blocks{gap:8px}.total-number{display:block}.total-number b{font-size:16px}.total-number small{font-size:9px}.modal-body{padding:15px}.modal-header{padding:12px 15px}.select-controls{align-items:stretch;flex-wrap:wrap}.select-controls label{min-width:100%}.select-controls .action-btn{width:100%}.search-area{flex-wrap:wrap}.search-area .action-btn{width:100%}}@media print{body{padding:0;background:white;color:black}.topbar,.intro,.section-line button,.day-total,.add-ingredient,.save-row,.delete-btn,.use-row,dialog{display:none!important}.container{width:100%}.cards{grid-template-columns:1fr 1fr}.meal-card{border:1px solid #aaa;box-shadow:none;break-inside:avoid;color:black;background:white}.time-input,.qty{color:black!important;background:white!important}.stat small,.card-type{color:#555}}
 
-    /* Open Food Facts search and chosen products */
-    .lookup{margin:1px 0 29px;padding:24px;border:1px solid #e5b26e45;border-radius:19px;background:linear-gradient(135deg,#1f2928,#121b1e);box-shadow:var(--shadow)}
-    .lookup-header{display:flex;justify-content:space-between;align-items:start;gap:16px;flex-wrap:wrap}
-    .lookup h2{font-size:clamp(21px,2.6vw,28px);margin:5px 0 7px;letter-spacing:-.04em}
-    .lookup p{font-size:12px;color:var(--muted);line-height:1.65;margin:0 0 15px}
-    .lookup .off-by{font-size:11px;color:var(--muted);white-space:nowrap}
-    .lookup .off-by a{color:var(--lime)}
-    .off-form{display:flex;gap:9px;margin:6px 0 12px}
-    .off-form input,.off-selection input,.off-selection select{width:100%;min-width:0;border:1px solid #52605b;background:#0b1315;color:var(--txt);border-radius:10px;padding:12px 13px}
-    .off-form input{flex:1}.off-form .btn{white-space:nowrap}
-    .off-feedback{font-size:12px;color:#c1cfc9;min-height:16px}
-    .off-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
-    .off-result{display:flex;align-items:center;gap:12px;padding:11px;background:#0b1416;border:1px solid #334340;border-radius:12px;min-width:0}
-    .off-result img,.off-noimage{width:59px;height:65px;object-fit:contain;background:#293735;border-radius:8px;flex:0 0 59px}
-    .off-noimage{display:grid;place-items:center;color:#a6afa8;font-size:23px}
-    .off-result-info{flex:1;min-width:0}.off-result-info b{display:block;font-size:13px;line-height:1.3;overflow-wrap:anywhere}.off-result-info small{display:block;color:var(--muted);font-size:11px;margin-top:4px;line-height:1.4}
-    .off-result .btn{font-size:11px;padding:10px}
-    .off-selection{margin-top:14px;border:1px solid #8c764e;background:#1b2725;border-radius:13px;padding:15px}
-    .off-selection[hidden]{display:none}
-    .off-selection h3{font-size:16px;margin:0 0 6px}
-    .off-fields{display:grid;grid-template-columns:minmax(0,1fr) 120px auto;gap:10px;align-items:end;margin-top:11px}
-    .off-fields label{font-size:11px;color:var(--muted);display:flex;gap:6px;flex-direction:column}
-    .off-preview{font-size:12px;color:var(--lime);margin-top:10px}
-    .off-added{background:#23332d7d;padding:8px;border:1px solid #415c4e;border-radius:8px}
-    .off-added .ing-name{overflow-wrap:anywhere;max-width:60%}
-    .off-added .off-remove{border:0;background:transparent;color:#f5ab92;padding:3px 7px;font-size:17px;line-height:1}
-    @media(max-width:760px){.off-results{grid-template-columns:1fr}.off-fields{grid-template-columns:1fr 100px}.off-fields button{grid-column:1/-1}}
-    @media(max-width:460px){.lookup{padding:17px}.off-result{flex-wrap:wrap}.off-result .btn{margin-left:auto}}
-
-    .builder-dialog{width:min(760px,calc(100vw - 20px));max-height:90dvh}
-    .builder-dialog .modal-body{max-height:67dvh}
-    .builder-dialog .builder-field{display:flex;flex-direction:column;gap:7px;color:#d2ddd5;font-size:12px;font-weight:600}
-    .builder-dialog input,.builder-dialog select{width:100%;min-width:0;border:1px solid #4b5953;background:#0c1517;color:#f4f6f2;border-radius:9px;padding:11px;font:inherit}
-    .builder-dialog input:focus-visible,.builder-dialog select:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
-    .builder-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
-    .builder-add-row{display:grid;grid-template-columns:1fr 100px auto;gap:9px;align-items:end;margin-top:9px}
-    .builder-items{display:grid;gap:8px;min-height:62px;margin:14px 0}
-    .builder-line{display:flex;gap:10px;justify-content:space-between;align-items:center;background:#0b1416;border:1px solid #35443e;border-radius:10px;padding:10px}
-    .builder-line b{font-size:12px}.builder-line small{font-size:11px;color:var(--muted);display:block;margin-top:4px}
-    .builder-qty{display:flex;gap:7px;align-items:center;flex-shrink:0}.builder-qty input{width:80px;text-align:right}
-    .builder-qty button{border:0;background:#392a28;color:#ffad92;border-radius:8px;font-size:18px;padding:7px 11px;cursor:pointer}
-    .builder-total{color:var(--lime);padding:12px;border:1px solid #8b705073;border-radius:11px;font-size:13px;line-height:1.55}
-    .builder-empty{font-size:12px;color:var(--muted);padding:15px}
-    .custom-actions{display:flex;gap:7px;margin:7px 0 10px;flex-wrap:wrap}.custom-actions .btn{padding:7px 10px;font-size:11px}
-    .builder-dialog .modal-actions{flex-wrap:wrap}#builder-delete{color:#ffa994;border-color:#a46e63;margin-right:auto}#builder-delete[hidden],#builder-manual[hidden]{display:none}
-    .manual-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
-    .manual-grid .builder-field{font-size:10px}
-    @media(max-width:640px){.tools .btn{flex:1;min-width:134px}.builder-fields,.builder-add-row{grid-template-columns:1fr}.builder-add-row .btn{grid-column:1/-1}.builder-dialog .modal-body{padding:17px}.builder-qty input{width:65px}.builder-dialog .modal-actions{padding:12px 16px}}
-  </style>
-</head>
-<body>
-  <header><div class="shell nav"><div class="logo"><div class="logo-mark">F</div> FUEL<span style="color:var(--lime)">.</span></div><div class="nav-right"><div class="pill hide-mobile">HES / PERFORMANCE</div><div class="pill live">LIVE MACRO TRACKING</div></div></div></header>
-  <main class="shell">
-    <section class="hero"><div><div class="eyebrow">EAT WITH PURPOSE / TRAIN WITH INTENT</div><h1>STICK TO<br><em>THE PLAN.</em></h1><p>Geen giswerk. Kies je dag, wissel gerechten, bepaal je grammen en volg direct je macro's. Grote maaltijden vroeg. Shake vóór 19:00.</p></div><div class="target"><div class="smallcaps">Dagdoel</div><div class="val"><span>3.000</span> kcal</div><div class="smallcaps">± 200 g eiwit</div></div></section>
-    <section class="toolbar" aria-label="Dagen en acties"><div class="seg" id="days"><button type="button" data-day="A" class="active">Dag A</button><button type="button" data-day="B">Dag B</button><button type="button" data-day="C">Dag C</button></div><div class="tools"><button type="button" class="btn accent" id="jump-search">⌕ Product zoeken</button><button type="button" class="btn accent" id="open-builder">＋ Maaltijd maken</button><button type="button" class="btn" id="reset">↺ Herstel dag</button><button type="button" class="btn" id="print">⎙ Print</button><button type="button" class="btn accent" id="shop">▤ Boodschappenlijst</button></div></section>
-
-    <section class="lookup" aria-labelledby="off-heading">
-      <div class="lookup-header"><div><div class="eyebrow">PRODUCTDATABASE / BARCODE</div><h2 id="off-heading">Zoek je eigen producten</h2><p>Bijvoorbeeld “Jumbo gevulde koeken” of een barcode. Kies je portie en tel hem mee bij een maaltijd.</p></div><div class="off-by">Data: <a href="https://world.openfoodfacts.org/" target="_blank" rel="noopener noreferrer">Open Food Facts ↗</a></div></div>
-      <form class="off-form" id="off-form"><input id="off-query" type="search" name="q" placeholder="Jumbo gevulde koeken of barcode (EAN)" aria-label="Productnaam of barcode" maxlength="100" required autocomplete="off"><button class="btn accent" id="off-search" type="submit">Zoek product</button></form>
-      <div class="off-feedback" id="off-feedback" role="status" aria-live="polite">Zoek in de openbare productdatabase. Controleer altijd het etiket.</div>
-      <div class="off-results" id="off-results" aria-label="Zoekresultaten"></div>
-      <div class="off-selection" id="off-selection" hidden><h3 id="off-picked-name"></h3><div class="off-fields"><label for="off-slot">Tijdstip<select id="off-slot"></select></label><label for="off-grams">Hoeveelheid (g/ml)<input id="off-grams" type="number" min="1" max="2500" step="1" value="100"></label><button id="off-add" type="button" class="btn accent">+ Voeg toe</button></div><div id="off-preview" class="off-preview"></div><button type="button" id="off-to-builder" class="btn" style="margin-top:11px">＋ Gebruik als ingrediënt in eigen maaltijd</button></div>
-    </section>
-    <div class="section-head"><h2>Je maaltijden <span style="color:var(--lime)" id="day-name">/ Dag A</span></h2><span class="legend">BEWERKBARE GRAMMEN · GEWICHTSCHECK · LIVE TOTALEN</span></div>
-    <div class="grid" id="meals" aria-live="polite"></div>
-    <section class="footer-notes"><div><strong>Gewicht:</strong> alle vaste maaltijden zijn gepland op maximaal 500 g na bereiding.<br>Rijst en pasta: invoeren in <strong>drooggewicht</strong>. Vlees: invoeren als <strong>rauw</strong>.</div><div><strong>Rustige avond:</strong> shake vóór 19:00. Drink later naar dorst en na inspanning.<br>Macro's zijn schattingen op basis van gemiddelde producten; check je etiketten.</div></section>
-  </main>
-  <div class="bottom" aria-label="Live dagtotalen"><div class="bottom-content"><div class="bottom-title"><div class="smallcaps">JOUW DAGTOTAAL</div><strong id="status">Binnen dagdoel <span>· Dag A</span></strong></div><div class="gauge" id="g-kcal"><div class="g-label">Calorieën</div><div class="g-head"><b id="kcal">0</b><small>/ 3000</small></div><div class="bar"><i></i></div></div><div class="gauge" id="g-p"><div class="g-label">Eiwit</div><div class="g-head"><b id="p">0 g</b><small>/ 200 g</small></div><div class="bar"><i></i></div></div><div class="gauge" id="g-c"><div class="g-label">Koolhydraten</div><div class="g-head"><b id="c">0 g</b></div><div class="bar"><i></i></div></div><div class="gauge" id="g-f"><div class="g-label">Vetten</div><div class="g-head"><b id="f">0 g</b></div><div class="bar"><i></i></div></div></div></div>
-  <dialog id="shop-dialog"><div class="modal-head"><h2>Boodschappenlijst <span id="shopday" style="color:var(--lime)">A</span></h2><button type="button" class="btn" id="close" aria-label="Sluiten">✕</button></div><div class="modal-body" id="shop-lines"></div><div class="modal-actions"><button class="btn" type="button" id="copyday">Kopieer voedingsschema</button><button class="btn accent" type="button" id="copyshop">Kopieer lijst</button></div></dialog>
-
-   <dialog id="builder-dialog" class="builder-dialog" aria-labelledby="builder-title">
-    <form id="builder-form">
-     <div class="modal-head"><h2 id="builder-title">Maak je eigen maaltijd</h2><button type="button" id="builder-close" class="btn" aria-label="Sluiten">✕</button></div>
-     <div class="modal-body">
-      <p class="note" style="margin:0 0 15px">Kies ingrediënten en gramgewichten. Het recept is daarna op elke dag opnieuw te gebruiken.</p>
-      <div class="builder-fields"><label class="builder-field" for="builder-name">Naam<input id="builder-name" maxlength="70" minlength="2" placeholder="Bijv. Gehaktwraps met groenten" required></label><label class="builder-field" for="builder-slot">Tijdstip<select id="builder-slot"></select></label></div>
-      <label class="builder-field" for="builder-food">Kies een ingrediënt</label>
-      <div class="builder-add-row"><select id="builder-food"></select><label class="builder-field" for="builder-grams">Hoeveel (g/ml)<input type="number" id="builder-grams" min="1" max="2500" value="100"></label><button type="button" class="btn accent" id="builder-add">＋ Ingrediënt</button></div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><button type="button" class="btn" id="builder-search-off">⌕ Zoek merkproduct/barcode</button><button type="button" class="btn" id="builder-manual-toggle">＋ Eigen ingrediënt</button></div>
-      <div id="builder-manual" hidden style="border:1px solid #455451;border-radius:12px;padding:13px;margin-top:12px">
-       <label class="builder-field" for="builder-manual-name">Productnaam<input type="text" id="builder-manual-name" maxlength="80" placeholder="Bijv. eigen gehaktmengsel"></label>
-       <div class="manual-grid" style="margin-top:10px">
-        <label class="builder-field">Gram<input id="builder-manual-g" type="number" min="1" max="2500" value="100"></label>
-        <label class="builder-field">Kcal / 100g<input id="builder-manual-k" type="number" min="0" max="1000" step="0.1" value="0"></label>
-        <label class="builder-field">Eiwit / 100g<input id="builder-manual-p" type="number" min="0" max="100" step="0.1" value="0"></label>
-        <label class="builder-field">KH / 100g<input id="builder-manual-c" type="number" min="0" max="100" step="0.1" value="0"></label>
-        <label class="builder-field">Vet / 100g<input id="builder-manual-f" type="number" min="0" max="100" step="0.1" value="0"></label>
-       </div><button type="button" class="btn accent" id="builder-manual-add" style="margin-top:10px">Voeg eigen product toe</button>
-      </div>
-      <div class="builder-items" id="builder-items"></div>
-      <div class="builder-total" id="builder-totals">0 kcal</div>
-     </div>
-     <div class="modal-actions"><button type="button" id="builder-delete" class="btn" hidden>Verwijder recept</button><button type="button" id="builder-cancel" class="btn">Annuleren</button><button type="submit" class="btn accent">✓ Bewaar en gebruik</button></div>
-    </form>
-   </dialog>
-  <div class="toast" id="toast" role="status"></div>
+/* Light backup toolbar and mobile-friendly camera view */
+.schema-actions{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px}
+.schema-actions .outline-btn{min-height:40px}.schema-actions .outline-btn.primary{color:#14201a;background:var(--gold);border-color:var(--gold);font-weight:800}
+.scan-btn{padding:10px 12px;border:1px solid #607e72;border-radius:10px;color:#eff5e9;background:#223a34;font-size:12px;font-weight:750;white-space:nowrap}
+.scan-btn:hover{border-color:var(--gold)}
+.scan-container{padding:18px;max-height:calc(90dvh - 80px);overflow:auto}
+#scanVideo{display:block;width:100%;max-height:320px;aspect-ratio:4/3;object-fit:cover;border-radius:12px;background:#030b0a}
+.scan-frame{position:relative;overflow:hidden;border:1px solid #577269;border-radius:13px;background:#040807}
+.scan-frame:after{content:"";pointer-events:none;position:absolute;inset:23% 10%;border:2px solid #e5b26eaa;border-radius:9px;box-shadow:0 0 0 100vmax #0003}
+.scan-guide{font-size:12px;color:var(--mute);margin:12px 0}
+.scan-alternative{border-top:1px solid #31403d;margin-top:12px;padding-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.scan-alternative button{flex:1}
+#scanStatus{min-height:24px;color:#c2d2c5;font-size:12px;margin:13px 0 8px}
+@media(max-width:650px){.section-line{flex-wrap:wrap}.schema-actions{justify-content:stretch;width:100%}.schema-actions .outline-btn{flex:1}.search-area .scan-btn{width:100%}}
+</style></head>
+<body><header class="topbar"><div class="container top-inner"><span class="brand">FUEL<b>.</b></span><span class="top-note">STICK TO THE PLAN / HES</span></div></header>
+<main class="container"><section class="intro"><div class="eyebrow">BUILD YOUR DAY / NO GUESSWORK</div><h1>STICK TO<br><em>THE PLAN.</em></h1><p>Maak je maaltijden. Kies je tijden. De rest rekent vanzelf.</p></section>
+<div class="section-line"><h2>Mijn voedingsschema</h2><div class="schema-actions"><button class="outline-btn" type="button" id="exportBackup" title="Bewaar je schema en maaltijden als bestand">↓ Export</button><button class="outline-btn" type="button" id="importBackup" title="Zet schema of maaltijden van een ander apparaat terug">↑ Import</button><button class="outline-btn primary" id="addSlot">＋ Eetmoment</button></div></div><input id="backupFile" type="file" accept=".json,application/json" hidden><section id="cards" class="cards" aria-label="Mijn maaltijdkaarten"></section></main>
+<div class="day-total" aria-label="Live dagtotaal"><div class="container total-inner"><div class="totals-title"><small>TOTAAL VANDAAG</small><strong id="total-status">0 / 3000 kcal</strong></div><div class="total-blocks"><div class="total-block"><div class="total-number"><b id="total-k">0</b><small>kcal</small></div><div class="track"><i id="track-k"></i></div></div><div class="total-block"><div class="total-number"><b id="total-p">0</b><small>eiwit</small></div><div class="track"><i id="track-p"></i></div></div><div class="total-block"><div class="total-number"><b id="total-c">0</b><small>KH</small></div><div class="track"><i id="track-c"></i></div></div><div class="total-block"><div class="total-number"><b id="total-f">0</b><small>vet</small></div><div class="track"><i id="track-f"></i></div></div></div></div></div>
+<dialog id="foodDialog" aria-labelledby="food-title"><div class="modal-header"><strong id="food-title">Ingrediënt toevoegen</strong><button class="x-close" id="foodClose" aria-label="Sluiten">×</button></div><div class="modal-body"><div class="search-area"><input type="search" id="foodSearch" placeholder="Gehakt, aardappel, Jumbo gevulde koeken…" aria-label="Zoek een ingrediënt of barcode"><button class="action-btn" id="searchOFF">Open Food Facts ↗</button><button type="button" class="scan-btn" id="scanBarcode">▣ Scan barcode</button></div><p class="help" id="searchNote">Kies een standaardproduct of zoek een merkproduct in Open Food Facts.</p><div class="picker-title" id="foodListTitle">Veelgebruikt</div><div id="foodResults" class="food-list"></div><div id="foodSelection" class="selection" hidden><strong id="selectedName"></strong><p id="selectedMacros"></p><div class="select-controls"><label>Hoeveel gram of ml?<input class="text-input" type="number" id="selectedGrams" min="1" max="2500" step="1" value="100"></label><button class="action-btn" id="addSelected">+ Toevoegen</button></div></div><button id="toggleManual" class="manual-link">+ Product handmatig invoeren</button><div class="manual-area" id="manualArea"><input class="text-input" id="manualName" placeholder="Naam van product" maxlength="100"><div class="manual-grid"><label>kcal<input type="number" id="manualK" min="0" max="1200" placeholder="100"></label><label>Eiwit<input type="number" id="manualP" min="0" max="100" placeholder="20"></label><label>KH<input type="number" id="manualC" min="0" max="100" placeholder="0"></label><label>Vet<input type="number" id="manualF" min="0" max="100" placeholder="5"></label></div><p class="help">Voedingswaarden per 100 g/ml.</p><button class="action-btn" id="manualAdd">+ Handmatig toevoegen</button></div></div></dialog>
+<dialog id="saveDialog" aria-labelledby="save-title"><div class="modal-header"><strong id="save-title">Save as meal</strong><button class="x-close" id="saveClose" aria-label="Sluiten">×</button></div><div class="modal-body"><label>Naam maaltijd<input class="text-input" id="mealName" placeholder="Bijv. gehakt, groenten & aardappel" maxlength="80" style="margin-top:8px"></label><p class="help">Je kunt deze combinatie later opnieuw gebruiken.</p></div><div class="modal-actions"><button class="action-btn" id="saveConfirm">Bewaar maaltijd</button></div></dialog>
+<dialog id="templateDialog" aria-labelledby="template-title"><div class="modal-header"><strong id="template-title">Mijn opgeslagen maaltijden</strong><button class="x-close" id="templateClose" aria-label="Sluiten">×</button></div><div class="modal-body"><div id="templateResults" class="template-list"></div></div></dialog>
+<dialog id="scanDialog" aria-labelledby="scanTitle"><div class="modal-header"><strong id="scanTitle">Scan een barcode</strong><button class="x-close" type="button" id="scanClose" aria-label="Sluiten">×</button></div><div class="scan-container"><div class="scan-frame"><video id="scanVideo" autoplay muted playsinline aria-label="Live beeld van de camera"></video></div><p id="scanStatus" role="status" aria-live="polite">Camera voorbereiden…</p><p class="scan-guide">Richt de camera op de streepjescode van de verpakking. Na herkenning zoeken we automatisch in Open Food Facts.</p><div class="scan-alternative"><button type="button" class="outline-btn" id="scanPhoto">📷 Maak of kies foto</button><button type="button" class="outline-btn" id="scanManual">⌨ Barcode typen</button><input type="file" id="scanPhotoInput" accept="image/*" capture="environment" hidden></div></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 'use strict';
-// Referentiewaarden per 100 g / 100 ml. Vervang door etiketten van je eigen merken voor meer precisie.
-const foods={
+const baseFoods={
  quark:{name:'Magere kwark',k:59,p:10,c:3.5,f:.2,w:1},oats:{name:'Havermout',k:370,p:13,c:60,f:7,w:1},walnuts:{name:'Walnoten',k:650,p:15,c:7,f:65,w:1},pb:{name:'100% pindakaas',k:630,p:26,c:12,f:52,w:1},berries:{name:'Blauwe bessen',k:55,p:.7,c:10,f:.3,w:1},bread:{name:'Volkorenbrood',k:245,p:9,c:40,f:3.5,w:1},eggs:{name:'Eieren',k:143,p:12.6,c:.7,f:10,w:.91},grapes:{name:'Druiven',k:70,p:.7,c:17,f:.2,w:1},muesli:{name:'Muesli',k:370,p:10,c:66,f:6,w:1},cashews:{name:'Cashewnoten',k:580,p:18,c:30,f:44,w:1},chickendeli:{name:'Kipfilet (beleg)',k:110,p:21,c:1,f:2,w:1},crud:{name:'Sla / rauwkost',k:25,p:1.1,c:4.5,f:.1,w:1},wraps:{name:'Volkorenwraps',k:320,p:9,c:51,f:9,w:1},filet:{name:'Filet americain',k:220,p:14,c:3,f:17,w:1},cheese:{name:'30+ kaas',k:275,p:30,c:1,f:16,w:1},avocado:{name:'Avocado',k:170,p:2,c:2,f:16,w:1},beef:{name:'Mager rundergehakt',k:140,p:21,c:0,f:6,w:.75},rice:{name:'Rijst (droog)',k:360,p:7,c:78,f:1,w:2.55},broccoli:{name:'Broccoli',k:35,p:3,c:3,f:.4,w:.88},oil:{name:'Olijfolie',k:900,p:0,c:0,f:100,w:1},soy:{name:'Sojasaus',k:60,p:5,c:6,f:0,w:1},chicken:{name:'Kipfilet (rauw)',k:110,p:23,c:0,f:1.8,w:.77},pasta:{name:'Pasta (droog)',k:360,p:12,c:72,f:1.5,w:2.4},veg:{name:'Gemengde groenten',k:35,p:2,c:4,f:.4,w:.9},pesto:{name:'Groene pesto',k:480,p:4,c:8,f:47,w:1},salmon:{name:'Zalm (rauw)',k:208,p:20,c:0,f:14,w:.88},potato:{name:'Aardappelen',k:78,p:2,c:17,f:.1,w:1},jam:{name:'Jam',k:250,p:.4,c:60,f:.2,w:1},banana:{name:'Banaan',k:89,p:1,c:21,f:.3,w:1},milk:{name:'Halfvolle melk',k:47,p:3.5,c:4.8,f:1.5,w:1,unit:'ml'},whey:{name:'Whey-eiwit',k:390,p:76,c:8,f:6,w:1}
 };
-const E=(key,g)=>({key,g});
-const recipes={
-  breakfast:[
-    {id:'quark-oats',title:'Kwark, oats & walnoten',desc:'Langzaam starten met fruit, noten en eiwitten.',emoji:'🫐',art:0,items:[E('quark',300),E('oats',60),E('walnuts',35),E('pb',15),E('berries',80)]},
-    {id:'eggs-toast',title:'Brood, ei & pindakaas',desc:'Veel energie, lekker stevig maar niet groot.',emoji:'🍳',art:1,items:[E('bread',140),E('eggs',110),E('pb',35),E('grapes',100)]},
-    {id:'muesli-bowl',title:'Kwark, muesli & cashews',desc:'Makkelijk vooraf te maken in een bewaarbak.',emoji:'🥣',art:2,items:[E('quark',300),E('muesli',50),E('cashews',35),E('pb',30),E('berries',75)]}
-  ],
-  lunch:[
-    {id:'chicken-bread',title:'Brood met kip & pindakaas',desc:'Beleg op aparte sneetjes; makkelijk voor werk.',emoji:'🥪',art:3,items:[E('bread',140),E('pb',50),E('chickendeli',130),E('crud',120)]},
-    {id:'wrap-filet',title:'Wraps filet americain',desc:'Vers en gekoeld meenemen; wissel rauw vlees af.',emoji:'🌯',art:4,items:[E('wraps',100),E('filet',110),E('cheese',30),E('avocado',40),E('crud',120)]},
-    {id:'egg-chicken-bread',title:'Brood met ei & kip',desc:'Twee soorten beleg en wat pindakaas.',emoji:'🥪',art:5,items:[E('bread',140),E('eggs',110),E('pb',20),E('chickendeli',80),E('crud',120)]}
-  ],
-  main:[
-    {id:'beef-rice',title:'Gehakt, rijst & broccoli',desc:'Mealprep favoriet; rijst wegen vóór het koken.',emoji:'🥩',art:6,items:[E('beef',150),E('rice',75),E('broccoli',130),E('oil',20),E('soy',15)]},
-    {id:'chicken-pasta',title:'Kip met pestopasta',desc:'Rijk aan koolhydraten voor je training.',emoji:'🍝',art:7,items:[E('chicken',150),E('pasta',70),E('veg',130),E('pesto',45),E('oil',5)]},
-    {id:'salmon-potatoes',title:'Zalm met aardappelen',desc:'Omega 3 en groenten, met olijfolie.',emoji:'🐟',art:8,items:[E('salmon',150),E('potato',210),E('veg',130),E('oil',20)]}
-  ],
-  snack:[
-    {id:'toast-jam',title:'Brood met jam',desc:'Lichte koolhydraten, weinig vet voor training.',emoji:'🍞',art:9,items:[E('bread',70),E('jam',35)]},
-    {id:'toast-chicken',title:'Brood met kip & jam',desc:'Kleine snack met extra eiwit. Beleg apart.',emoji:'🥪',art:10,items:[E('bread',70),E('chickendeli',100),E('jam',10)]},
-    {id:'quark-snack',title:'Kwark & jamtoast',desc:'Wat extra eiwit zonder zware maaltijd.',emoji:'🥣',art:11,items:[E('quark',125),E('bread',70),E('jam',30)]}
-  ],
-  shake:[
-    {id:'shake',title:'Banaan-eiwitshake',desc:'Jouw vaste shake, vóór 19:00 opdrinken.',emoji:'🥤',art:12,items:[E('milk',500),E('banana',120),E('whey',35)]}
-  ]
-};
-const slots=[{id:'breakfast',time:'10:00',name:'Eerste maaltijd',place:'Op werk'},{id:'lunch',time:'12:00',name:'Lunchpauze',place:'Op werk'},{id:'main',time:'14:00',name:'Grote maaltijd',place:'Op werk'},{id:'snack',time:'16:00',name:'Voor training',place:'Licht eten'},{id:'shake',time:'18:30',name:'Laatste shake',place:'Voor 19:00'}];
-const defaults={A:['quark-oats','chicken-bread','beef-rice','toast-jam','shake'],B:['eggs-toast','wrap-filet','chicken-pasta','toast-chicken','shake'],C:['muesli-bowl','egg-chicken-bread','salmon-potatoes','quark-snack','shake']};
-const storageKey='hes-fuel-v1';
-function getSaved(){try{return JSON.parse(localStorage.getItem(storageKey)||'{}')}catch{return {}}}
-const saved=getSaved();let day=['A','B','C'].includes(saved.day)?saved.day:'A';let plan=saved.plan&&typeof saved.plan==='object'?saved.plan:{};let amounts=saved.amounts&&typeof saved.amounts==='object'?saved.amounts:{};let offExtras=saved.offExtras&&typeof saved.offExtras==='object'?saved.offExtras:{};
-let userRecipes=Array.isArray(saved.userRecipes)?saved.userRecipes.filter(r=>r&&typeof r.id==='string'&&Array.isArray(r.items)).slice(0,50):[];
-let customFoods=saved.customFoods&&typeof saved.customFoods==='object'?saved.customFoods:{};
-for(const [key,f] of Object.entries(customFoods))if(/^(off-|manual-)/.test(key)&&f&&typeof f.name==='string')foods[key]=f;
-function persist(){try{localStorage.setItem(storageKey,JSON.stringify({day,plan,amounts,offExtras,userRecipes,customFoods}))}catch{}}
-function recipeOptions(slotId){return recipes[slotId].concat(userRecipes)}
-function selected(slot,index){const id=(plan[day]||{})[slot.id]||defaults[day][index];return recipeOptions(slot.id).find(r=>r.id===id)||recipes[slot.id][0]}
-function quantity(recipe,idx){const v=amounts[day+'|'+recipe.id+'|'+idx];return Number.isFinite(Number(v))&&v!==undefined?Math.max(0,Number(v)):recipe.items[idx].g}
-function calc(recipe){const val={k:0,p:0,c:0,f:0,w:0};recipe.items.forEach((it,i)=>{const n=foods[it.key],g=quantity(recipe,i);for(const key of ['k','p','c','f']) val[key]+=g*n[key]/100;val.w+=g*n.w});return val}
 
-function offItems(slotId){const rows=offExtras[day]?.[slotId];return Array.isArray(rows)?rows:[]}
-function calcWithExtra(slotId,recipe){
- const val=calc(recipe);
- for(const row of offItems(slotId)){
-  const g=Number(row?.g);
-  if(!Number.isFinite(g)||g<0||g>2500)continue;
-  for(const k of ['k','p','c','f']){const per100=Number(row[k]);if(Number.isFinite(per100)&&per100>=0)val[k]+=g*per100/100}
-  val.w+=g;
+const MAX_SLOTS=20,MAX_ITEMS=30;
+const DATA_KEY='hes-fuel-simple-cards-v1';
+const $=id=>document.getElementById(id);
+const round=n=>Math.round(Number(n)||0).toLocaleString('nl-NL');
+const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const isTime=s=>/^([01]\d|2[0-3]):[0-5]\d$/.test(s);
+function normalizeFood(key,food){return {id:key,name:String(food.name||'Product').slice(0,125),k:Number(food.k)||0,p:Number(food.p)||0,c:Number(food.c)||0,f:Number(food.f)||0,unit:food.unit||'g'};}
+const catalogue=Object.fromEntries(Object.entries(baseFoods).map(([id,x])=>[id,normalizeFood(id,x)]));
+let state;
+try{state=JSON.parse(localStorage.getItem(DATA_KEY)||'null')}catch{}
+if(!state || !Array.isArray(state.cards)){
+ state={cards:[{id:uid(),time:'12:00',title:'',items:[]}],templates:[],customFoods:{}};
+ // If the older advanced planner has an existing personal schedule, carry those times, foods and gram weights over.
+ try{const old=JSON.parse(localStorage.getItem('hes-fuel-v1')||'null');
+  if(old&&Array.isArray(old.ownPlan)&&old.ownPlan.length){
+   state.cards=old.ownPlan.slice(0,MAX_SLOTS).map(s=>({id:uid(),time:isTime(s.time)?s.time:'12:00',title:String(s.name||'').slice(0,80),items:(s.items||[]).filter(x=>baseFoods[x.key]).slice(0,MAX_ITEMS).map(x=>({id:x.key,g:Number(x.g)||0}))}));
+   const off=old.offExtras?.E||{};
+   old.ownPlan.forEach((s,i)=>{const target=state.cards[i];if(!target)return;for(const x of off[s.id]||[]){if(!x?.name||!x?.code)continue;const key='off:'+x.code;state.customFoods[key]=normalizeFood(key,x);if(target.items.length<MAX_ITEMS)target.items.push({id:key,g:Number(x.g)||0})}});
+  }
+ }catch{}
+}
+if(!state.customFoods||typeof state.customFoods!=='object')state.customFoods={};if(!Array.isArray(state.templates))state.templates=[];
+function food(id){return state.customFoods[id]||catalogue[id]||null}
+function save(){try{localStorage.setItem(DATA_KEY,JSON.stringify(state))}catch{showToast('Opslag is niet beschikbaar in deze browser')}}
+function macro(items){let out={k:0,p:0,c:0,f:0};for(const it of items||[]){const f=food(it.id),g=Number(it.g)||0;if(!f||g<0)continue;for(const q of ['k','p','c','f'])out[q]+=g*f[q]/100}return out}
+function total(){let values={k:0,p:0,c:0,f:0};for(const c of state.cards){let val=macro(c.items);for(const q of ['k','p','c','f'])values[q]+=val[q]}return values}
+let toastTimer;function showToast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2500)}
+function renderCard(card,seq){const v=macro(card.items);let has=card.items.length>0;const items=(card.items||[]).map((it,i)=>{const f=food(it.id);return `<div class="item-row"><span class="item-name">${safe(f?.name||'Onbekend')}</span><input class="qty" aria-label="Hoeveelheid ${safe(f?.name||'ingrediënt')}" inputmode="numeric" type="number" min="0" max="2500" step="1" value="${Number(it.g)||0}" data-qty="${i}"><span class="unit">${safe(f?.unit||'g')}</span><button class="remove-item" data-remove="${i}" type="button" aria-label="Verwijder ${safe(f?.name||'ingrediënt')}">×</button></div>`}).join('');
+return `<article class="meal-card" data-card="${safe(card.id)}"><div class="card-head"><div class="time-group"><input type="time" class="time-input" data-time value="${safe(card.time)}" aria-label="Tijdstip maaltijd ${seq}"><span class="card-type">Eetmoment ${String(seq).padStart(2,'0')}</span></div><button class="delete-btn" type="button" data-delete title="Verwijder eetmoment" aria-label="Verwijder eetmoment">×</button></div><div class="card-body">${card.title?`<h3 class="meal-title">${safe(card.title)}</h3>`:''}${has?`<div class="items">${items}</div>`:`<div class="empty"><div class="icon-plus">+</div><p>Deze maaltijd is nog leeg</p></div>`}<button class="add-ingredient ${has?'has-items':''}" data-add type="button">＋ Ingrediënt toevoegen</button>${state.templates.length?`<div class="use-row"><button class="reuse" data-reuse type="button">Of kies opgeslagen maaltijd →</button></div>`:''}</div><div class="subtotal"><div class="subtotal-head"><strong>SUBTOTAAL</strong><span>${has?`${card.items.length} ingrediënten`:'Nog niets toegevoegd'}</span></div><div class="stat-grid"><div class="stat"><b data-stat="k">${round(v.k)}</b><small>kcal</small></div><div class="stat"><b data-stat="p">${round(v.p)} g</b><small>eiwit</small></div><div class="stat"><b data-stat="c">${round(v.c)} g</b><small>KH</small></div><div class="stat"><b data-stat="f">${round(v.f)} g</b><small>vet</small></div></div><div class="save-row"><button class="save" type="button" data-save ${!has?'disabled':''}>SAVE AS MEAL →</button></div></div></article>`}
+function render(){const sorted=[...state.cards].sort((a,b)=>a.time.localeCompare(b.time));$('cards').innerHTML=sorted.map((c,i)=>renderCard(c,i+1)).join('');drawTotals()}
+function drawTotals(){const all=total();for(const key of ['k','p','c','f']){
+ $('total-'+key).textContent=round(all[key])+(key==='k'?'':' g');
+ $('track-'+key).style.width=Math.min(100,all[key]/({k:3000,p:200,c:350,f:100}[key])*100)+'%';
+ }$('total-status').textContent=round(all.k)+' / 3000 kcal';}
+function redrawCard(cardId){const card=state.cards.find(x=>x.id===cardId),node=document.querySelector('[data-card="'+cardId+'"]');if(!card||!node)return;const val=macro(card.items);for(const key of ['k','p','c','f']){const stat=node.querySelector('[data-stat="'+key+'"]');if(stat)stat.textContent=round(val[key])+(key==='k'?'':' g')}drawTotals();save()}
+$('addSlot').addEventListener('click',()=>{if(state.cards.length>=MAX_SLOTS){showToast('Maximaal 20 eetmomenten');return}let last=state.cards.reduce((m,s)=>s.time>m?s.time:m,'10:00');let [h,min]=last.split(':').map(Number);min+=30;h=(h+Math.floor(min/60))%24;min%=60;state.cards.push({id:uid(),time:String(h).padStart(2,'0')+':'+String(min).padStart(2,'0'),title:'',items:[]});save();render();window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})});
+let activeCard=null;
+$('cards').addEventListener('click',e=>{const node=e.target.closest('[data-card]');if(!node)return;const c=state.cards.find(x=>x.id===node.dataset.card);if(!c)return;
+ if(e.target.closest('[data-add]')){activeCard=c.id;openPicker();return}
+ if(e.target.closest('[data-reuse]')){activeCard=c.id;openTemplates();return}
+ if(e.target.closest('[data-delete]')){if(c.items.length>0&&!confirm('Dit eetmoment met ingrediënten verwijderen?'))return;state.cards=state.cards.filter(x=>x.id!==c.id);if(!state.cards.length)state.cards.push({id:uid(),time:'12:00',title:'',items:[]});save();render();return}
+ const rem=e.target.closest('[data-remove]');if(rem){c.items.splice(Number(rem.dataset.remove),1);c.title='';save();render();return}
+ if(e.target.closest('[data-save]')){activeCard=c.id;$('mealName').value=c.title||'Maaltijd '+c.time;$('saveDialog').showModal();$('mealName').select()}
+});
+$('cards').addEventListener('input',e=>{const node=e.target.closest('[data-card]');if(!node)return;const c=state.cards.find(x=>x.id===node.dataset.card);if(!c)return;
+ if(e.target.matches('[data-qty]')){const i=Number(e.target.dataset.qty),g=Number(e.target.value);if(Number.isFinite(g)&&g>=0&&g<=2500&&c.items[i]){c.items[i].g=g;c.title='';redrawCard(c.id)}}
+});
+$('cards').addEventListener('change',e=>{const node=e.target.closest('[data-card]');if(!node)return;const c=state.cards.find(x=>x.id===node.dataset.card);if(!c)return;
+ if(e.target.matches('[data-time]')){if(isTime(e.target.value)){c.time=e.target.value;save();render()}return}
+ if(e.target.matches('[data-qty]')){const i=Number(e.target.dataset.qty),g=Number(e.target.value);if(!Number.isFinite(g)||g<0||g>2500)e.target.value=c.items[i]?.g??0;render()}
+});
+function closeDialog(id){const dialog=$(id);if(dialog.open)dialog.close()}
+for(const [id,button] of [['foodDialog','foodClose'],['saveDialog','saveClose'],['templateDialog','templateClose']])$(button).addEventListener('click',()=>closeDialog(id));
+for(const id of ['foodDialog','saveDialog','templateDialog'])$(id).addEventListener('click',e=>{if(e.target===$(id))closeDialog(id)});
+function foodOptions(term){let q=term.trim().toLocaleLowerCase('nl');const all={...catalogue,...state.customFoods};return Object.values(all).filter(x=>!q||x.name.toLocaleLowerCase('nl').includes(q)).slice(0,25)}
+let hits=[],chosen=null,reqCtrl=null;
+function rowResults(data){hits=data;$('foodResults').innerHTML=data.length?data.map((f,i)=>`<button class="food-hit" type="button" data-pick="${i}"><span><b>${safe(f.name)}</b><small>${round(f.k)} kcal · ${round(f.p)} g eiwit / 100 ${safe(f.unit||'g')}</small></span><span class="badge">KIES →</span></button>`).join(''):'<div class="help">Geen resultaten. Zoek via Open Food Facts of voeg handmatig toe.</div>'}
+function openPicker(){chosen=null;$('foodSearch').value='';$('foodSelection').hidden=true;$('foodListTitle').textContent='Veelgebruikt';$('searchNote').textContent='Zoek een product, of kies er één uit de lijst.';$('manualArea').classList.remove('open');rowResults(foodOptions(''));$('foodDialog').showModal();$('foodSearch').focus()}
+$('foodSearch').addEventListener('input',e=>{$('foodListTitle').textContent=e.target.value?'Ingrediënten':'Veelgebruikt';rowResults(foodOptions(e.target.value));$('searchNote').textContent='Voor merken zoals Jumbo: klik op Open Food Facts ↗'});
+$('foodSearch').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('searchOFF').click()}});
+function choose(f){chosen=f;$('selectedName').textContent=f.name;$('selectedMacros').textContent=`Per 100 ${f.unit||'g'}: ${round(f.k)} kcal · ${round(f.p)} g eiwit · ${round(f.c)} g KH · ${round(f.f)} g vet`;$('selectedGrams').value=100;$('foodSelection').hidden=false;$('selectedGrams').focus();$('selectedGrams').select();}
+$('foodResults').addEventListener('click',e=>{const button=e.target.closest('[data-pick]');if(button)choose(hits[Number(button.dataset.pick)])});
+$('addSelected').addEventListener('click',()=>{if(!chosen)return;const g=Number($('selectedGrams').value),c=state.cards.find(x=>x.id===activeCard);if(!c)return;if(!Number.isFinite(g)||g<1||g>2500){showToast('Kies 1–2500 gram');return}if(c.items.length>=MAX_ITEMS){showToast('Maximaal 30 ingrediënten');return}if(!catalogue[chosen.id])state.customFoods[chosen.id]=chosen;c.items.push({id:chosen.id,g});c.title='';save();closeDialog('foodDialog');render();showToast(chosen.name+' toegevoegd')});
+const OFF_FIELDS='code,product_name,product_name_nl,brands,quantity,image_front_small_url,nutriments';
+function offFood(p){const n=p?.nutriments||{},toNumber=x=>x!==undefined&&x!==null&&x!==''?Number(x):NaN;let k=toNumber(n['energy-kcal_100g']);if(!Number.isFinite(k))k=toNumber(n['energy-kj_100g'])/4.184;let v={id:'off:'+String(p?.code||'').replace(/\D/g,''),name:String(p?.product_name_nl||p?.product_name||'').trim().slice(0,125),k,p:toNumber(n.proteins_100g),c:toNumber(n.carbohydrates_100g),f:toNumber(n.fat_100g),unit:'g'};return v.id.length>4&&v.name&&[v.k,v.p,v.c,v.f].every((num,i)=>Number.isFinite(num)&&num>=0&&num<=(i===0?1200:100))?v:null}
+$('searchOFF').addEventListener('click',async()=>{const term=$('foodSearch').value.trim();if(term.length<2){$('searchNote').textContent='Voer eerst een productnaam of barcode in.';return}if(reqCtrl)reqCtrl.abort();let controller=new AbortController();reqCtrl=controller;const timeout=setTimeout(()=>controller.abort(),14000);const button=$('searchOFF');button.disabled=true;button.textContent='Zoeken…';$('searchNote').textContent='Open Food Facts doorzoeken…';$('foodSelection').hidden=true;try{const barcode=/^\d{8,14}$/.test(term);const base='https://world.openfoodfacts.org';const url=barcode?base+'/api/v2/product/'+encodeURIComponent(term)+'.json?fields='+encodeURIComponent(OFF_FIELDS):base+'/cgi/search.pl?search_terms='+encodeURIComponent(term)+'&search_simple=1&action=process&json=1&page_size=30&fields='+encodeURIComponent(OFF_FIELDS);const res=await fetch(url,{headers:{Accept:'application/json'},credentials:'omit',signal:controller.signal});if(!res.ok)throw Error('HTTP '+res.status);const data=await res.json();if(reqCtrl!==controller)return;const rows=barcode?(data.status===1&&data.product?[data.product]:[]):Array.isArray(data.products)?data.products:[];const usable=rows.map(offFood).filter(Boolean).slice(0,20);$('foodListTitle').textContent='Open Food Facts';rowResults(usable);$('searchNote').textContent=usable.length?`${usable.length} producten. Controleer merk, verpakking en etiket.`:'Niets met complete macro’s gevonden. Gebruik een kortere naam of voeg handmatig toe.'}catch(err){if(reqCtrl!==controller)return;$('searchNote').textContent=err.name==='AbortError'?'Verzoek duurde te lang. Probeer opnieuw.':'Open Food Facts is nu niet bereikbaar. Je kunt wel handmatig toevoegen.'}finally{clearTimeout(timeout);if(reqCtrl===controller){reqCtrl=null;button.disabled=false;button.textContent='Open Food Facts ↗'}}});
+$('toggleManual').addEventListener('click',()=>{$('manualArea').classList.toggle('open')});
+$('manualAdd').addEventListener('click',()=>{const name=$('manualName').value.trim(),keys=['K','P','C','F'],vals=keys.map(q=>Number($('manual'+q).value));if(!name||vals.some((n,i)=>!Number.isFinite(n)||n<0||n>(i===0?1200:100))||keys.some(q=>$('manual'+q).value==='')){showToast('Vul naam en alle waarden per 100 g in');return}const id='manual:'+uid();const f={id,name:name.slice(0,100),k:vals[0],p:vals[1],c:vals[2],f:vals[3],unit:'g'};state.customFoods[id]=f;save();choose(f);$('manualArea').classList.remove('open')});
+$('saveConfirm').addEventListener('click',()=>{const c=state.cards.find(x=>x.id===activeCard),name=$('mealName').value.trim().slice(0,80);if(!c||!c.items.length||!name){showToast('Voer een maaltijdnaam in');return}const existing=state.templates.find(t=>t.name.toLocaleLowerCase('nl')===name.toLocaleLowerCase('nl'));if(existing){existing.items=c.items.map(it=>({...it}))}else{state.templates.push({id:uid(),name,items:c.items.map(it=>({...it}))})}c.title=name;save();closeDialog('saveDialog');render();showToast('Maaltijd opgeslagen ✓')});
+function openTemplates(){if(!state.templates.length){showToast('Je hebt nog geen maaltijden opgeslagen');return}renderTemplates();$('templateDialog').showModal()}
+function renderTemplates(){$('templateResults').innerHTML=state.templates.map((t,i)=>{let v=macro(t.items);return `<div class="template-line"><button class="food-hit" type="button" data-template="${i}"><span><b>${safe(t.name)}</b><small>${round(v.k)} kcal · ${round(v.p)} g eiwit · ${t.items.length} ingrediënten</small></span><span class="badge">KIES →</span></button><button type="button" class="delete-template" data-delete-template="${i}" aria-label="Verwijder opgeslagen maaltijd ${safe(t.name)}">×</button></div>`}).join('')}
+$('templateResults').addEventListener('click',e=>{const del=e.target.closest('[data-delete-template]');if(del){state.templates.splice(Number(del.dataset.deleteTemplate),1);save();if(state.templates.length)renderTemplates();else closeDialog('templateDialog');return}const btn=e.target.closest('[data-template]');if(btn){const t=state.templates[Number(btn.dataset.template)],c=state.cards.find(x=>x.id===activeCard);if(!t||!c)return;if(c.items.length&&!confirm('Huidige ingrediënten vervangen door '+t.name+'?'))return;c.items=t.items.map(x=>({...x}));c.title=t.name;save();closeDialog('templateDialog');render();showToast('Maaltijd geladen')}});
+
+
+/* VERSIONED BACKUP: app-owned data only, never access unrelated localStorage. */
+const BACKUP_APP='hes-fuel-simple-cards',BACKUP_VERSION=1;
+function backupObject(){
+ return {app:BACKUP_APP,schema_version:BACKUP_VERSION,exported_at:new Date().toISOString(),data:{cards:state.cards,templates:state.templates,customFoods:state.customFoods}};
+}
+function backupBlob(){return new Blob([JSON.stringify(backupObject(),null,2)],{type:'application/json;charset=utf-8'})}
+function backupFileName(){return 'hes-voedingsschema-'+new Date().toISOString().slice(0,10)+'.json'}
+function downloadBackup(){
+ const url=URL.createObjectURL(backupBlob());const a=document.createElement('a');a.href=url;a.download=backupFileName();document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);showToast('Back-upbestand gemaakt ✓')
+}
+$('exportBackup').addEventListener('click',downloadBackup);
+$('importBackup').addEventListener('click',()=>{$('backupFile').value='';$('backupFile').click()});
+function validBackup(input){
+ if(!input||input.app!==BACKUP_APP||input.schema_version!==BACKUP_VERSION||!input.data)throw Error('Dit is geen compatibele FUEL-back-up (versie 1).');
+ const d=input.data;
+ if(!Array.isArray(d.cards)||!d.cards.length||d.cards.length>MAX_SLOTS)throw Error('Ongeldig aantal eetmomenten.');
+ if(!Array.isArray(d.templates)||d.templates.length>200)throw Error('Ongeldig aantal bewaarde maaltijden.');
+ if(!d.customFoods||typeof d.customFoods!=='object'||Array.isArray(d.customFoods)||Object.keys(d.customFoods).length>500)throw Error('Ongeldige productlijst.');
+ const customFoods=Object.create(null);
+ for(const [id,raw] of Object.entries(d.customFoods)){
+  if(!/^(off:\d{8,14}|manual:[a-zA-Z0-9_.:-]{5,90})$/.test(id)||!raw||typeof raw.name!=='string'||raw.name.length<1||raw.name.length>125)throw Error('Ongeldig eigen product.');
+  const value={id,name:raw.name,unit:raw.unit==='ml'?'ml':'g'};
+  for(const key of ['k','p','c','f']){
+   const n=raw[key];if(typeof n!=='number'||!Number.isFinite(n)||n<0||n>(key==='k'?1200:100))throw Error('Ongeldige voedingswaarden.');value[key]=n;
+  }
+  customFoods[id]=value;
  }
- return val;
+ function cleanItems(items){
+  if(!Array.isArray(items)||items.length>MAX_ITEMS)throw Error('Ongeldige ingrediëntenlijst.');
+  return items.map(it=>{
+   const id=it?.id,g=it?.g;
+   if(typeof id!=='string'||!(Object.hasOwn(catalogue,id)||Object.hasOwn(customFoods,id))||typeof g!=='number'||!Number.isFinite(g)||g<0||g>2500)throw Error('Onbekend ingrediënt of ongeldig gewicht.');
+   return {id,g};
+  });
+ }
+ const seen=new Set();
+ const cards=d.cards.map(c=>{
+  if(typeof c?.id!=='string'||c.id.length>100||!isTime(c.time)||typeof c.title!=='string'||c.title.length>80||seen.has(c.id))throw Error('Ongeldig eetmoment.');
+  seen.add(c.id);return {id:c.id,time:c.time,title:c.title,items:cleanItems(c.items)};
+ });
+ const templates=d.templates.map(t=>{
+  if(typeof t?.id!=='string'||t.id.length>100||typeof t.name!=='string'||!t.name.trim()||t.name.length>80)throw Error('Ongeldige bewaarde maaltijd.');
+  return {id:t.id,name:t.name,items:cleanItems(t.items)};
+ });
+ return {cards,templates,customFoods};
 }
-function renderExtras(slotId){
- return offItems(slotId).map((row,i)=>{
-  const gram=Number(row.g)||0;
-  return '<div class="ing off-added"><span class="ing-name">'+tidy(row.name||'Product')+
-    ' <small style="color:var(--lime)">(OFF)</small></span><span class="ing-qty"><input type="number" min="0" max="2500" step="1" value="'+gram+
-    '" data-off-g="'+i+'" aria-label="Hoeveelheid '+tidy(row.name||'product')+'"><span class="unit">g</span><button type="button" class="off-remove" data-off-remove="'+i+
-    '" aria-label="Verwijder '+tidy(row.name||'product')+'">×</button></span></div>';
- }).join('');
-}
-function offShopping(){
- const map=new Map();
- for(const slot of slots){for(const row of offItems(slot.id)){
-   const key=String(row.code||row.name),prev=map.get(key),g=Number(row.g)||0;
-   if(prev)prev.g+=g;else map.set(key,{name:String(row.name||'Product'),g});
- }}
- return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,'nl'));
-}
-const format=n=>Math.round(n).toLocaleString('nl-NL');const tidy=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function render(){document.querySelectorAll('[data-day]').forEach(b=>{b.classList.toggle('active',b.dataset.day===day);b.setAttribute('aria-pressed',String(b.dataset.day===day))});document.getElementById('day-name').textContent='/ Dag '+day;
-  document.getElementById('meals').innerHTML=slots.map((slot,index)=>{const r=selected(slot,index),v=calcWithExtra(slot.id,r),opts=recipeOptions(slot.id).map(o=>`<option value="${o.id}" ${o.id===r.id?'selected':''}>${tidy(o.title)}</option>`).join('');
-    return `<article class="meal" data-slot="${slot.id}"><div class="photo">${r.custom?'<div class="placeholder" style="background:radial-gradient(circle at 50% 40%,#627950,#18312b 62%,#11191c)">🍽️</div>':'<div class="placeholder">'+r.emoji+'</div><div class="dish-shot" role="img" aria-label="Afbeelding van '+tidy(r.title)+'" style="background-position:'+((r.art%4)*100/3).toFixed(3)+'% '+(Math.floor(r.art/4)*100/3).toFixed(3)+'%"></div>'}<div class="meta-top"><span class="time">${slot.time}</span><span class="location">${slot.place}</span></div></div><div class="meal-body"><div class="meal-index">0${index+1} / ${slot.name}</div><h3>${tidy(r.title)}</h3><p class="desc">${tidy(r.desc)}</p>${r.custom?'<div class="custom-actions"><button type="button" class="btn" data-builder-edit="'+tidy(r.id)+'">✎ Bewerk dit recept</button></div>':''}<div class="stats"><div class="stat"><b>${format(v.k)}</b><small>KCAL</small></div><div class="stat"><b>${format(v.p)}g</b><small>EIWIT</small></div><div class="stat"><b>${format(v.c)}g</b><small>KH</small></div><div class="stat"><b>${format(v.f)}g</b><small>VET</small></div></div><div class="ingredients">${r.items.map((it,i)=>{const food=foods[it.key];return `<label class="ing"><span class="ing-name">${tidy(food.name)}</span><span class="ing-qty"><input aria-label="${tidy(food.name)} in ${food.unit||'gram'}" type="number" min="0" max="2500" step="5" data-ing="${i}" value="${quantity(r,i)}"><span class="unit">${food.unit||'g'}</span></span></label>`}).join('')}${renderExtras(slot.id)}</div><div class="${slot.id==='shake'?'fine':v.w>500.5?'warn':'fine'}">${slot.id==='shake'?'✓ Drinkmaaltijd · uitgezonderd van 500 g':v.w>500.5?'⚠ Geschat '+format(v.w)+' g bereid, boven 500 g':'✓ Geschat '+format(v.w)+' g op bord'}</div><div class="swap"><label for="select-${slot.id}">Kies een ander gerecht</label><div class="select-wrap"><select id="select-${slot.id}" data-select="${slot.id}">${opts}</select></div><button type="button" class="btn" data-builder-new="${slot.id}" style="margin-top:9px;width:100%;border-style:dashed">＋ Zelf maaltijd samenstellen</button></div></div></article>`
-  }).join('');drawBottom();persist()}
-function drawBottom(){const sum={k:0,p:0,c:0,f:0},meals=slots.map((s,i)=>calcWithExtra(s.id,selected(s,i)));meals.forEach(v=>['k','p','c','f'].forEach(k=>sum[k]+=v[k]));['k','p','c','f'].forEach(k=>document.getElementById(k==='k'?'kcal':k).textContent=format(sum[k])+(k==='k'?'':' g'));
- const limits={k:3000,p:200,c:350,f:100};Object.keys(limits).forEach(k=>{const wrap=document.getElementById('g-'+(k==='k'?'kcal':k)),percentage=Math.min(100,(sum[k]/limits[k])*100);wrap.querySelector('.bar i').style.width=percentage+'%';wrap.classList.toggle('over',k==='k'&&sum.k>3150)});document.getElementById('status').innerHTML=(sum.k>3150?'Boven calorie-doel':sum.p<185?'Eiwit iets laag':'Dicht bij dagdoel')+' <span>· Dag '+day+'</span>'}
-document.getElementById('days').addEventListener('click',e=>{const b=e.target.closest('button[data-day]');if(!b)return;day=b.dataset.day;render()});
-document.getElementById('meals').addEventListener('change',e=>{const select=e.target.closest('select[data-select]');if(select){plan[day]??={};plan[day][select.dataset.select]=select.value;render();return;}const ing=e.target.closest('input[data-ing]');if(!ing)return;const article=ing.closest('[data-slot]'),slot=slots.find(s=>s.id===article.dataset.slot),recipe=selected(slot,slots.indexOf(slot)),value=Number(ing.value);if(!Number.isFinite(value)||value<0||value>2500){ing.value=quantity(recipe,Number(ing.dataset.ing));return}amounts[day+'|'+recipe.id+'|'+ing.dataset.ing]=value;render()});
-document.getElementById('meals').addEventListener('input',e=>{const ing=e.target.closest('input[data-ing]');if(!ing)return;const article=ing.closest('[data-slot]'),slot=slots.find(s=>s.id===article.dataset.slot),recipe=selected(slot,slots.indexOf(slot)),value=Number(ing.value);if(!Number.isFinite(value)||value<0||value>2500)return;amounts[day+'|'+recipe.id+'|'+ing.dataset.ing]=value;drawBottom();persist();const card=ing.closest('.meal'),v=calcWithExtra(slot.id,recipe);card.querySelectorAll('.stat b').forEach((el,i)=>el.textContent=format([v.k,v.p,v.c,v.f][i])+(i?'g':''));const note=card.querySelector('.fine,.warn');if(slot.id!=='shake'){note.className=v.w>500.5?'warn':'fine';note.textContent=(v.w>500.5?'⚠':'✓')+' Geschat '+format(v.w)+' g bereid'+(v.w>500.5?', boven 500 g':'')} });
-document.getElementById('reset').addEventListener('click',()=>{delete plan[day];for(const k of Object.keys(amounts))if(k.startsWith(day+'|'))delete amounts[k];delete offExtras[day];render();toast('Dag '+day+' hersteld')});
-document.getElementById('print').addEventListener('click',()=>{window.print()});
-const dialog=document.getElementById('shop-dialog');function shopping(){const combined={};slots.forEach((slot,index)=>{const recipe=selected(slot,index);recipe.items.forEach((it,i)=>{combined[it.key]=(combined[it.key]||0)+quantity(recipe,i)})});return Object.entries(combined).sort((a,b)=>foods[a[0]].name.localeCompare(foods[b[0]].name,'nl'))}
-function shopText(){return 'BOODSCHAPPENLIJST · DAG '+day+'\n'+shopping().map(([key,g])=>foods[key].name+': '+format(g)+' '+(foods[key].unit||'g')).concat(offShopping().map(x=>x.name+': '+format(x.g)+' g')).join('\n')}
-function planText(){const lines=['VOEDINGSSCHEMA · DAG '+day,''];let sumK=0,sumP=0;slots.forEach((s,i)=>{const r=selected(s,i),v=calcWithExtra(s.id,r);sumK+=v.k;sumP+=v.p;lines.push(s.time+' | '+r.title+' ('+format(v.k)+' kcal, '+format(v.p)+' g eiwit)');r.items.forEach((it,j)=>lines.push('  '+foods[it.key].name+': '+quantity(r,j)+' '+(foods[it.key].unit||'g')));offItems(s.id).forEach(x=>lines.push('  '+x.name+': '+x.g+' g [OFF]'));lines.push('')});lines.push('Totaal '+format(sumK)+' kcal | '+format(sumP)+' g eiwit');return lines.join('\n')}
-document.getElementById('shop').addEventListener('click',()=>{document.getElementById('shopday').textContent=day;document.getElementById('shop-lines').innerHTML='<div class="smallcaps">Benodigd voor één dag · opgeteld per ingrediënt</div>'+shopping().map(([key,g])=>`<div class="shop-line"><span>${tidy(foods[key].name)}</span><span>${format(g)} ${foods[key].unit||'g'}</span></div>`).concat(offShopping().map(x=>`<div class="shop-line"><span>${tidy(x.name)} (OFF)</span><span>${format(x.g)} g</span></div>`)).join('');dialog.showModal()});document.getElementById('close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
-async function copy(value){try{await navigator.clipboard.writeText(value);toast('Gekopieerd ✓')}catch{const ta=document.createElement('textarea');ta.value=value;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Gekopieerd ✓')}catch{toast('Kopiëren niet toegestaan in deze browser')}ta.remove()}}
-document.getElementById('copyshop').addEventListener('click',()=>copy(shopText()));document.getElementById('copyday').addEventListener('click',()=>copy(planText()));let toastT;function toast(s){const e=document.getElementById('toast');e.textContent=s;e.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>e.classList.remove('show'),2300)}
-
-/* Open Food Facts: barcode endpoint and legacy full-text search.
-   v2 /search supports filters, not free text. No account, API key or tracker. */
-const offSearchForm=document.getElementById('off-form');
-const offResultEl=document.getElementById('off-results');
-const offFeedback=document.getElementById('off-feedback');
-const offSelection=document.getElementById('off-selection');
-let offFound=[],offPicked=null,offController=null;
-const offFields='code,product_name,product_name_nl,brands,image_front_small_url,quantity,nutriments';
-document.getElementById('off-slot').innerHTML=slots.map(s=>'<option value="'+s.id+'">'+s.time+' · '+s.name+'</option>').join('');
-document.getElementById('off-slot').value='snack';
-function offNormalize(p){
- const n=p?.nutriments||{};
- const read=key=>{const value=n[key];if(value===null||value===undefined||value==='')return null;const v=Number(value);return Number.isFinite(v)&&v>=0?v:null};
- const kj=read('energy-kj_100g');
- const kcal=read('energy-kcal_100g')??(kj===null?null:kj/4.184);
- const protein=read('proteins_100g'),carbs=read('carbohydrates_100g'),fat=read('fat_100g');
- const code=String(p?.code||'').replace(/\D/g,'');
- const name=String(p?.product_name_nl||p?.product_name||'').trim().slice(0,130);
- if(!code||!name||[kcal,protein,carbs,fat].some(x=>x===null))return null;
- const pic=String(p?.image_front_small_url||'');
- return {code,name,brand:String(p.brands||'').slice(0,80),image:/^https:\/\/images\.openfoodfacts\.org\//.test(pic)?pic:'',k:kcal,p:protein,c:carbs,f:fat};
-}
-function offPreview(){
- if(!offPicked)return;
- const g=Number(document.getElementById('off-grams').value);
- const box=document.getElementById('off-preview');
- box.textContent=!Number.isFinite(g)||g<=0||g>2500?'Kies 1 tot 2500 g/ml':
-   Math.round(g*offPicked.k/100)+' kcal · '+(g*offPicked.p/100).toFixed(1)+' g eiwit · '+(g*offPicked.c/100).toFixed(1)+' g koolhydraten · '+(g*offPicked.f/100).toFixed(1)+' g vet';
-}
-offSearchForm.addEventListener('submit',async e=>{
- e.preventDefault();
- const raw=document.getElementById('off-query').value.trim();
- if(raw.length<2)return;
- if(offController)offController.abort();
- const controller=new AbortController();offController=controller;
- offResultEl.replaceChildren();offSelection.hidden=true;offPicked=null;offFound=[];
- const button=document.getElementById('off-search');button.disabled=true;button.textContent='Zoeken…';
- offFeedback.textContent='Zoeken in Open Food Facts…';
- const timer=setTimeout(()=>controller.abort(),14000);
+$('backupFile').addEventListener('change',async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ if(file.size>2_000_000){showToast('Bestand te groot (max. 2 MB)');return}
  try{
-  const barcode=/^\d{8,14}$/.test(raw);
-  const base='https://world.openfoodfacts.org';
-  const url=barcode?base+'/api/v2/product/'+encodeURIComponent(raw)+'.json?fields='+encodeURIComponent(offFields):
-   base+'/cgi/search.pl?search_terms='+encodeURIComponent(raw)+'&search_simple=1&action=process&json=1&page_size=24&fields='+encodeURIComponent(offFields);
-  const response=await fetch(url,{signal:controller.signal,credentials:'omit',headers:{Accept:'application/json'}});
-  if(!response.ok)throw new Error('HTTP '+response.status);
-  const body=await response.json();
-  if(offController!==controller)return;
-  const candidates=barcode?(body.status===1&&body.product?[body.product]:[]):(Array.isArray(body.products)?body.products:[]);
-  offFound=candidates.map(offNormalize).filter(Boolean).slice(0,16);
-  offFeedback.textContent=offFound.length?offFound.length+' producten met volledige voedingswaarden gevonden. Kies het juiste merk en gewicht.':
-   'Geen bruikbaar product gevonden. Probeer een kortere zoekterm of de barcode; niet alle producten staan in de database.';
-  offResultEl.innerHTML=offFound.map((p,i)=>
-    '<article class="off-result">'+(p.image?'<img src="'+tidy(p.image)+'" loading="lazy" alt="Verpakking '+tidy(p.name)+'">':'<span class="off-noimage" aria-hidden="true">▣</span>')+
-    '<div class="off-result-info"><b>'+tidy(p.name)+'</b><small>'+tidy(p.brand||p.code)+' · '+format(p.k)+' kcal / 100 g · '+p.p.toFixed(1)+' g eiwit</small></div>'+
-    '<button type="button" class="btn" data-off-pick="'+i+'">Kies</button></article>'
-  ).join('');
- }catch(err){
-  if(offController!==controller)return;
-  offFeedback.textContent=err.name==='AbortError'?'Zoeken duurde te lang. Probeer opnieuw.':
-   'Open Food Facts is nu niet bereikbaar. Controleer je verbinding of probeer later opnieuw.';
- }finally{clearTimeout(timer);if(offController===controller){offController=null;button.disabled=false;button.textContent='Zoek product'}}
+  const raw=JSON.parse(await file.text()),next=validBackup(raw);
+  if(!confirm('Het huidige schema en je opgeslagen maaltijden worden vervangen door deze back-up. Doorgaan?'))return;
+  // Write first: if storage fails, keep the existing in-memory state.
+  localStorage.setItem(DATA_KEY,JSON.stringify(next));state=next;render();showToast('Schema en maaltijden geïmporteerd ✓');
+ }catch(err){alert('Importeren mislukt: '+(err?.message||'ongeldig bestand')+'\nJe huidige schema is niet gewijzigd.')}
+ finally{e.target.value=''}
 });
-offResultEl.addEventListener('click',e=>{
- const button=e.target.closest('button[data-off-pick]');if(!button)return;
- offPicked=offFound[Number(button.dataset.offPick)]||null;if(!offPicked)return;
- document.getElementById('off-picked-name').textContent=offPicked.name+(offPicked.brand?' · '+offPicked.brand:'');
- offSelection.hidden=false;offPreview();offSelection.scrollIntoView({block:'nearest',behavior:'smooth'});
-});
-document.getElementById('off-grams').addEventListener('input',offPreview);
-document.getElementById('off-add').addEventListener('click',()=>{
- if(!offPicked)return;
- const gram=Number(document.getElementById('off-grams').value);
- const slot=document.getElementById('off-slot').value;
- if(!slots.some(s=>s.id===slot)||!Number.isFinite(gram)||gram<1||gram>2500){offPreview();return}
- offExtras[day]??={};offExtras[day][slot]??=[];
- if(offExtras[day][slot].length>=24){toast('Maximaal 24 producten per eetmoment');return}
- const p=offPicked;
- offExtras[day][slot].push({code:p.code,name:p.name,k:p.k,p:p.p,c:p.c,f:p.f,g:gram});
- render();toast(p.name+' toegevoegd om '+slots.find(s=>s.id===slot).time);
-});
-document.getElementById('meals').addEventListener('click',e=>{
- const btn=e.target.closest('button[data-off-remove]');if(!btn)return;
- const slot=btn.closest('[data-slot]')?.dataset.slot,list=offItems(slot),idx=Number(btn.dataset.offRemove);
- if(!Number.isInteger(idx)||idx<0||idx>=list.length)return;
- list.splice(idx,1);render();toast('Product verwijderd');
-});
-document.getElementById('meals').addEventListener('input',e=>{
- const input=e.target.closest('input[data-off-g]');if(!input)return;
- const slotId=input.closest('[data-slot]')?.dataset.slot;
- const row=offItems(slotId)[Number(input.dataset.offG)],g=Number(input.value);
- if(!row||!Number.isFinite(g)||g<0||g>2500)return;
- row.g=g;persist();
- const slot=slots.find(s=>s.id===slotId);
- const v=calcWithExtra(slotId,selected(slot,slots.indexOf(slot)));
- const card=input.closest('.meal');
- card.querySelectorAll('.stat b').forEach((el,i)=>el.textContent=format([v.k,v.p,v.c,v.f][i])+(i?'g':''));
- if(slotId!=='shake'){
-  const note=card.querySelector('.fine,.warn');
-  note.className=v.w>500.5?'warn':'fine';
-  note.textContent=(v.w>500.5?'⚠':'✓')+' Geschat '+format(v.w)+' g bereid'+(v.w>500.5?', boven 500 g':'');
+
+/* Camera scanner: native BarcodeDetector on supporting browsers, ZXing fallback
+   for iOS and other browsers. No images or video are uploaded. */
+const scanDialog=$('scanDialog'),scanVideo=$('scanVideo'),scanStatus=$('scanStatus');
+let scanStream=null,scanControls=null,scanGeneration=0,scanPending=false,scanInProgress=false;
+const SCAN_FORMATS=['ean_13','ean_8','upc_a','upc_e','code_128','itf'];
+let zxingLoad=null;
+function loadZxing(){
+ if(window.ZXingBrowser?.BrowserMultiFormatReader)return Promise.resolve();
+ if(zxingLoad)return zxingLoad;
+ zxingLoad=new Promise((resolve,reject)=>{
+  const script=document.createElement('script');script.src='https://cdn.jsdelivr.net/npm/@zxing/browser@0.1.5/umd/zxing-browser.min.js';
+  script.crossOrigin='anonymous';script.onload=()=>window.ZXingBrowser?.BrowserMultiFormatReader?resolve():reject(Error('Decoder niet gevonden'));
+  script.onerror=()=>reject(Error('ZXing niet bereikbaar (internet vereist)'));document.head.append(script);
+ }).catch(e=>{zxingLoad=null;throw e});return zxingLoad;
+}
+function stopScan(){
+ ++scanGeneration;
+ try{scanControls?.stop()}catch{}scanControls=null;
+ for(const track of scanStream?.getTracks()||[])track.stop();scanStream=null;
+ if(scanVideo.srcObject){for(const t of scanVideo.srcObject.getTracks?.()||[])t.stop();scanVideo.srcObject=null}
+ scanVideo.pause();scanPending=false;scanInProgress=false;
+}
+function scanBarcodeFound(text){
+ if(scanInProgress)return;
+ const barcode=String(text??'').replace(/\D/g,'');
+ if(!/^\d{8,14}$/.test(barcode))return;
+ scanInProgress=true;
+ $('foodSearch').value=barcode;
+ stopScan();if(scanDialog.open)scanDialog.close();
+ $('searchOFF').click();
+ showToast('Barcode gevonden: '+barcode);
+}
+function stopCameraOnlyForFallback(){for(const t of scanStream?.getTracks()||[])t.stop();scanStream=null;scanVideo.srcObject=null;}
+async function nativeScan(generation){
+ const supported=typeof BarcodeDetector.getSupportedFormats==='function'?await BarcodeDetector.getSupportedFormats():SCAN_FORMATS;
+ const formats=SCAN_FORMATS.filter(f=>supported.includes(f));if(!formats.length)throw Error('Geen EAN-formaat ondersteund');
+ const detector=new BarcodeDetector({formats});
+ scanStream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}}});
+ if(generation!==scanGeneration){scanStream.getTracks().forEach(t=>t.stop());return}
+ scanVideo.srcObject=scanStream;await scanVideo.play();scanStatus.textContent='Camera actief — richt op de barcode.';
+ while(generation===scanGeneration&&scanDialog.open){
+  try{
+   if(scanVideo.readyState>=2){const codes=await detector.detect(scanVideo);for(const c of codes){if(/^\d{8,14}$/.test(c.rawValue||'')){scanBarcodeFound(c.rawValue);return}}}
+  }catch(e){if(generation===scanGeneration)throw e;return}
+  await new Promise(res=>setTimeout(res,180));
  }
- drawBottom();
+}
+async function zxingScan(generation){
+ await loadZxing();if(generation!==scanGeneration)return;
+ const reader=new window.ZXingBrowser.BrowserMultiFormatReader();
+ scanStatus.textContent='Camera starten…';
+ const controls=await reader.decodeFromConstraints({audio:false,video:{facingMode:{ideal:'environment'}}},scanVideo,(result,error,controls)=>{
+  if(generation!==scanGeneration||scanInProgress)return;
+  if(result)scanBarcodeFound(result.getText());
+ });
+ if(generation!==scanGeneration){controls.stop();return}
+ scanControls=controls;scanStatus.textContent='Camera actief — richt op de barcode.';
+}
+$('scanBarcode').addEventListener('click',async()=>{
+ stopScan();scanDialog.showModal();scanStatus.textContent='Camera voorbereiden…';const gen=scanGeneration;
+ if(!navigator.mediaDevices?.getUserMedia){scanStatus.textContent='Live camera niet beschikbaar. Kies Maak of kies foto of voer de barcode handmatig in (op de website via HTTPS werkt de camera het best).';return}
+ try{
+  if('BarcodeDetector' in window){try{await nativeScan(gen);return}catch(e){if(gen!==scanGeneration)return;stopCameraOnlyForFallback(); /* Keep dialog open for ZXing. */ }}
+  if(scanDialog.open){const current=scanGeneration;await zxingScan(current)}
+ }catch(e){if(scanDialog.open){scanStatus.textContent='Live scannen lukt niet: '+(e?.message||'onbekende fout')+'. Kies een foto of typ de barcode.'}stopScan()}
 });
-document.getElementById('meals').addEventListener('change',e=>{
- if(e.target.matches('input[data-off-g]'))render();
+$('scanClose').addEventListener('click',()=>scanDialog.close());
+scanDialog.addEventListener('close',stopScan);
+scanDialog.addEventListener('click',e=>{if(e.target===scanDialog)scanDialog.close()});
+window.addEventListener('pagehide',stopScan);
+$('scanManual').addEventListener('click',()=>{scanDialog.close();$('foodSearch').focus()});
+$('scanPhoto').addEventListener('click',()=>{$('scanPhotoInput').value='';$('scanPhotoInput').click()});
+$('scanPhotoInput').addEventListener('change',async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ scanStatus.textContent='Barcode zoeken op foto…';
+ let bitmap=null,img=null,url=null;
+ try{
+  if(window.BarcodeDetector){
+   const supported=typeof BarcodeDetector.getSupportedFormats==='function'?await BarcodeDetector.getSupportedFormats():SCAN_FORMATS;
+   const formats=SCAN_FORMATS.filter(x=>supported.includes(x));
+   if(!formats.length)throw Error('Geen EAN-formaat ondersteund');
+   const detector=new BarcodeDetector({formats});
+   bitmap=await createImageBitmap(file);const codes=await detector.detect(bitmap);
+   const code=codes.map(x=>x.rawValue).find(x=>/^\d{8,14}$/.test(x));
+   if(code){scanBarcodeFound(code);return}
+  }
+  await loadZxing();url=URL.createObjectURL(file);img=new Image();img.src=url;await img.decode();
+  const reader=new ZXingBrowser.BrowserMultiFormatReader();const code=(await reader.decodeFromImageElement(img)).getText();
+  if(!/^\d{8,14}$/.test(code)){throw Error('Geen geldige EAN/UPC barcode')}
+  scanBarcodeFound(code);
+ }catch(ex){scanStatus.textContent='Geen barcode gevonden in foto. Probeer dichterbij of typ de code.'}
+ finally{bitmap?.close?.();if(url)URL.revokeObjectURL(url);e.target.value=''}
 });
 
 render();
-</script>
-<script src="assets/builder.js?v=1"></script>
-<style media="print">@media print{body{color:#111;background:white;padding:0}header,.hero,.toolbar,.bottom,.swap,.tools,dialog,.toast{display:none!important}.shell{width:100%}.grid{display:block}.meal{break-inside:avoid;margin:0 0 14px;border:1px solid #bbb;box-shadow:none;color:#111;background:#fff;display:grid;grid-template-columns:1fr 3fr}.photo{height:auto;min-height:130px}.meal-body{padding:12px}.ingredients{grid-template-columns:1fr 1fr}.desc,.stat small,.ing-name,.note{color:#333}.stats{display:flex;gap:20px}.footer-notes{color:#444}.fine,.warn{color:#333}.ing input{color:#111;background:white;border:0}}</style>
-</body>
-</html>
+</script></body></html>
