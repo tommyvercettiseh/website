@@ -1,0 +1,6 @@
+# Check for updated planner versions on every visit.
+<IfModule mod_headers.c>
+  <FilesMatch "^(index\.html|builder\.js)$">
+    Header always set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
