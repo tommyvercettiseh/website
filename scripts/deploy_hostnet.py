@@ -10,7 +10,7 @@ import subprocess
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
-DIRECTORIES = {'assets', 'diensten', 'projects', 'pallet-optimizer', 'rebirth'}
+DIRECTORIES = {'assets', 'diensten', 'projects', 'pallet-optimizer', 'rebirth', 'meals'}
 EXTENSIONS = {'.html', '.css', '.js', '.json', '.webmanifest', '.woff', '.woff2',
               '.png', '.jpg', '.jpeg', '.webp', '.svg', '.ico', '.mp4', '.webm', '.avif'}
 ROOT_FILES = {'.htaccess', 'index.html', 'robots.txt', 'sitemap.xml', 'favicon.ico', 'mobile-check.html'}
