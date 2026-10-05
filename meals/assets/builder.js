@@ -115,7 +115,7 @@ document.getElementById('builder-form').addEventListener('submit',e=>{
  }else userRecipes.push(recipe);
  plan[day]??={};plan[day][slot]=id;
  for(const key of Object.keys(amounts))if(key.includes('|'+id+'|'))delete amounts[key];
- persist();builderDialog.close();render();toast('Maaltijd opgeslagen ✓');
+ persist();editingId=null;building=[];builderDialog.close();render();toast('Maaltijd opgeslagen ✓');
 });
 document.getElementById('builder-delete').addEventListener('click',()=>{
  if(!editingId)return;const id=editingId;
@@ -124,10 +124,10 @@ document.getElementById('builder-delete').addEventListener('click',()=>{
   if(chosen&&typeof chosen==='object')for(const k of Object.keys(chosen))if(chosen[k]===id)delete chosen[k];
  }
  for(const k of Object.keys(amounts))if(k.includes('|'+id+'|'))delete amounts[k];
- persist();builderDialog.close();render();toast('Maaltijd verwijderd');
+ persist();editingId=null;building=[];builderDialog.close();render();toast('Maaltijd verwijderd');
 });
 for(const id of ['builder-close','builder-cancel']){
- document.getElementById(id).addEventListener('click',()=>builderDialog.close());
+ document.getElementById(id).addEventListener('click',()=>{editingId=null;building=[];builderDialog.close()});
 }
 document.getElementById('builder-search-off').addEventListener('click',()=>{
  builderDialog.close();document.getElementById('off-heading').scrollIntoView({behavior:'smooth',block:'start'});
