@@ -17,3 +17,5 @@ Bestaande bestanden worden vooraf gekopieerd naar `github-deploy-backups/<run-id
 ## Lokale controle
 
 `python3 scripts/deploy_hostnet.py --check` valideert de publicatieset zonder serververbinding. `npm install --no-save jsdom@24.1.3` gevolgd door `node tests/meals-smoke.cjs` controleert het live dagboekgedrag.
+
+De live Pallet Optimizer gebruikt de vormgegeven versie in `website/pallet-optimizer/`, ook bij een losse centrale publicatie van dat project. De standalone repository blijft een aparte ontwikkelvariant.
