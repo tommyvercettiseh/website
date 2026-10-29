@@ -20,10 +20,10 @@ def files_to_publish():
     files = []
     for name in filter(None, tracked):
         p = PurePosixPath(name)
-        allowed = name in ROOT_FILES or (p.parts[0] in DIRECTORIES and p.suffix.lower() in EXTENSIONS)
+        allowed = name in ROOT_FILES or (p.parts[0] in DIRECTORIES and (p.suffix.lower() in EXTENSIONS or p.name == '.htaccess'))
         if not allowed:
             continue
-        if any(part.startswith('.') for part in p.parts) and name != '.htaccess':
+        if any(part.startswith('.') for part in p.parts) and p.name != '.htaccess':
             raise ValueError('Hidden file in publish set')
         local = ROOT / name
         if local.is_symlink() or not local.is_file() or ROOT not in local.resolve().parents:
@@ -161,7 +161,7 @@ def deploy(files):
                     print('Published:', name)
                 print('Changed files:', len(changes))
     sha = os.environ.get('GITHUB_SHA', '')
-    for route in ['/', '/diensten/', '/projects/', '/pallet-optimizer/', '/rebirth/']:
+    for route in ['/', '/diensten/', '/projects/', '/pallet-optimizer/', '/rebirth/', '/meals/', '/projects/hypotheek/']:
         request = urllib.request.Request('https://hesseldevries.com' + route + '?deploy=' + sha, method='HEAD')
         with urllib.request.urlopen(request, timeout=30) as response:
             if response.status != 200:
