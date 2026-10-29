@@ -1,34 +1,19 @@
-# GitHub → Hostnet
+# Publiceren naar Hostnet
 
-A push to `main` validates the static site. When `HOSTNET_DEPLOY_ENABLED=true`, it also publishes to Hostnet using SFTP.
+`hostnet/.github/workflows/deploy-hostnet.yml` is de enige workflow die de website publiceert. De website-repository valideert iedere wijziging en pull request; een geslaagde validatie betekent niet dat de site al online staat.
 
-## One-time setup
+## Publicatie
 
-Repository Settings → Secrets and variables → Actions:
+Kies in `tommyvercettiseh/hostnet` de workflow **Central Hostnet Deploy**, klik **Run workflow** en kies **website**. De centrale repository gebruikt de bestaande secrets `FTP_USERNAME` en `SSH_PRIVATE_KEY`. Er is geen extra token in de website-repository nodig.
 
-Secrets:
-- `HOSTNET_SSH_KEY`: the private Ed25519 key matching the existing Hostnet public key named **GitHub Actions Hostnet Deploy**. Never paste this in chat, commit it, or print it in workflow logs.
-Server identity is pinned in the script using SHA-256 SSHFP fingerprints independently verified through DNSSEC-validating DNS-over-HTTPS (AD=true) on 2026-09-28. No automatic acceptance of changed keys is allowed. Reverify DNSSEC SSHFP if Hostnet rotates its host keys.
+Een wijziging van `.deploy-trigger`, de centrale configuratie of de centrale workflow start eveneens een publicatie van het daarin gekozen project. Alleen wijzigingen op `main` publiceren; pull requests valideren alleen de configuratie.
 
-Variables:
-- `HOSTNET_WEBROOT`: the verified SFTP path to the live `httpdocs` directory. The File Manager's `HTTP/` label is not necessarily an SFTP path.
-- `HOSTNET_DEPLOY_ENABLED`: set to `true` only after the settings above are configured.
+## Volledige website
 
-First run Actions → Publish to Hostnet → Run workflow with `probe` checked to verify the connection and discover the webroot without changing files. Then, after configuring the variables, run it again with `probe` unchecked. Verify the first run completes and all five live page checks pass. Automatic deployment is **not active** until this setup and first live test succeed.
+De centrale workflow checkt de website-repository uit en gebruikt `scripts/deploy_hostnet.py`. Dit publiceert alle gevolgde statische bestanden, inclusief Diensten, Projects, Hypotheek, Meals, Pallet Optimizer en de bijbehorende `.htaccess`-bestanden. Rebirth wordt apart beheerd en wordt niet verwijderd.
 
-## Behaviour
+Bestaande bestanden worden vooraf gekopieerd naar `github-deploy-backups/<run-id>-<attempt>/` naast `httpdocs`. De upload controleert hashes, verifieert de vastgelegde SSH-hostsleutel en vervangt bestanden afzonderlijk atomair. Na publicatie worden zeven routes gecontroleerd. Publicaties worden na elkaar uitgevoerd.
 
-- Publishes only tracked static site files and `.htaccess`; excludes workflow code, documentation, credentials and Git metadata.
-- Does not delete files on Hostnet. Rebirth, which is currently only on Hostnet, is preserved.
-- Compares file hashes and uploads only changes.
-- Copies all files that will be overwritten into `github-deploy-backups/<run-id>-<attempt>/`, beside `httpdocs`, and verifies those backups before publishing.
-- Verifies each staged upload and uses atomic replacement per file. This is not an atomic whole-site release.
-- Runs deployments serially; never cancels a deployment halfway through.
-- Uses strict SSH host verification and a read-only GitHub token. Secrets are never embedded in public files.
-- Checks the homepage, Diensten, Projects, Pallet Optimizer and Rebirth after publishing.
+## Lokale controle
 
-## Recovery and maintenance
-
-Revert a bad Git commit and push `main` to redeploy the prior tracked version. For files missing from Git or a partial deployment, restore affected files from `github-deploy-backups` using SFTP or Hostnet File Manager.
-
-Backups are on the same hosting account, so they are not independent disaster recovery. They accumulate until reviewed and removed manually. No automatic deletion is configured. Keep a separate off-host backup and periodically test recovery.
+`python3 scripts/deploy_hostnet.py --check` valideert de publicatieset zonder serververbinding. `npm install --no-save jsdom@24.1.3` gevolgd door `node tests/meals-smoke.cjs` controleert het live dagboekgedrag.
